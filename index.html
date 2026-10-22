@@ -92,15 +92,6 @@
                 font-size: clamp(1.5rem, 3vw, 2rem);
             }
 
-            .empty-section {
-                margin: 0;
-                padding: 24px;
-                color: #52645d;
-                background: #f8f6ed;
-                border: 1px solid rgb(24 60 54 / 14%);
-                border-radius: 14px;
-            }
-
             .games-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
@@ -323,7 +314,12 @@
             </section>
             <section class="content-section" id="apps" aria-labelledby="apps-heading">
                 <h2 class="section-heading" id="apps-heading">Apps</h2>
-                <p class="empty-section">Apps will appear here.</p>
+                <div class="games-grid">
+                    <a class="game-card" href="Apps/GUST.html" style="--art-start: #b7d8d0; --art-end: #537f76">
+                        <span class="game-art" aria-hidden="true"><span>🌐</span></span>
+                        <span class="game-copy"><strong>GUST Browser</strong><span class="play-label">Open &#8594;</span></span>
+                    </a>
+                </div>
             </section>
         </main>
         <script>
