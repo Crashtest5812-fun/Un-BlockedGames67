@@ -92,10 +92,56 @@
                 font-size: clamp(1.5rem, 3vw, 2rem);
             }
 
+            .all-games-menu {
+                overflow: hidden;
+                background: #f8f6ed;
+                border: 1px solid rgb(24 60 54 / 14%);
+                border-radius: 14px;
+                box-shadow: 0 4px 12px rgb(28 43 36 / 10%);
+            }
+
+            .all-games-menu summary {
+                padding: 16px 20px;
+                color: #183c36;
+                font-weight: 700;
+                cursor: pointer;
+            }
+
+            .all-games-menu summary:focus-visible,
+            .game-search:focus-visible {
+                outline: 3px solid #28594d;
+                outline-offset: 3px;
+            }
+
+            .all-games-content {
+                padding: 0 20px 20px;
+            }
+
+            .game-search {
+                width: 100%;
+                max-width: 480px;
+                padding: 12px 14px;
+                color: #28282b;
+                font: inherit;
+                background: #fff;
+                border: 1px solid rgb(24 60 54 / 28%);
+                border-radius: 8px;
+            }
+
+            .game-search-status {
+                margin: 12px 0 18px;
+                color: #52645d;
+                font-size: 0.9rem;
+            }
+
             .games-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
                 gap: 20px;
+            }
+
+            .game-card[hidden] {
+                display: none;
             }
 
             .game-card {
@@ -200,8 +246,18 @@
         </header>
         <main>
             <section class="content-section" id="games" aria-labelledby="games-heading">
-                <h2 class="section-heading" id="games-heading">Games</h2>
-                <div class="games-grid">
+                <h2 class="section-heading" id="games-heading">Popular Games</h2>
+                <div class="games-grid" id="popular-games-grid"></div>
+            </section>
+            <section class="content-section" id="all-games" aria-labelledby="all-games-heading">
+                <h2 class="section-heading" id="all-games-heading">All Games</h2>
+                <details class="all-games-menu">
+                    <summary>Browse all games</summary>
+                    <div class="all-games-content">
+                        <label for="game-search">Search games</label><br>
+                        <input class="game-search" id="game-search" type="search" placeholder="Type a game name..." autocomplete="off">
+                        <p class="game-search-status" id="game-search-status" aria-live="polite"></p>
+                <div class="games-grid" id="all-games-grid">
                 <a class="game-card" href="Games/People%20Playground.html" style="--art-start: #d9c3aa; --art-end: #9db6a1">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqLkBRPwA8_3DVcrOiau3ReQqEHLo8TJLZtgvxd9U56g&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>People Playground</strong><span class="play-label">Play &#8594;</span></span>
@@ -311,6 +367,8 @@
                     <span class="game-copy"><strong>Please, Don’t Touch Anything</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 </div>
+                    </div>
+                </details>
             </section>
             <section class="content-section" id="apps" aria-labelledby="apps-heading">
                 <h2 class="section-heading" id="apps-heading">Apps</h2>
@@ -323,31 +381,56 @@
             </section>
         </main>
         <script>
-            document.querySelectorAll(".game-card").forEach((gameLink) => {
-                gameLink.addEventListener("click", (event) => {
-                    event.preventDefault();
+            const allGameCards = [...document.querySelectorAll("#all-games-grid .game-card")];
+            const popularGamesGrid = document.querySelector("#popular-games-grid");
+            const gameSearch = document.querySelector("#game-search");
+            const gameSearchStatus = document.querySelector("#game-search-status");
 
-                    const gameBase = window.location.protocol === "file:"
-                        ? "https://crashtest5812-fun.github.io/Un-BlockedGames67/"
-                        : document.baseURI;
-                    const gameUrl = new URL(gameLink.getAttribute("href"), gameBase).href;
-                    const gameWindow = window.open("about:blank", "_blank");
+            allGameCards.slice(0, 8).forEach((gameCard) => {
+                popularGamesGrid.append(gameCard.cloneNode(true));
+            });
 
-                    if (!gameWindow) {
-                        window.alert("Allow pop-ups for this page to open games in a blank tab.");
-                        return;
-                    }
+            gameSearch.addEventListener("input", () => {
+                const query = gameSearch.value.trim().toLocaleLowerCase();
+                let visibleCount = 0;
 
-                    gameWindow.document.title = gameLink.querySelector("strong").textContent;
-                    gameWindow.document.body.style.margin = "0";
-
-                    const gameFrame = gameWindow.document.createElement("iframe");
-                    gameFrame.src = gameUrl;
-                    gameFrame.title = gameLink.querySelector("strong").textContent;
-                    gameFrame.allow = "autoplay; fullscreen; gamepad";
-                    gameFrame.style.cssText = "position:fixed;inset:0;width:100%;height:100%;border:0";
-                    gameWindow.document.body.append(gameFrame);
+                allGameCards.forEach((gameCard) => {
+                    const gameName = gameCard.querySelector("strong").textContent.trim().toLocaleLowerCase();
+                    gameCard.hidden = !gameName.includes(query);
+                    if (!gameCard.hidden) visibleCount += 1;
                 });
+
+                gameSearchStatus.textContent = `${visibleCount} ${visibleCount === 1 ? "game" : "games"} found`;
+            });
+            gameSearchStatus.textContent = `${allGameCards.length} games`;
+
+            document.addEventListener("click", (event) => {
+                const gameLink = event.target.closest(".game-card");
+                if (!gameLink) return;
+
+                event.preventDefault();
+
+                const gameBase = window.location.protocol === "file:"
+                    ? "https://crashtest5812-fun.github.io/Un-BlockedGames67/"
+                    : document.baseURI;
+                const gameUrl = new URL(gameLink.getAttribute("href"), gameBase).href;
+                const gameWindow = window.open("about:blank", "_blank");
+
+                if (!gameWindow) {
+                    window.alert("Allow pop-ups for this page to open games in a blank tab.");
+                    return;
+                }
+
+                const gameTitle = gameLink.querySelector("strong").textContent;
+                gameWindow.document.title = gameTitle;
+                gameWindow.document.body.style.margin = "0";
+
+                const gameFrame = gameWindow.document.createElement("iframe");
+                gameFrame.src = gameUrl;
+                gameFrame.title = gameTitle;
+                gameFrame.allow = "autoplay; fullscreen; gamepad";
+                gameFrame.style.cssText = "position:fixed;inset:0;width:100%;height:100%;border:0";
+                gameWindow.document.body.append(gameFrame);
             });
         </script>
     </body>
