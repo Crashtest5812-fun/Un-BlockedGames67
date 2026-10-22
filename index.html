@@ -82,10 +82,23 @@
                 padding: 36px clamp(20px, 6vw, 72px) 56px;
             }
 
-            .games-heading {
+            .content-section + .content-section {
+                margin-top: 42px;
+            }
+
+            .section-heading {
                 margin: 0 0 22px;
                 color: #183c36;
                 font-size: clamp(1.5rem, 3vw, 2rem);
+            }
+
+            .empty-section {
+                margin: 0;
+                padding: 24px;
+                color: #52645d;
+                background: #f8f6ed;
+                border: 1px solid rgb(24 60 54 / 14%);
+                border-radius: 14px;
             }
 
             .games-grid {
@@ -128,6 +141,12 @@
             .game-art span {
                 font-size: 4.25rem;
                 filter: drop-shadow(0 4px 3px rgb(0 0 0 / 18%));
+            }
+
+            .game-art img {
+                width: 100%;
+                height: 145px;
+                object-fit: cover;
             }
 
             .game-copy {
@@ -189,85 +208,151 @@
             </div>
         </header>
         <main>
-            <h2 class="games-heading">Popular Games</h2>
-            <div class="games-grid">
+            <section class="content-section" id="games" aria-labelledby="games-heading">
+                <h2 class="section-heading" id="games-heading">Games</h2>
+                <div class="games-grid">
                 <a class="game-card" href="Games/People%20Playground.html" style="--art-start: #d9c3aa; --art-end: #9db6a1">
-                    <span class="game-art" aria-hidden="true"><span>🧍</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqLkBRPwA8_3DVcrOiau3ReQqEHLo8TJLZtgvxd9U56g&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>People Playground</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clbasketrandom.html" style="--art-start: #f6c66b; --art-end: #ed8754">
-                    <span class="game-art" aria-hidden="true"><span>🏀</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_nFgw0OBMVL36vWb1x2QYSFrY3lrJvNMYLOu9a2T_FKLpl-7mfy-1BtBXBDkzIRj4Golq9LSCRbIBDXmgYamvI1xGFmrf_Y92v9_5w7jvUg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Basket Random</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clslitherio.html" style="--art-start: #9de0a4; --art-end: #3b9c7b">
-                    <span class="game-art" aria-hidden="true"><span>🐍</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT66v2A78wrqRcXmcQaQQQoGogJbU3VLqYE7mNYhMdcggLjHhkFY1cUk3YmuCT2kgr0dXHx8ddTq5H0cB-LdbdnLteoXHwcXFUpU9GAR4WZ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Snake</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/cltimeshooter2.html" style="--art-start: #f5d66c; --art-end: #e88345">
-                    <span class="game-art" aria-hidden="true"><span>⏱️</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRntQrmCqw_KJ1z1bi0MWXfye7uC8gtqQZNKbh8K0lHVg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Time Shooter 2</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clescaperoadcity2.html" style="--art-start: #a8d4e8; --art-end: #4f83a5">
-                    <span class="game-art" aria-hidden="true"><span>🚗</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYt1VTOwmYR2ibL1ngXa4qgIXlTkv6V97A_ZL-XU-KVA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Escape Road</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clragollhit.html" style="--art-start: #f1b0a0; --art-end: #bd5b59">
-                    <span class="game-art" aria-hidden="true"><span>🥊</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWT6el1UZ5J7KyAWqVy1GGtxZhaxgNYfREVx-nZM6oxg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Ragdoll Hit</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clragdollarchers.html" style="--art-start: #b8d18d; --art-end: #668447">
-                    <span class="game-art" aria-hidden="true"><span>🏹</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq1LT4-60bQ_wPuPkRQtk4eseSEnQzfy-FXEiK3ov_IQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Ragdoll Archers</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clrooftopsnipers2.html" style="--art-start: #b8c8e8; --art-end: #655e9c">
-                    <span class="game-art" aria-hidden="true"><span>🏙️</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW-EUnns_221-kjZvQ7HqLD8wwDAP6vlGSXlkTSuIo_w&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Rooftop Snipers 2</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clgrindcraft.html" style="--art-start: #dac28e; --art-end: #7d9c62">
-                    <span class="game-art" aria-hidden="true"><span>⛏️</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL7rOS_Y8LH56FgZFYM5hFDGZ3sQu6qZHA_W_p3VjZwg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>GrindCraft</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/cl2048.html" style="--art-start: #f4c27e; --art-end: #e9845d">
-                    <span class="game-art" aria-hidden="true"><span>🔢</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyze1bWJkHvH2sgbwrmWbr1Yez1t_QINmEYPKmmlwjsQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>2048</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/cl234playergame.html" style="--art-start: #c2b5e8; --art-end: #7d75b7">
-                    <span class="game-art" aria-hidden="true"><span>🎮</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8vXWri9VyQkZgvIaZOrDTvuaQgV9jTkq6i4nEs5aepQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>2 3 4 Player Games</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clescaperoad3.html" style="--art-start: #f3b57d; --art-end: #bd6554">
-                    <span class="game-art" aria-hidden="true"><span>🚘</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTos09m-fAz4giTJ4gktO-EgGI01-lQeAr9yh6WLPbKRQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Escape Road 3</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clretrobowl.html" style="--art-start: #d9a771; --art-end: #894f58">
-                    <span class="game-art" aria-hidden="true"><span>🏈</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYIiOxUFlNK49yr1Icf9UqQb58P9oZD-QR3wcCAYV6VA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Retro Bowl</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clsnowrider.html" style="--art-start: #d5eef2; --art-end: #76a9c1">
-                    <span class="game-art" aria-hidden="true"><span>🏂</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ_aL-Jq8JIdorlR8uOXA84Lrvo8uwgWswtjFKImDWHA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Snow Rider 3D</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clsandboxels.html" style="--art-start: #a7d8c0; --art-end: #6694ad">
-                    <span class="game-art" aria-hidden="true"><span>🧪</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUdZ_gD42pOThyuvnAW7SzFtEXpDHgPjxw_roEfbcEkA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Sandboxels</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clsupersmashbros.html" style="--art-start: #f3a76f; --art-end: #c85445">
-                    <span class="game-art" aria-hidden="true"><span>💥</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoxRixLbbDNcXKZQK3ZKHqZyQ215C6zzfPbN5yvDyi3Q&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Super Smash Bros.</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clfunnyshooter2.html" style="--art-start: #a8d4a1; --art-end: #5e8b63">
-                    <span class="game-art" aria-hidden="true"><span>🎯</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeD1YdfD_eoP52qEhijZFVuD2IxZUQiEdON5Z7xFm1AA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Funny Shooter 2</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/clsuperhot.html" style="--art-start: #f5a18e; --art-end: #b9333a">
-                    <span class="game-art" aria-hidden="true"><span>🔴</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScZiDzezzR2pIThPNA8UsJkID1aUVWeUMryZJkqWGbNg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>SUPERHOT</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Games/cltimeshooter3.html" style="--art-start: #f1d06d; --art-end: #d77a45">
-                    <span class="game-art" aria-hidden="true"><span>⏱️</span></span>
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU3fwxjKlLbRWJ0uEUxuabVPZqAKSIR4Z9nOCgqQ5Xfg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Time Shooter 3 SWAT</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-            </div>
+                <a class="game-card" href="Games/clmotox3mm.html" style="--art-start: #f4bd70; --art-end: #db704d">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6MY8j-zwIfhdFaLJEQxu1sUlwzM4ZJ9tU6kcpEvZVCw&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>Moto X3M</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clmotox3mwinter.html" style="--art-start: #d5eef2; --art-end: #76a9c1">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVpcIsmrWaSqVAylNhJl8nDDiSvReWlmoDuv8PEjdWEw&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>Moto X3M Winter</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clmotox3mpoolparty.html" style="--art-start: #90d8e8; --art-end: #348eaf">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHNCUBmE_SWbzJOG9wmwbgLYiW4fVz5ku7Un92xJj2BQ&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>Moto X3M Pool Party</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clmotox3mspookyland.html" style="--art-start: #bca6d9; --art-end: #53446e">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9ETqu33eViFLY8pWBE2rAQdFOMIqcwSbKjkVLQIFwcw&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>Moto X3M Spooky Land</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clovo2.html" style="--art-start: #f4d789; --art-end: #e99550">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8W6YSrft0h9twBrDOsuGJCV_AZ0gbueHRj2Be5DKgZA&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>OvO 2</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clpaperio.html" style="--art-start: #a9d7ef; --art-end: #638dc4">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQFR6HIgRH7LXvZUiCE5WaC-bLLLIj4761QlBiydiwCg&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>Paper.io</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clpixelshooter.html" style="--art-start: #f5a18e; --art-end: #b9333a">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl5tRyflb24tw67RU7c7oCAoCdbClDCwjOcIErB52SKQ&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>Pixel Shooter 1</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clpleasedonttouchanything.html" style="--art-start: #a8a8a8; --art-end: #565656">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDTX7gfcdem2J_IXNBV78kqbJoyJ5kWFWU5Eue2fT5vw&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>Please, Don’t Touch Anything</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                </div>
+            </section>
+            <section class="content-section" id="apps" aria-labelledby="apps-heading">
+                <h2 class="section-heading" id="apps-heading">Apps</h2>
+                <p class="empty-section">Apps will appear here.</p>
+            </section>
         </main>
+        <script>
+            document.querySelectorAll(".game-card").forEach((gameLink) => {
+                gameLink.addEventListener("click", (event) => {
+                    event.preventDefault();
+
+                    const gameBase = window.location.protocol === "file:"
+                        ? "https://crashtest5812-fun.github.io/Un-BlockedGames67/"
+                        : document.baseURI;
+                    const gameUrl = new URL(gameLink.getAttribute("href"), gameBase).href;
+                    const gameWindow = window.open("about:blank", "_blank");
+
+                    if (!gameWindow) {
+                        window.alert("Allow pop-ups for this page to open games in a blank tab.");
+                        return;
+                    }
+
+                    gameWindow.document.title = gameLink.querySelector("strong").textContent;
+                    gameWindow.document.body.style.margin = "0";
+
+                    const gameFrame = gameWindow.document.createElement("iframe");
+                    gameFrame.src = gameUrl;
+                    gameFrame.title = gameLink.querySelector("strong").textContent;
+                    gameFrame.allow = "autoplay; fullscreen; gamepad";
+                    gameFrame.style.cssText = "position:fixed;inset:0;width:100%;height:100%;border:0";
+                    gameWindow.document.body.append(gameFrame);
+                });
+            });
+        </script>
     </body>
 </html>
