@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Un-Blocked Games</title>
+        <style>
+            :root {
+                /* Change these values to customize the page's colors and fonts. */
+                --page-background: rgb(216, 216, 199);
+                --page-font: Arial, sans-serif;
+                --header-color-start: #183c36;
+                --header-color-end: #28594d;
+                --header-accent: #d2a85a;
+                --header-text: #f8f6ed;
+                --header-subtitle: #d8e5dc;
+                --heading-font: Arial, sans-serif;
+                --subtitle-font: Arial, sans-serif;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                background-color: var(--page-background);
+                color: #28282B;
+                font-family: var(--page-font);
+            }
+
+            header {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                padding: 18px clamp(20px, 6vw, 72px);
+                color: var(--header-text);
+                background: linear-gradient(115deg, var(--header-color-start), var(--header-color-end));
+                border-bottom: 4px solid var(--header-accent);
+                box-shadow: 0 4px 14px rgb(28 43 36 / 18%);
+            }
+
+            .brand-mark {
+                display: grid;
+                width: 54px;
+                height: 54px;
+                flex: 0 0 54px;
+                place-items: center;
+                overflow: hidden;
+                background: #f8f6ed;
+                border: 2px solid rgb(248 246 237 / 75%);
+                border-radius: 16px;
+            }
+
+            .brand-mark img {
+                display: block;
+                width: 38px;
+                height: 38px;
+                object-fit: contain;
+            }
+
+            .brand-copy h1 {
+                margin: 0;
+                font-size: clamp(1.25rem, 3vw, 1.75rem);
+                font-family: var(--heading-font);
+                letter-spacing: 0.02em;
+            }
+
+            .brand-copy p {
+                margin: 4px 0 0;
+                color: var(--header-subtitle);
+                font-size: 0.85rem;
+                font-family: var(--subtitle-font);
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+            }
+
+            main {
+                width: min(1200px, 100%);
+                margin: 0 auto;
+                padding: 36px clamp(20px, 6vw, 72px) 56px;
+            }
+
+            .games-heading {
+                margin: 0 0 22px;
+                color: #183c36;
+                font-size: clamp(1.5rem, 3vw, 2rem);
+            }
+
+            .games-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+                gap: 20px;
+            }
+
+            .game-card {
+                display: flex;
+                min-width: 0;
+                flex-direction: column;
+                overflow: hidden;
+                color: #28282b;
+                text-decoration: none;
+                background: #f8f6ed;
+                border: 1px solid rgb(24 60 54 / 14%);
+                border-radius: 14px;
+                box-shadow: 0 4px 12px rgb(28 43 36 / 10%);
+                transition: transform 160ms ease, box-shadow 160ms ease;
+            }
+
+            .game-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 18px rgb(28 43 36 / 18%);
+            }
+
+            .game-card:focus-visible {
+                outline: 3px solid #28594d;
+                outline-offset: 4px;
+            }
+
+            .game-art {
+                display: grid;
+                min-height: 145px;
+                place-items: center;
+                background: linear-gradient(135deg, var(--art-start), var(--art-end));
+            }
+
+            .game-art span {
+                font-size: 4.25rem;
+                filter: drop-shadow(0 4px 3px rgb(0 0 0 / 18%));
+            }
+
+            .game-copy {
+                display: flex;
+                flex: 1;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                padding: 14px 16px;
+            }
+
+            .game-copy strong {
+                font-size: 1rem;
+            }
+
+            .play-label {
+                flex: 0 0 auto;
+                color: #28594d;
+                font-size: 0.85rem;
+                font-weight: 700;
+            }
+
+            @media (max-width: 480px) {
+                header {
+                    gap: 12px;
+                    padding-block: 14px;
+                }
+
+                .brand-mark {
+                    width: 46px;
+                    height: 46px;
+                    flex-basis: 46px;
+                    border-radius: 13px;
+                }
+
+                .brand-mark img {
+                    width: 32px;
+                    height: 32px;
+                }
+
+                main {
+                    padding-top: 28px;
+                }
+
+                .games-grid {
+                    gap: 14px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="brand-mark">
+                <img src="https://freepngimg.com/thumb/letter/130045-c-letter-png-image-high-quality.png" alt="">
+            </div>
+            <div class="brand-copy">
+                <h1>Un-Blocked Games</h1>
+                <p>Play • Explore • Enjoy</p>
+            </div>
+        </header>
+        <main>
+            <h2 class="games-heading">Popular Games</h2>
+            <div class="games-grid">
+                <a class="game-card" href="Games/People%20Playground.html" style="--art-start: #d9c3aa; --art-end: #9db6a1">
+                    <span class="game-art" aria-hidden="true"><span>🧍</span></span>
+                    <span class="game-copy"><strong>People Playground</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clbasketrandom.html" style="--art-start: #f6c66b; --art-end: #ed8754">
+                    <span class="game-art" aria-hidden="true"><span>🏀</span></span>
+                    <span class="game-copy"><strong>Basket Random</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clslitherio.html" style="--art-start: #9de0a4; --art-end: #3b9c7b">
+                    <span class="game-art" aria-hidden="true"><span>🐍</span></span>
+                    <span class="game-copy"><strong>Snake</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/cltimeshooter2.html" style="--art-start: #f5d66c; --art-end: #e88345">
+                    <span class="game-art" aria-hidden="true"><span>⏱️</span></span>
+                    <span class="game-copy"><strong>Time Shooter 2</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clescaperoadcity2.html" style="--art-start: #a8d4e8; --art-end: #4f83a5">
+                    <span class="game-art" aria-hidden="true"><span>🚗</span></span>
+                    <span class="game-copy"><strong>Escape Road</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clragollhit.html" style="--art-start: #f1b0a0; --art-end: #bd5b59">
+                    <span class="game-art" aria-hidden="true"><span>🥊</span></span>
+                    <span class="game-copy"><strong>Ragdoll Hit</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clragdollarchers.html" style="--art-start: #b8d18d; --art-end: #668447">
+                    <span class="game-art" aria-hidden="true"><span>🏹</span></span>
+                    <span class="game-copy"><strong>Ragdoll Archers</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clrooftopsnipers2.html" style="--art-start: #b8c8e8; --art-end: #655e9c">
+                    <span class="game-art" aria-hidden="true"><span>🏙️</span></span>
+                    <span class="game-copy"><strong>Rooftop Snipers 2</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clgrindcraft.html" style="--art-start: #dac28e; --art-end: #7d9c62">
+                    <span class="game-art" aria-hidden="true"><span>⛏️</span></span>
+                    <span class="game-copy"><strong>GrindCraft</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/cl2048.html" style="--art-start: #f4c27e; --art-end: #e9845d">
+                    <span class="game-art" aria-hidden="true"><span>🔢</span></span>
+                    <span class="game-copy"><strong>2048</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/cl234playergame.html" style="--art-start: #c2b5e8; --art-end: #7d75b7">
+                    <span class="game-art" aria-hidden="true"><span>🎮</span></span>
+                    <span class="game-copy"><strong>2 3 4 Player Games</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clescaperoad3.html" style="--art-start: #f3b57d; --art-end: #bd6554">
+                    <span class="game-art" aria-hidden="true"><span>🚘</span></span>
+                    <span class="game-copy"><strong>Escape Road 3</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clretrobowl.html" style="--art-start: #d9a771; --art-end: #894f58">
+                    <span class="game-art" aria-hidden="true"><span>🏈</span></span>
+                    <span class="game-copy"><strong>Retro Bowl</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clsnowrider.html" style="--art-start: #d5eef2; --art-end: #76a9c1">
+                    <span class="game-art" aria-hidden="true"><span>🏂</span></span>
+                    <span class="game-copy"><strong>Snow Rider 3D</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clsandboxels.html" style="--art-start: #a7d8c0; --art-end: #6694ad">
+                    <span class="game-art" aria-hidden="true"><span>🧪</span></span>
+                    <span class="game-copy"><strong>Sandboxels</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clsupersmashbros.html" style="--art-start: #f3a76f; --art-end: #c85445">
+                    <span class="game-art" aria-hidden="true"><span>💥</span></span>
+                    <span class="game-copy"><strong>Super Smash Bros.</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clfunnyshooter2.html" style="--art-start: #a8d4a1; --art-end: #5e8b63">
+                    <span class="game-art" aria-hidden="true"><span>🎯</span></span>
+                    <span class="game-copy"><strong>Funny Shooter 2</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/clsuperhot.html" style="--art-start: #f5a18e; --art-end: #b9333a">
+                    <span class="game-art" aria-hidden="true"><span>🔴</span></span>
+                    <span class="game-copy"><strong>SUPERHOT</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Games/cltimeshooter3.html" style="--art-start: #f1d06d; --art-end: #d77a45">
+                    <span class="game-art" aria-hidden="true"><span>⏱️</span></span>
+                    <span class="game-copy"><strong>Time Shooter 3 SWAT</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+            </div>
+        </main>
+    </body>
+</html>
