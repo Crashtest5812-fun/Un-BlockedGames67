@@ -450,8 +450,22 @@
             const gameSearch = document.querySelector("#game-search");
             const gameSearchStatus = document.querySelector("#game-search-status");
 
-            allGameCards.slice(0, 8).forEach((gameCard) => {
-                popularGamesGrid.append(gameCard.cloneNode(true));
+            const popularGameHrefs = [
+                "Games/clbitlife.html",
+                "Games/clretrobowl.html",
+                "Games/clbasketballlegends.html",
+                "Games/clmotox3mm.html",
+                "Games/clsubwaysurferssanfrancisco%20%281%29.html",
+                "Games/clbasketballstars.html",
+                "Games/clbasketrandom.html",
+                "Games/clsoccerrandom.html",
+                "Games/cl2048.html",
+                "Games/clgoogledino.html"
+            ];
+
+            popularGameHrefs.forEach((href) => {
+                const gameCard = allGameCards.find((card) => card.getAttribute("href") === href);
+                if (gameCard) popularGamesGrid.append(gameCard.cloneNode(true));
             });
 
             gameSearch.addEventListener("input", () => {
