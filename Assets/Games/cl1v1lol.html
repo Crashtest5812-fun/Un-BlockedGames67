@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>1v1.lol</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MENBM6GSNY"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-MENBM6GSNY")</script>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      .webgl-content {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      #gameContainer {
+        width: 100vw !important;
+        height: 100vh !important;
+      }
+
+      #run_game {
+        position: fixed;
+        z-index: 10;
+        top: 50%;
+        left: 50%;
+        width: auto;
+        min-width: 0;
+        max-width: calc(100vw - 32px);
+        height: auto;
+        padding: 18px 28px;
+        transform: translate(-50%, -50%);
+        font-family: inherit;
+        font-size: clamp(1rem, 4vw, 1.75rem);
+        color: #fff;
+        background: #2c2c2c;
+        border: 0;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #run_game:hover {
+        background: #3f3f3f;
+      }
+
+      #run_game:focus-visible {
+        outline: 3px solid #cbd6ee;
+        outline-offset: 3px;
+      }
+
+      #game-status {
+        position: fixed;
+        z-index: 10;
+        top: calc(50% + 56px);
+        left: 50%;
+        width: max-content;
+        max-width: calc(100vw - 32px);
+        transform: translateX(-50%);
+        color: #fff;
+        font: 16px/1.5 Arial, sans-serif;
+        text-align: center;
+        text-shadow: 0 1px 3px #000;
+      }
+    </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ferialoken937373/clever@c91366f7f0a51bfccdb966a5cabcc39add3807ac/projects/rockpaperscissors/exercise/style.css">
+    <script src="https://cdn.jsdelivr.net/gh/ferialoken937373/clever@c91366f7f0a51bfccdb966a5cabcc39add3807ac/projects/rockpaperscissors/exercise/UnityProgress.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/ferialoken937373/clever@c91366f7f0a51bfccdb966a5cabcc39add3807ac/projects/rockpaperscissors/exercise/2.7.js"></script>
+    <script type="text/javascript">
+
+      var gameInstance;
+
+      function startGame() {
+        const playButton = document.getElementById("run_game");
+        const gameStatus = document.getElementById("game-status");
+
+        if (!window.UnityLoader || typeof window.UnityLoader.instantiate !== "function") {
+          gameStatus.textContent = "The game loader did not load. Check your connection and reload.";
+          return;
+        }
+
+        playButton.disabled = true;
+        playButton.textContent = "Loading game...";
+
+        try {
+          gameInstance = UnityLoader.instantiate("gameContainer", "https://cdn.jsdelivr.net/gh/ferialoken937373/clever@8424f74721ca8bb284b77c2b9f232b94171fe2e2/projects/rockpaperscissors/exercise/2.7.json", {
+            onProgress: UnityProgress,
+            Module: {
+              onRuntimeInitialized: function () {
+                UnityProgress(gameInstance, "complete");
+                playButton.remove();
+                gameStatus.textContent = "";
+              }
+            }
+          });
+        } catch (error) {
+          console.error("Unable to start the game.", error);
+          playButton.disabled = false;
+          playButton.textContent = "Try again";
+          gameStatus.textContent = "The game could not start. Check your connection and try again.";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <button id="run_game" type="button" onclick="startGame()">CLICK TO PLAY NOW</button>
+    <p id="game-status" role="status" aria-live="polite"></p>
+    <div class="webgl-content">
+      <div id="gameContainer"></div>
+    </div>
+	<script src="https://cdn.jsdelivr.net/gh/ferialoken937373/clever@39a90cb9cfb043b6e47becd5ba0410ed2092d5a6/projects/rockpaperscissors/exercise/1firebase-app.js"></script>
+
+	<!-- Add Firebase products that you want to use -->
+	<script src="https://cdn.jsdelivr.net/gh/ferialoken937373/clever@39a90cb9cfb043b6e47becd5ba0410ed2092d5a6/projects/rockpaperscissors/exercise/1firebase-auth.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/ferialoken937373/clever@39a90cb9cfb043b6e47becd5ba0410ed2092d5a6/projects/rockpaperscissors/exercise/1firebase-firestore.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/gh/ferialoken937373/clever@39a90cb9cfb043b6e47becd5ba0410ed2092d5a6/projects/rockpaperscissors/exercise/1firebase.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/ferialoken937373/clever@39a90cb9cfb043b6e47becd5ba0410ed2092d5a6/projects/rockpaperscissors/exercise/1login.js?v=2"></script>
+	<script src="https://cdn.jsdelivr.net/gh/ferialoken937373/clever@39a90cb9cfb043b6e47becd5ba0410ed2092d5a6/projects/rockpaperscissors/exercise/1firestore.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script><script type="text/javascript">window.SDK_OPTIONS={gameId:"r2tzpy9cgrn2u4xgzc9z0zbtvxm16mby",onEvent:function(a){switch(a.name){case"SDK_GAME_PAUSE":break;case"SDK_GAME_START":break;case"SDK_READY":break}}};(function(a,b,c){var d=a.getElementsByTagName(b)[0];a.getElementById(c)||(a=a.createElement(b),a.id=c,a.src="https://cdn.jsdelivr.net/gh/st39/sdk@main/sdkjs.js",d.parentNode.insertBefore(a,d))})(document,"script","gamemonetize-sdk");</script><script type="text/javascript">let isAdShown=false;function onClick(e){if(!isAdShown&&typeof sdk!=='undefined'&&typeof sdk.showBanner==='function'){sdk.showBanner();isAdShown=true}window.removeEventListener("click",onClick)}window.addEventListener("click",onClick);</script>
+
+	<script src="https://cdn.jsdelivr.net/gh/st39/sdk@main/api.js"></script>
+  </body>
+</html>
