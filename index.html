@@ -170,6 +170,59 @@
                 outline-offset: 4px;
             }
 
+            .site-footer {
+                color: var(--header-text);
+                background: linear-gradient(115deg, var(--header-color-start), var(--header-color-end));
+                border-top: 4px solid var(--header-accent);
+            }
+
+            .footer-content {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 32px;
+                width: min(1200px, 100%);
+                margin: 0 auto;
+                padding: 34px clamp(20px, 6vw, 72px);
+            }
+
+            .footer-section h2 {
+                margin: 0 0 12px;
+                color: var(--header-accent);
+                font-size: 0.8rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+            }
+
+            .footer-section p {
+                margin: 0;
+                color: var(--header-subtitle);
+                line-height: 1.6;
+            }
+
+            .footer-section a {
+                color: var(--header-text);
+                text-underline-offset: 3px;
+            }
+
+            .footer-section a:hover {
+                color: var(--header-accent);
+            }
+
+            .footer-section a:focus-visible {
+                outline: 3px solid var(--header-accent);
+                outline-offset: 4px;
+            }
+
+            .footer-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px 16px;
+            }
+
+            .footer-credit {
+                font-weight: 700;
+            }
+
             .page-layout {
                 display: grid;
                 grid-template-columns: 220px minmax(0, 1fr);
@@ -519,6 +572,11 @@
             }
 
             @media (max-width: 760px) {
+                .footer-content {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 26px 20px;
+                }
+
                 .page-layout {
                     grid-template-columns: minmax(0, 1fr);
                     gap: 0;
@@ -621,6 +679,7 @@
                         <a href="#games">Popular games</a>
                         <a href="#all-games">All games</a>
                         <a href="#apps">Apps</a>
+                        <a href="#request-game">Request a game</a>
                     </nav>
                 </div>
                 <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">
@@ -700,9 +759,17 @@
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRntQrmCqw_KJ1z1bi0MWXfye7uC8gtqQZNKbh8K0lHVg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Time Shooter 2</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
+                <a class="game-card" href="Assets/Games/clescaperoad.html" style="--art-start: #a8d4e8; --art-end: #4f83a5">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkROUl3XGP3F9WMCNYGCNV7ysa_Qdvm8xSIkOk-Ropg&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>Escape Road</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Assets/Games/clescaperoad-2.html" style="--art-start: #f3b57d; --art-end: #bd6554">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGPdxb43NTms7UXdMgwQYUdapZIZ5Suk52mQ_MARouRQ&amp;s" alt=""></span>
+                    <span class="game-copy"><strong>Escape Road 2</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
                 <a class="game-card" href="Assets/Games/clescaperoadcity2.html" style="--art-start: #a8d4e8; --art-end: #4f83a5">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYt1VTOwmYR2ibL1ngXa4qgIXlTkv6V97A_ZL-XU-KVA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Escape Road</strong><span class="play-label">Play &#8594;</span></span>
+                    <span class="game-copy"><strong>Escape Road City 2</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Assets/Games/clragollhit.html" style="--art-start: #f1b0a0; --art-end: #bd5b59">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWT6el1UZ5J7KyAWqVy1GGtxZhaxgNYfREVx-nZM6oxg&amp;s=10" alt=""></span>
@@ -728,6 +795,10 @@
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8vXWri9VyQkZgvIaZOrDTvuaQgV9jTkq6i4nEs5aepQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>2 3 4 Player Games</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
+                <a class="game-card" href="Assets/Games/clrun3.html" style="--art-start: #b4b8f4; --art-end: #555b9e">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgv72pC8RwqFDLIq75hVPkt3OEP3gJTALBkQWvok7wKw&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>Run 3</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
                 <a class="game-card" href="Assets/Games/clescaperoad3.html" style="--art-start: #f3b57d; --art-end: #bd6554">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTos09m-fAz4giTJ4gktO-EgGI01-lQeAr9yh6WLPbKRQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Escape Road 3</strong><span class="play-label">Play &#8594;</span></span>
@@ -736,9 +807,17 @@
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYIiOxUFlNK49yr1Icf9UqQb58P9oZD-QR3wcCAYV6VA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Retro Bowl</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
+                <a class="game-card" href="Assets/Games/clretrobowlcollege.html" style="--art-start: #d9a771; --art-end: #894f58">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCzfXtnt5TtBJ7S8BzkNNY-Elp3Jw_asyi-zHPsxXhJA&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>Retro Bowl College</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
                 <a class="game-card" href="Assets/Games/clsnowrider.html" style="--art-start: #d5eef2; --art-end: #76a9c1">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ_aL-Jq8JIdorlR8uOXA84Lrvo8uwgWswtjFKImDWHA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Snow Rider 3D</strong><span class="play-label">Play &#8594;</span></span>
+                </a>
+                <a class="game-card" href="Assets/Games/cleggycar.html" style="--art-start: #f5d17d; --art-end: #c77c3e">
+                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyKSXm8KeM9AMWROM-hKWfIw9w4XAWpXOhCZHDubyQ2g&amp;s=10" alt=""></span>
+                    <span class="game-copy"><strong>Eggy Car</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
                 <a class="game-card" href="Assets/Games/clsandboxels.html" style="--art-start: #a7d8c0; --art-end: #6694ad">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUdZ_gD42pOThyuvnAW7SzFtEXpDHgPjxw_roEfbcEkA&amp;s=10" alt=""></span>
@@ -853,8 +932,36 @@
                     </a>
                 </div>
             </section>
+            <section class="content-section" id="request-game" aria-labelledby="request-game-heading">
+                <h2 class="section-heading" id="request-game-heading">Request a Game</h2>
+                <p>Have a game you’d like to see here? Send us a request.</p>
+                <a class="welcome-link" href="mailto:madcoder19265@outlook.com?subject=Game%20Request&amp;body=Hi%2C%20I%27d%20like%20to%20request%20this%20game%3A%0A%0AGame%20name%3A%20">
+                    Email a game request <span aria-hidden="true">&#8594;</span>
+                </a>
+            </section>
             </main>
         </div>
+        <footer class="site-footer">
+            <div class="footer-content">
+                <section class="footer-section" aria-labelledby="footer-contact-heading">
+                    <h2 id="footer-contact-heading">Get in touch</h2>
+                    <p>Have a game idea or question? <a href="mailto:madcoder19265@outlook.com">Email us</a>.</p>
+                </section>
+                <nav class="footer-section" aria-label="Footer navigation">
+                    <h2>Explore</h2>
+                    <div class="footer-links">
+                        <a href="#games">Popular games</a>
+                        <a href="#all-games">All games</a>
+                        <a href="#apps">Apps</a>
+                        <a href="#request-game">Request a game</a>
+                    </div>
+                </nav>
+                <section class="footer-section" aria-labelledby="footer-credits-heading">
+                    <h2 id="footer-credits-heading">Credits</h2>
+                    <p class="footer-credit">Made by: Adrian Virrueta &amp; Liam Soto</p>
+                </section>
+            </div>
+        </footer>
         <script>
             const allGameCards = [...document.querySelectorAll("#all-games-grid .game-card")];
             const popularGamesGrid = document.querySelector("#popular-games-grid");
@@ -1068,15 +1175,20 @@
                 ["Snake", "Arcade"],
                 ["Time Shooter 2", "Arcade"],
                 ["Escape Road", "Racing"],
+                ["Escape Road 2", "Racing"],
+                ["Escape Road City 2", "Racing"],
                 ["Ragdoll Hit", "Arcade"],
                 ["Ragdoll Archers", "Arcade"],
                 ["Rooftop Snipers 2", "Arcade"],
                 ["GrindCraft", "Puzzle"],
                 ["2048", "Puzzle"],
                 ["2 3 4 Player Games", "Arcade"],
+                ["Run 3", "Arcade"],
                 ["Escape Road 3", "Racing"],
                 ["Retro Bowl", "Sports"],
+                ["Retro Bowl College", "Sports"],
                 ["Snow Rider 3D", "Racing"],
+                ["Eggy Car", "Racing"],
                 ["Sandboxels", "Casual"],
                 ["Super Smash Bros.", "Arcade"],
                 ["Funny Shooter 2", "Arcade"],
