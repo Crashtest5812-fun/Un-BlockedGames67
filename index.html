@@ -4,10 +4,18 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Un-Blocked Games</title>
+        <link rel="icon" type="image/png" href="https://freepngimg.com/thumb/letter/130045-c-letter-png-image-high-quality.png">
         <style>
             :root {
-                /* Change these values to customize the page's colors and fonts. */
                 --page-background: rgb(216, 216, 199);
+                --page-text: #28282b;
+                --surface-background: #f8f6ed;
+                --surface-border: rgb(24 60 54 / 14%);
+                --heading-color: #183c36;
+                --muted-color: #52645d;
+                --control-background: #fff;
+                --control-border: rgb(24 60 54 / 28%);
+                --focus-color: #28594d;
                 --page-font: Arial, sans-serif;
                 --header-color-start: #183c36;
                 --header-color-end: #28594d;
@@ -18,6 +26,22 @@
                 --subtitle-font: Arial, sans-serif;
             }
 
+            :root[data-theme="dark"] {
+                color-scheme: dark;
+                --page-background: #141b1a;
+                --page-text: #e8eee9;
+                --surface-background: #202b28;
+                --surface-border: rgb(208 225 214 / 16%);
+                --heading-color: #c4e1ce;
+                --muted-color: #a9b8ae;
+                --control-background: #18211f;
+                --control-border: rgb(208 225 214 / 24%);
+                --focus-color: #e8c77e;
+                --header-color-start: #101816;
+                --header-color-end: #203b32;
+                --header-accent: #b58a43;
+            }
+
             * {
                 box-sizing: border-box;
             }
@@ -26,8 +50,10 @@
                 margin: 0;
                 min-height: 100vh;
                 background-color: var(--page-background);
-                color: #28282B;
+                color: var(--page-text);
                 font-family: var(--page-font);
+                animation: page-enter 420ms ease-out both;
+                transition: background-color 220ms ease, color 220ms ease;
             }
 
             header {
@@ -95,6 +121,7 @@
                 border: 1px solid rgb(24 60 54 / 12%);
                 border-radius: 22px;
                 box-shadow: 0 10px 24px rgb(28 43 36 / 16%);
+                animation: welcome-enter 620ms cubic-bezier(.2, .75, .3, 1) both;
             }
 
             .welcome-kicker {
@@ -143,27 +170,144 @@
                 outline-offset: 4px;
             }
 
+            .page-layout {
+                display: grid;
+                grid-template-columns: 220px minmax(0, 1fr);
+                gap: 12px;
+                width: min(1500px, 100%);
+                margin: 0 auto;
+            }
+
+            .side-menu {
+                position: sticky;
+                top: 16px;
+                align-self: start;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                margin: 24px 0 24px 16px;
+                padding: 18px 14px;
+                background: var(--surface-background);
+                border: 1px solid var(--surface-border);
+                border-radius: 16px;
+                box-shadow: 0 4px 12px rgb(28 43 36 / 10%);
+                animation: sidebar-enter 520ms cubic-bezier(.2, .75, .3, 1) both;
+            }
+
+            .side-menu-label {
+                margin: 0 0 8px 10px;
+                color: var(--muted-color);
+                font-size: 0.72rem;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+            }
+
+            .side-menu nav {
+                display: grid;
+                gap: 5px;
+            }
+
+            .side-menu nav a {
+                padding: 10px;
+                color: var(--page-text);
+                font-weight: 700;
+                text-decoration: none;
+                border-radius: 9px;
+                transition: background-color 150ms ease, color 150ms ease;
+            }
+
+            .side-menu nav a:hover {
+                color: var(--heading-color);
+                background: rgb(40 89 77 / 10%);
+            }
+
+            .side-menu nav a:focus-visible {
+                outline: 3px solid var(--focus-color);
+                outline-offset: 3px;
+            }
+
+            .audio-controls {
+                display: grid;
+                gap: 8px;
+            }
+
+            .theme-toggle {
+                width: 100%;
+                padding: 11px 12px;
+                color: var(--page-text);
+                font: inherit;
+                font-weight: 700;
+                text-align: left;
+                background: var(--control-background);
+                border: 1px solid var(--control-border);
+                border-radius: 10px;
+                cursor: pointer;
+                transition: background-color 150ms ease, border-color 150ms ease;
+            }
+
+            .theme-toggle:hover {
+                border-color: var(--focus-color);
+            }
+
+            .audio-toggle {
+                width: 100%;
+                padding: 10px 12px;
+                color: var(--page-text);
+                font: inherit;
+                font-size: 0.9rem;
+                font-weight: 700;
+                text-align: left;
+                background: var(--control-background);
+                border: 1px solid var(--control-border);
+                border-radius: 10px;
+                cursor: pointer;
+                transition: background-color 150ms ease, border-color 150ms ease;
+            }
+
+            .audio-toggle:hover {
+                border-color: var(--focus-color);
+            }
+
+            .audio-toggle:focus-visible {
+                outline: 3px solid var(--focus-color);
+                outline-offset: 3px;
+            }
+
+            .audio-status {
+                min-height: 1.2em;
+                margin: 0;
+                color: var(--muted-color);
+                font-size: 0.78rem;
+                line-height: 1.4;
+            }
+
+            .page-layout main {
+                width: min(1200px, 100%);
+                margin: 0 auto;
+            }
+
             .content-section + .content-section {
                 margin-top: 42px;
             }
 
             .section-heading {
                 margin: 0 0 22px;
-                color: #183c36;
+                color: var(--heading-color);
                 font-size: clamp(1.5rem, 3vw, 2rem);
             }
 
             .all-games-menu {
                 overflow: hidden;
-                background: #f8f6ed;
-                border: 1px solid rgb(24 60 54 / 14%);
+                background: var(--surface-background);
+                border: 1px solid var(--surface-border);
                 border-radius: 14px;
                 box-shadow: 0 4px 12px rgb(28 43 36 / 10%);
             }
 
             .all-games-menu summary {
                 padding: 16px 20px;
-                color: #183c36;
+                color: var(--heading-color);
                 font-weight: 700;
                 cursor: pointer;
             }
@@ -171,7 +315,7 @@
             .all-games-menu summary:focus-visible,
             .game-search:focus-visible,
             .category-filter:focus-visible {
-                outline: 3px solid #28594d;
+                outline: 3px solid var(--focus-color);
                 outline-offset: 3px;
             }
 
@@ -183,10 +327,10 @@
                 width: 100%;
                 max-width: 480px;
                 padding: 12px 14px;
-                color: #28282b;
+                color: var(--page-text);
                 font: inherit;
-                background: #fff;
-                border: 1px solid rgb(24 60 54 / 28%);
+                background: var(--control-background);
+                border: 1px solid var(--control-border);
                 border-radius: 8px;
             }
 
@@ -199,30 +343,30 @@
 
             .category-filter {
                 padding: 8px 13px;
-                color: #28594d;
+                color: var(--heading-color);
                 font: inherit;
                 font-size: 0.9rem;
                 font-weight: 700;
-                background: #fff;
-                border: 1px solid rgb(24 60 54 / 20%);
+                background: var(--control-background);
+                border: 1px solid var(--control-border);
                 border-radius: 999px;
                 cursor: pointer;
                 transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
             }
 
             .category-filter:hover {
-                border-color: #28594d;
+                border-color: var(--focus-color);
             }
 
             .category-filter[aria-pressed="true"] {
-                color: #f8f6ed;
-                background: #28594d;
-                border-color: #28594d;
+                color: var(--surface-background);
+                background: var(--heading-color);
+                border-color: var(--heading-color);
             }
 
             .game-search-status {
                 margin: 12px 0 18px;
-                color: #52645d;
+                color: var(--muted-color);
                 font-size: 0.9rem;
             }
 
@@ -241,13 +385,30 @@
                 min-width: 0;
                 flex-direction: column;
                 overflow: hidden;
-                color: #28282b;
+                color: var(--page-text);
                 text-decoration: none;
-                background: #f8f6ed;
-                border: 1px solid rgb(24 60 54 / 14%);
+                background: var(--surface-background);
+                border: 1px solid var(--surface-border);
                 border-radius: 14px;
                 box-shadow: 0 4px 12px rgb(28 43 36 / 10%);
                 transition: transform 160ms ease, box-shadow 160ms ease;
+                animation: card-enter 460ms cubic-bezier(.2, .75, .3, 1) backwards;
+            }
+
+            .game-card:nth-child(4n + 1) {
+                animation-delay: 40ms;
+            }
+
+            .game-card:nth-child(4n + 2) {
+                animation-delay: 80ms;
+            }
+
+            .game-card:nth-child(4n + 3) {
+                animation-delay: 120ms;
+            }
+
+            .game-card:nth-child(4n) {
+                animation-delay: 160ms;
             }
 
             .game-card:hover .game-art img {
@@ -260,7 +421,7 @@
             }
 
             .game-card:focus-visible {
-                outline: 3px solid #28594d;
+                outline: 3px solid var(--focus-color);
                 outline-offset: 4px;
             }
 
@@ -300,9 +461,29 @@
 
             .play-label {
                 flex: 0 0 auto;
-                color: #28594d;
+                color: var(--heading-color);
                 font-size: 0.85rem;
                 font-weight: 700;
+            }
+
+            @keyframes page-enter {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+            @keyframes welcome-enter {
+                from { opacity: 0; transform: translateY(16px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes sidebar-enter {
+                from { opacity: 0; transform: translateX(-12px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+
+            @keyframes card-enter {
+                from { opacity: 0; transform: translateY(12px); }
+                to { opacity: 1; transform: translateY(0); }
             }
 
             @media (max-width: 480px) {
@@ -337,12 +518,87 @@
                 }
             }
 
+            @media (max-width: 760px) {
+                .page-layout {
+                    grid-template-columns: minmax(0, 1fr);
+                    gap: 0;
+                }
+
+                .side-menu {
+                    position: static;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 12px;
+                    margin: 14px 20px 0;
+                    padding: 10px;
+                }
+
+                .side-menu-label {
+                    display: none;
+                }
+
+                .side-menu nav {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 3px;
+                }
+
+                .side-menu nav a {
+                    padding: 9px;
+                    font-size: 0.9rem;
+                }
+
+                .theme-toggle {
+                    width: auto;
+                    flex: 0 0 auto;
+                    padding: 9px 11px;
+                    font-size: 0.9rem;
+                }
+
+                .audio-controls {
+                    flex: 1 0 100%;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+
+                .audio-status {
+                    grid-column: 1 / -1;
+                }
+            }
+
+            @media (max-width: 420px) {
+                .side-menu {
+                    align-items: stretch;
+                    flex-direction: column;
+                }
+
+                .side-menu nav {
+                    justify-content: space-between;
+                }
+
+                .theme-toggle {
+                    width: 100%;
+                }
+
+                .audio-controls {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+
+                .audio-status {
+                    grid-column: auto;
+                }
+            }
+
             @media (prefers-reduced-motion: reduce) {
                 *,
                 *::before,
                 *::after {
                     scroll-behavior: auto !important;
                     transition-duration: 0.01ms !important;
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    animation-delay: 0ms !important;
                 }
             }
         </style>
@@ -357,7 +613,33 @@
                 <p>Play • Explore • Enjoy</p>
             </div>
         </header>
-        <main>
+        <div class="page-layout">
+            <aside class="side-menu" aria-label="Site menu">
+                <div>
+                    <p class="side-menu-label">Explore</p>
+                    <nav aria-label="Main navigation">
+                        <a href="#games">Popular games</a>
+                        <a href="#all-games">All games</a>
+                        <a href="#apps">Apps</a>
+                    </nav>
+                </div>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">
+                    <span aria-hidden="true">☾</span> Dark mode
+                </button>
+                <div class="audio-controls" aria-label="Audio controls">
+                    <button class="audio-toggle" id="music-toggle" type="button" aria-pressed="false">
+                        <span aria-hidden="true">♫</span> Lo-fi music: Off
+                    </button>
+                    <button class="audio-toggle" id="eight-bit-toggle" type="button" aria-pressed="false">
+                        <span aria-hidden="true">♫</span> 8-bit music: Off
+                    </button>
+                    <button class="audio-toggle" id="sound-toggle" type="button" aria-pressed="false">
+                        <span aria-hidden="true">♪</span> Sound effects: Off
+                    </button>
+                    <p class="audio-status" id="audio-status" role="status" aria-live="polite"></p>
+                </div>
+            </aside>
+            <main>
             <section class="welcome-panel" aria-labelledby="welcome-heading">
                 <p class="welcome-kicker">Play • Explore • Enjoy</p>
                 <h2 id="welcome-heading">Pick a game. Jump right in.</h2>
@@ -386,175 +668,175 @@
                         </div>
                         <p class="game-search-status" id="game-search-status" aria-live="polite"></p>
                 <div class="games-grid" id="all-games-grid">
-                <a class="game-card" href="Games/People%20Playground.html" style="--art-start: #d9c3aa; --art-end: #9db6a1">
+                <a class="game-card" href="Assets/Games/People%20Playground.html" style="--art-start: #d9c3aa; --art-end: #9db6a1">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqLkBRPwA8_3DVcrOiau3ReQqEHLo8TJLZtgvxd9U56g&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>People Playground</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clbasketrandom.html" style="--art-start: #f6c66b; --art-end: #ed8754">
+                <a class="game-card" href="Assets/Games/clbasketrandom.html" style="--art-start: #f6c66b; --art-end: #ed8754">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_nFgw0OBMVL36vWb1x2QYSFrY3lrJvNMYLOu9a2T_FKLpl-7mfy-1BtBXBDkzIRj4Golq9LSCRbIBDXmgYamvI1xGFmrf_Y92v9_5w7jvUg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Basket Random</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clsoccerrandom.html" style="--art-start: #a5d79a; --art-end: #48894d">
+                <a class="game-card" href="Assets/Games/clsoccerrandom.html" style="--art-start: #a5d79a; --art-end: #48894d">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWp8HFa4hUU1WD9aYfLqa8X4fQdg-v9F-4cS5g1VkmAQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Soccer Random</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clboxingrandom.html" style="--art-start: #f1a3a3; --art-end: #b83f48">
+                <a class="game-card" href="Assets/Games/clboxingrandom.html" style="--art-start: #f1a3a3; --art-end: #b83f48">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5oL-3tjohtk204z4-wy5_cOrzb2ELwNONgRQw9oz1zg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Boxing Random</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clgooglebaseball.html" style="--art-start: #173c70; --art-end: #5bb85c">
+                <a class="game-card" href="Assets/Games/clgooglebaseball.html" style="--art-start: #173c70; --art-end: #5bb85c">
                     <span class="game-art" aria-hidden="true"><img src="https://www.google.com/logos/doodles/2019/fourth-of-july-2019-6225363087654912.2-l.png" alt=""></span>
                     <span class="game-copy"><strong>Google Baseball</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clgoogledino.html" style="--art-start: #f7f5ee; --art-end: #d4cbb3">
+                <a class="game-card" href="Assets/Games/clgoogledino.html" style="--art-start: #f7f5ee; --art-end: #d4cbb3">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkF3AZ5pCVatTDywq2cy0q6G0TBvd1CyYNf3sAOyvp8g&amp;s" alt=""></span>
                     <span class="game-copy"><strong>Google Dino</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clslitherio.html" style="--art-start: #9de0a4; --art-end: #3b9c7b">
+                <a class="game-card" href="Assets/Games/clslitherio.html" style="--art-start: #9de0a4; --art-end: #3b9c7b">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT66v2A78wrqRcXmcQaQQQoGogJbU3VLqYE7mNYhMdcggLjHhkFY1cUk3YmuCT2kgr0dXHx8ddTq5H0cB-LdbdnLteoXHwcXFUpU9GAR4WZ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Snake</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/cltimeshooter2.html" style="--art-start: #f5d66c; --art-end: #e88345">
+                <a class="game-card" href="Assets/Games/cltimeshooter2.html" style="--art-start: #f5d66c; --art-end: #e88345">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRntQrmCqw_KJ1z1bi0MWXfye7uC8gtqQZNKbh8K0lHVg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Time Shooter 2</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clescaperoadcity2.html" style="--art-start: #a8d4e8; --art-end: #4f83a5">
+                <a class="game-card" href="Assets/Games/clescaperoadcity2.html" style="--art-start: #a8d4e8; --art-end: #4f83a5">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYt1VTOwmYR2ibL1ngXa4qgIXlTkv6V97A_ZL-XU-KVA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Escape Road</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clragollhit.html" style="--art-start: #f1b0a0; --art-end: #bd5b59">
+                <a class="game-card" href="Assets/Games/clragollhit.html" style="--art-start: #f1b0a0; --art-end: #bd5b59">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWT6el1UZ5J7KyAWqVy1GGtxZhaxgNYfREVx-nZM6oxg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Ragdoll Hit</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clragdollarchers.html" style="--art-start: #b8d18d; --art-end: #668447">
+                <a class="game-card" href="Assets/Games/clragdollarchers.html" style="--art-start: #b8d18d; --art-end: #668447">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq1LT4-60bQ_wPuPkRQtk4eseSEnQzfy-FXEiK3ov_IQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Ragdoll Archers</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clrooftopsnipers2.html" style="--art-start: #b8c8e8; --art-end: #655e9c">
+                <a class="game-card" href="Assets/Games/clrooftopsnipers2.html" style="--art-start: #b8c8e8; --art-end: #655e9c">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW-EUnns_221-kjZvQ7HqLD8wwDAP6vlGSXlkTSuIo_w&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Rooftop Snipers 2</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clgrindcraft.html" style="--art-start: #dac28e; --art-end: #7d9c62">
+                <a class="game-card" href="Assets/Games/clgrindcraft.html" style="--art-start: #dac28e; --art-end: #7d9c62">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL7rOS_Y8LH56FgZFYM5hFDGZ3sQu6qZHA_W_p3VjZwg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>GrindCraft</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/cl2048.html" style="--art-start: #f4c27e; --art-end: #e9845d">
+                <a class="game-card" href="Assets/Games/cl2048.html" style="--art-start: #f4c27e; --art-end: #e9845d">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyze1bWJkHvH2sgbwrmWbr1Yez1t_QINmEYPKmmlwjsQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>2048</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/cl234playergame.html" style="--art-start: #c2b5e8; --art-end: #7d75b7">
+                <a class="game-card" href="Assets/Games/cl234playergame.html" style="--art-start: #c2b5e8; --art-end: #7d75b7">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8vXWri9VyQkZgvIaZOrDTvuaQgV9jTkq6i4nEs5aepQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>2 3 4 Player Games</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clescaperoad3.html" style="--art-start: #f3b57d; --art-end: #bd6554">
+                <a class="game-card" href="Assets/Games/clescaperoad3.html" style="--art-start: #f3b57d; --art-end: #bd6554">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTos09m-fAz4giTJ4gktO-EgGI01-lQeAr9yh6WLPbKRQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Escape Road 3</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clretrobowl.html" style="--art-start: #d9a771; --art-end: #894f58">
+                <a class="game-card" href="Assets/Games/clretrobowl.html" style="--art-start: #d9a771; --art-end: #894f58">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYIiOxUFlNK49yr1Icf9UqQb58P9oZD-QR3wcCAYV6VA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Retro Bowl</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clsnowrider.html" style="--art-start: #d5eef2; --art-end: #76a9c1">
+                <a class="game-card" href="Assets/Games/clsnowrider.html" style="--art-start: #d5eef2; --art-end: #76a9c1">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ_aL-Jq8JIdorlR8uOXA84Lrvo8uwgWswtjFKImDWHA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Snow Rider 3D</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clsandboxels.html" style="--art-start: #a7d8c0; --art-end: #6694ad">
+                <a class="game-card" href="Assets/Games/clsandboxels.html" style="--art-start: #a7d8c0; --art-end: #6694ad">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUdZ_gD42pOThyuvnAW7SzFtEXpDHgPjxw_roEfbcEkA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Sandboxels</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clsupersmashbros.html" style="--art-start: #f3a76f; --art-end: #c85445">
+                <a class="game-card" href="Assets/Games/clsupersmashbros.html" style="--art-start: #f3a76f; --art-end: #c85445">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoxRixLbbDNcXKZQK3ZKHqZyQ215C6zzfPbN5yvDyi3Q&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Super Smash Bros.</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clfunnyshooter2.html" style="--art-start: #a8d4a1; --art-end: #5e8b63">
+                <a class="game-card" href="Assets/Games/clfunnyshooter2.html" style="--art-start: #a8d4a1; --art-end: #5e8b63">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeD1YdfD_eoP52qEhijZFVuD2IxZUQiEdON5Z7xFm1AA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Funny Shooter 2</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clsuperhot.html" style="--art-start: #f5a18e; --art-end: #b9333a">
+                <a class="game-card" href="Assets/Games/clsuperhot.html" style="--art-start: #f5a18e; --art-end: #b9333a">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScZiDzezzR2pIThPNA8UsJkID1aUVWeUMryZJkqWGbNg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>SUPERHOT</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/cltimeshooter3.html" style="--art-start: #f1d06d; --art-end: #d77a45">
+                <a class="game-card" href="Assets/Games/cltimeshooter3.html" style="--art-start: #f1d06d; --art-end: #d77a45">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU3fwxjKlLbRWJ0uEUxuabVPZqAKSIR4Z9nOCgqQ5Xfg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Time Shooter 3 SWAT</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clmotox3mm.html" style="--art-start: #f4bd70; --art-end: #db704d">
+                <a class="game-card" href="Assets/Games/clmotox3mm.html" style="--art-start: #f4bd70; --art-end: #db704d">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6MY8j-zwIfhdFaLJEQxu1sUlwzM4ZJ9tU6kcpEvZVCw&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Moto X3M</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clmotox3mwinter.html" style="--art-start: #d5eef2; --art-end: #76a9c1">
+                <a class="game-card" href="Assets/Games/clmotox3mwinter.html" style="--art-start: #d5eef2; --art-end: #76a9c1">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHNCUBmE_SWbzJOG9wmwbgLYiW4fVz5ku7Un92xJj2BQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Moto X3M Winter</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clmotox3mpoolparty.html" style="--art-start: #90d8e8; --art-end: #348eaf">
+                <a class="game-card" href="Assets/Games/clmotox3mpoolparty.html" style="--art-start: #90d8e8; --art-end: #348eaf">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVpcIsmrWaSqVAylNhJl8nDDiSvReWlmoDuv8PEjdWEw&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Moto X3M Pool Party</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clmotox3mspookyland.html" style="--art-start: #bca6d9; --art-end: #53446e">
+                <a class="game-card" href="Assets/Games/clmotox3mspookyland.html" style="--art-start: #bca6d9; --art-end: #53446e">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9ETqu33eViFLY8pWBE2rAQdFOMIqcwSbKjkVLQIFwcw&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Moto X3M Spooky Land</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clovo2.html" style="--art-start: #f4d789; --art-end: #e99550">
+                <a class="game-card" href="Assets/Games/clovo2.html" style="--art-start: #f4d789; --art-end: #e99550">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8W6YSrft0h9twBrDOsuGJCV_AZ0gbueHRj2Be5DKgZA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>OvO 2</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clpaperio.html" style="--art-start: #a9d7ef; --art-end: #638dc4">
+                <a class="game-card" href="Assets/Games/clpaperio.html" style="--art-start: #a9d7ef; --art-end: #638dc4">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQFR6HIgRH7LXvZUiCE5WaC-bLLLIj4761QlBiydiwCg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Paper.io</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clpixelshooter.html" style="--art-start: #f5a18e; --art-end: #b9333a">
+                <a class="game-card" href="Assets/Games/clpixelshooter.html" style="--art-start: #f5a18e; --art-end: #b9333a">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl5tRyflb24tw67RU7c7oCAoCdbClDCwjOcIErB52SKQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Pixel Shooter 1</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clpleasedonttouchanything.html" style="--art-start: #a8a8a8; --art-end: #565656">
+                <a class="game-card" href="Assets/Games/clpleasedonttouchanything.html" style="--art-start: #a8a8a8; --art-end: #565656">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDTX7gfcdem2J_IXNBV78kqbJoyJ5kWFWU5Eue2fT5vw&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Please, Don’t Touch Anything</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clbaseballbros.html" style="--art-start: #f3d39b; --art-end: #b96c45">
+                <a class="game-card" href="Assets/Games/clbaseballbros.html" style="--art-start: #f3d39b; --art-end: #b96c45">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYk73nzdq0dCB_P5i0hv11UMhpcAr5SzanPWSPIDWSJQ&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Baseball Bros</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clbasketballlegends.html" style="--art-start: #f6c66b; --art-end: #d97842">
+                <a class="game-card" href="Assets/Games/clbasketballlegends.html" style="--art-start: #f6c66b; --art-end: #d97842">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2QVURcnIr98XiEYU6YAxpu1JEbly8mT1Hm-HRqPwuQg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Basketball Legends</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clbasketballstars.html" style="--art-start: #f1d98b; --art-end: #dc8c52">
+                <a class="game-card" href="Assets/Games/clbasketballstars.html" style="--art-start: #f1d98b; --art-end: #dc8c52">
                     <span class="game-art" aria-hidden="true"><img src="Assets/basketball-stars.jpg" alt=""></span>
                     <span class="game-copy"><strong>Basketball Stars</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clbasketbros.html" style="--art-start: #f4b878; --art-end: #be593d">
+                <a class="game-card" href="Assets/Games/clbasketbros.html" style="--art-start: #f4b878; --art-end: #be593d">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMVDLEUnLSZh-5pSoCIndaptCcqLNrDjfp36TSfRm2SA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Basket Bros</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clbitlife.html" style="--art-start: #b6d49a; --art-end: #547d59">
+                <a class="game-card" href="Assets/Games/clbitlife.html" style="--art-start: #b6d49a; --art-end: #547d59">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZdo5cBqkv1uAcfCofpC-WAViocRNLlysohwHMV2Lqzw&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>BitLife</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/cltunnelrushbetter.html" style="--art-start: #b5c5ee; --art-end: #6655a6">
+                <a class="game-card" href="Assets/Games/cltunnelrushbetter.html" style="--art-start: #b5c5ee; --art-end: #6655a6">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsxveDflkupPK36X5xc41snTgwHtOR8kBYyWt4avWp2Q&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Tunnel Rush</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clpapabakeria.html" style="--art-start: #f2c4a2; --art-end: #d98266">
+                <a class="game-card" href="Assets/Games/clpapabakeria.html" style="--art-start: #f2c4a2; --art-end: #d98266">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrmwL5lihvRCb0DIHGEU2L5ZJVtTeScRTwIeKeBIaZsA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Papa's Bakeria</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clpapasburgerIIIAAAAA.html" style="--art-start: #f5d17d; --art-end: #c77c3e">
+                <a class="game-card" href="Assets/Games/clpapasburgerIIIAAAAA.html" style="--art-start: #f5d17d; --art-end: #c77c3e">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0FCPe4c5DeoxceXPSAGFdkJulMkdKKZOALmc8aOXzHg&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Papa's Burgeria</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clpapascheeseria.html" style="--art-start: #f4d68a; --art-end: #d59a4c">
+                <a class="game-card" href="Assets/Games/clpapascheeseria.html" style="--art-start: #f4d68a; --art-end: #d59a4c">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdRjixyZ-lapxG8Wy5CyMGEzw5024NGvsp3ca41elcJA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Papa's Cheeseria</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clpapaspancakeria.html" style="--art-start: #eccda1; --art-end: #bd8456">
+                <a class="game-card" href="Assets/Games/clpapaspancakeria.html" style="--art-start: #eccda1; --art-end: #bd8456">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4YvlmtAGZeuOkxKEVPwgIMXnnkKK6yCBLhc7X-h92kA&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Papa's Pancakeria</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clpapassushiria.html" style="--art-start: #f2b8a9; --art-end: #bd6d71">
+                <a class="game-card" href="Assets/Games/clpapassushiria.html" style="--art-start: #f2b8a9; --art-end: #bd6d71">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAyMnqWHGVyEt_IAbbb_-QljbHYi0nisXi0lDfRZjc5Q&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Papa's Sushiria</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
-                <a class="game-card" href="Games/clsubwaysurferssanfrancisco%20%281%29.html" style="--art-start: #f4b775; --art-end: #ca684b">
+                <a class="game-card" href="Assets/Games/clsubwaysurferssanfrancisco%20%281%29.html" style="--art-start: #f4b775; --art-end: #ca684b">
                     <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO2W8En0PnYWR7dLBfzfwEubKFAyex06MHa-knjFmqag&amp;s=10" alt=""></span>
                     <span class="game-copy"><strong>Subway Surfers: San Francisco</strong><span class="play-label">Play &#8594;</span></span>
                 </a>
@@ -565,18 +847,212 @@
             <section class="content-section" id="apps" aria-labelledby="apps-heading">
                 <h2 class="section-heading" id="apps-heading">Apps</h2>
                 <div class="games-grid">
-                    <a class="game-card" href="Apps/GUST.html" style="--art-start: #b7d8d0; --art-end: #537f76">
+                    <a class="game-card" href="Assets/Apps/GUST.html" style="--art-start: #b7d8d0; --art-end: #537f76">
                         <span class="game-art" aria-hidden="true"><span>🌐</span></span>
                         <span class="game-copy"><strong>GUST Browser</strong><span class="play-label">Open &#8594;</span></span>
                     </a>
                 </div>
             </section>
-        </main>
+            </main>
+        </div>
         <script>
             const allGameCards = [...document.querySelectorAll("#all-games-grid .game-card")];
             const popularGamesGrid = document.querySelector("#popular-games-grid");
             const gameSearch = document.querySelector("#game-search");
             const gameSearchStatus = document.querySelector("#game-search-status");
+            const themeToggle = document.querySelector("#theme-toggle");
+            const musicToggle = document.querySelector("#music-toggle");
+            const eightBitToggle = document.querySelector("#eight-bit-toggle");
+            const soundToggle = document.querySelector("#sound-toggle");
+            const audioStatus = document.querySelector("#audio-status");
+            const clickSound = new Audio("data:audio/mpeg;base64,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VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/70mQAD/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//vSZAAP8AAAaQAAAAgAAA0gAAABAAABpAAAACAAADSAAAAETEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+9JkAA/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/70GQAD/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU=");
+            clickSound.preload = "auto";
+            const loFiTracks = [
+                { title: "Velario", src: "Assets/Music/Lofi/velariomusic-lofi-beats-581277.mp3" },
+                { title: "Deawthanapon", src: "Assets/Music/Lofi/deawthanapon-lofi-relax-beat-loop-bpm-88-eb-major-ii-v-i-361752.mp3" },
+                { title: "Zephira", src: "Assets/Music/Lofi/zephiramusic-lofi-beat-613823.mp3" }
+            ];
+            const backgroundMusic = new Audio();
+            backgroundMusic.preload = "none";
+            const eightBitTracks = [
+                { title: "8 Bit Boss", src: "Assets/Music/8%20Bit%20Boss%20By%20HeatleyBros.mp3" },
+                { title: "8 Bit Grind", src: "Assets/Music/HeatleyBros%20-%208%20Bit%20Grind.mp3" },
+                { title: "8 Bit Jump", src: "Assets/Music/8%20Bit%20Jump%20By%20HeatleyBros.mp3" },
+                { title: "8 Bit Challenge", src: "Assets/Music/8%20Bit%20Challenge%20By%20HeatleyBros.mp3" }
+            ];
+            const eightBitMusic = new Audio();
+            eightBitMusic.preload = "none";
+            let musicEnabled = false;
+            let eightBitEnabled = false;
+            let soundEffectsEnabled = false;
+            let currentMusicTrack = 0;
+            let currentEightBitTrack = 0;
+
+            const playClickSound = () => {
+                clickSound.currentTime = 0;
+                clickSound.play().catch((error) => console.warn("Could not play click sound.", error));
+            };
+
+            const getMusicPlaybackErrorMessage = (error, musicName) => {
+                if (error.name === "NotAllowedError") {
+                    return `${musicName} playback was blocked. Click the music toggle again or allow sound for this site.`;
+                }
+                if (error.name === "NotSupportedError") {
+                    return `${musicName} could not load. Check that the music file is available and supported.`;
+                }
+                return `${musicName} could not play. Check the browser console for details.`;
+            };
+
+            const playBackgroundMusic = async () => {
+                try {
+                    await backgroundMusic.play();
+                    musicEnabled = true;
+                    musicToggle.setAttribute("aria-pressed", "true");
+                    musicToggle.innerHTML = '<span aria-hidden="true">♫</span> Lo-fi music: On';
+                    audioStatus.textContent = `Playing ${loFiTracks[currentMusicTrack].title}'s lo-fi beat.`;
+                } catch (error) {
+                    console.warn("Could not play lo-fi music.", error);
+                    musicEnabled = false;
+                    musicToggle.setAttribute("aria-pressed", "false");
+                    musicToggle.innerHTML = '<span aria-hidden="true">♫</span> Lo-fi music: Off';
+                    audioStatus.textContent = getMusicPlaybackErrorMessage(error, "Lo-fi music");
+                }
+            };
+
+            const startMusic = async () => {
+                stopEightBitMusic();
+                backgroundMusic.src = new URL(loFiTracks[currentMusicTrack].src, document.baseURI).href;
+                backgroundMusic.currentTime = 0;
+                backgroundMusic.load();
+                await playBackgroundMusic();
+            };
+
+            const stopMusic = () => {
+                musicEnabled = false;
+                musicToggle.setAttribute("aria-pressed", "false");
+                musicToggle.innerHTML = '<span aria-hidden="true">♫</span> Lo-fi music: Off';
+                audioStatus.textContent = soundEffectsEnabled ? "Sound effects are on." : "Audio is off.";
+                backgroundMusic.pause();
+                backgroundMusic.currentTime = 0;
+            };
+
+            const playEightBitMusic = async () => {
+                try {
+                    await eightBitMusic.play();
+                    eightBitEnabled = true;
+                    eightBitToggle.setAttribute("aria-pressed", "true");
+                    eightBitToggle.innerHTML = '<span aria-hidden="true">♫</span> 8-bit music: On';
+                    audioStatus.textContent = `Playing ${eightBitTracks[currentEightBitTrack].title}.`;
+                } catch (error) {
+                    console.warn("Could not play 8-bit music.", error);
+                    eightBitEnabled = false;
+                    eightBitToggle.setAttribute("aria-pressed", "false");
+                    eightBitToggle.innerHTML = '<span aria-hidden="true">♫</span> 8-bit music: Off';
+                    audioStatus.textContent = getMusicPlaybackErrorMessage(error, "8-bit music");
+                }
+            };
+
+            const startEightBitMusic = async () => {
+                stopMusic();
+                eightBitMusic.src = new URL(eightBitTracks[currentEightBitTrack].src, document.baseURI).href;
+                eightBitMusic.currentTime = 0;
+                eightBitMusic.load();
+                await playEightBitMusic();
+            };
+
+            const stopEightBitMusic = () => {
+                eightBitEnabled = false;
+                eightBitToggle.setAttribute("aria-pressed", "false");
+                eightBitToggle.innerHTML = '<span aria-hidden="true">♫</span> 8-bit music: Off';
+                audioStatus.textContent = soundEffectsEnabled ? "Sound effects are on." : "Audio is off.";
+                eightBitMusic.pause();
+                eightBitMusic.currentTime = 0;
+            };
+
+            backgroundMusic.addEventListener("ended", () => {
+                currentMusicTrack = (currentMusicTrack + 1) % loFiTracks.length;
+                backgroundMusic.src = loFiTracks[currentMusicTrack].src;
+                if (musicEnabled) playBackgroundMusic();
+            });
+
+            eightBitMusic.addEventListener("ended", () => {
+                currentEightBitTrack = (currentEightBitTrack + 1) % eightBitTracks.length;
+                eightBitMusic.src = eightBitTracks[currentEightBitTrack].src;
+                if (eightBitEnabled) playEightBitMusic();
+            });
+
+            musicToggle.addEventListener("click", () => {
+                if (musicEnabled) stopMusic();
+                else startMusic();
+            });
+
+            eightBitToggle.addEventListener("click", () => {
+                if (eightBitEnabled) stopEightBitMusic();
+                else startEightBitMusic();
+            });
+
+            soundToggle.addEventListener("click", async () => {
+                if (soundEffectsEnabled) {
+                    soundEffectsEnabled = false;
+                    soundToggle.setAttribute("aria-pressed", "false");
+                    soundToggle.innerHTML = '<span aria-hidden="true">♪</span> Sound effects: Off';
+                    audioStatus.textContent = musicEnabled
+                        ? `Playing ${loFiTracks[currentMusicTrack].title}'s lo-fi beat.`
+                        : eightBitEnabled ? `Playing ${eightBitTracks[currentEightBitTrack].title}.` : "Audio is off.";
+                    return;
+                }
+                soundEffectsEnabled = true;
+                soundToggle.setAttribute("aria-pressed", "true");
+                soundToggle.innerHTML = '<span aria-hidden="true">♪</span> Sound effects: On';
+                audioStatus.textContent = musicEnabled || eightBitEnabled
+                    ? `${musicEnabled ? "Lo-fi" : "8-bit"} music and sound effects are on.`
+                    : "Sound effects are on.";
+                playClickSound();
+            });
+
+            document.addEventListener("visibilitychange", () => {
+                if (musicEnabled) {
+                    if (document.hidden) backgroundMusic.pause();
+                    else playBackgroundMusic();
+                }
+                if (eightBitEnabled) {
+                    if (document.hidden) eightBitMusic.pause();
+                    else playEightBitMusic();
+                }
+            });
+
+            document.addEventListener("click", (event) => {
+                if (!soundEffectsEnabled) return;
+                if (event.target.closest(".game-card, .category-filter, .theme-toggle, .side-menu nav a")) {
+                    playClickSound();
+                }
+            }, true);
+
+            const applyTheme = (theme) => {
+                const isDark = theme === "dark";
+                document.documentElement.dataset.theme = isDark ? "dark" : "light";
+                themeToggle.setAttribute("aria-pressed", String(isDark));
+                themeToggle.innerHTML = isDark
+                    ? '<span aria-hidden="true">☀</span> Light mode'
+                    : '<span aria-hidden="true">☾</span> Dark mode';
+            };
+
+            try {
+                applyTheme(localStorage.getItem("unblockedgames-theme") || "light");
+            } catch (error) {
+                console.warn("Could not load the saved theme preference.", error);
+                applyTheme("light");
+            }
+
+            themeToggle.addEventListener("click", () => {
+                const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+                applyTheme(nextTheme);
+                try {
+                    localStorage.setItem("unblockedgames-theme", nextTheme);
+                } catch (error) {
+                    console.warn("Could not save the theme preference.", error);
+                }
+            });
             const categoryFilters = [...document.querySelectorAll(".category-filter")];
             const categoryByGame = new Map([
                 ["People Playground", "Casual"],
