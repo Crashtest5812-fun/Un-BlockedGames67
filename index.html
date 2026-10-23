@@ -82,6 +82,67 @@
                 padding: 36px clamp(20px, 6vw, 72px) 56px;
             }
 
+            .welcome-panel {
+                position: relative;
+                overflow: hidden;
+                margin-bottom: 38px;
+                padding: clamp(26px, 5vw, 48px);
+                color: #f8f6ed;
+                background:
+                    radial-gradient(circle at 88% 18%, rgb(210 168 90 / 28%) 0 4px, transparent 5px),
+                    radial-gradient(circle at 94% 72%, rgb(210 168 90 / 20%) 0 7px, transparent 8px),
+                    linear-gradient(120deg, #183c36, #28594d);
+                border: 1px solid rgb(24 60 54 / 12%);
+                border-radius: 22px;
+                box-shadow: 0 10px 24px rgb(28 43 36 / 16%);
+            }
+
+            .welcome-kicker {
+                margin: 0 0 10px;
+                color: #e8c77e;
+                font-size: 0.8rem;
+                font-weight: 700;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+            }
+
+            .welcome-panel h2 {
+                max-width: 650px;
+                margin: 0;
+                font-size: clamp(2rem, 5vw, 3.5rem);
+                line-height: 1.05;
+            }
+
+            .welcome-panel p:not(.welcome-kicker) {
+                max-width: 540px;
+                margin: 14px 0 22px;
+                color: #d8e5dc;
+                line-height: 1.6;
+            }
+
+            .welcome-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 11px 16px;
+                color: #183c36;
+                font-weight: 700;
+                text-decoration: none;
+                background: #e8c77e;
+                border-radius: 999px;
+                transition: background-color 160ms ease, transform 160ms ease;
+            }
+
+            .welcome-link:hover {
+                transform: translateY(-2px);
+                background: #f3d99b;
+            }
+
+            .welcome-link:focus-visible {
+                outline: 3px solid #f8f6ed;
+                outline-offset: 4px;
+            }
+
             .content-section + .content-section {
                 margin-top: 42px;
             }
@@ -108,7 +169,8 @@
             }
 
             .all-games-menu summary:focus-visible,
-            .game-search:focus-visible {
+            .game-search:focus-visible,
+            .category-filter:focus-visible {
                 outline: 3px solid #28594d;
                 outline-offset: 3px;
             }
@@ -126,6 +188,36 @@
                 background: #fff;
                 border: 1px solid rgb(24 60 54 / 28%);
                 border-radius: 8px;
+            }
+
+            .category-filters {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: 16px;
+            }
+
+            .category-filter {
+                padding: 8px 13px;
+                color: #28594d;
+                font: inherit;
+                font-size: 0.9rem;
+                font-weight: 700;
+                background: #fff;
+                border: 1px solid rgb(24 60 54 / 20%);
+                border-radius: 999px;
+                cursor: pointer;
+                transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+            }
+
+            .category-filter:hover {
+                border-color: #28594d;
+            }
+
+            .category-filter[aria-pressed="true"] {
+                color: #f8f6ed;
+                background: #28594d;
+                border-color: #28594d;
             }
 
             .game-search-status {
@@ -158,6 +250,10 @@
                 transition: transform 160ms ease, box-shadow 160ms ease;
             }
 
+            .game-card:hover .game-art img {
+                transform: scale(1.04);
+            }
+
             .game-card:hover {
                 transform: translateY(-4px);
                 box-shadow: 0 8px 18px rgb(28 43 36 / 18%);
@@ -172,6 +268,7 @@
                 display: grid;
                 min-height: 145px;
                 place-items: center;
+                overflow: hidden;
                 background: linear-gradient(135deg, var(--art-start), var(--art-end));
             }
 
@@ -184,6 +281,7 @@
                 width: 100%;
                 height: 145px;
                 object-fit: cover;
+                transition: transform 220ms ease;
             }
 
             .game-copy {
@@ -197,6 +295,7 @@
 
             .game-copy strong {
                 font-size: 1rem;
+                line-height: 1.35;
             }
 
             .play-label {
@@ -228,8 +327,22 @@
                     padding-top: 28px;
                 }
 
+                .welcome-panel {
+                    margin-bottom: 30px;
+                    border-radius: 17px;
+                }
+
                 .games-grid {
                     gap: 14px;
+                }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                *,
+                *::before,
+                *::after {
+                    scroll-behavior: auto !important;
+                    transition-duration: 0.01ms !important;
                 }
             }
         </style>
@@ -245,6 +358,12 @@
             </div>
         </header>
         <main>
+            <section class="welcome-panel" aria-labelledby="welcome-heading">
+                <p class="welcome-kicker">Play • Explore • Enjoy</p>
+                <h2 id="welcome-heading">Pick a game. Jump right in.</h2>
+                <p>Find a quick favorite, discover something new, and get straight to the fun.</p>
+                <a class="welcome-link" href="#all-games">Browse all games <span aria-hidden="true">&#8595;</span></a>
+            </section>
             <section class="content-section" id="games" aria-labelledby="games-heading">
                 <h2 class="section-heading" id="games-heading">Popular Games</h2>
                 <div class="games-grid" id="popular-games-grid"></div>
@@ -256,6 +375,15 @@
                     <div class="all-games-content">
                         <label for="game-search">Search games</label><br>
                         <input class="game-search" id="game-search" type="search" placeholder="Type a game name..." autocomplete="off">
+                        <div class="category-filters" role="group" aria-label="Filter games by category">
+                            <button class="category-filter" type="button" data-category="all" aria-pressed="true">All</button>
+                            <button class="category-filter" type="button" data-category="Sports" aria-pressed="false">Sports</button>
+                            <button class="category-filter" type="button" data-category="Racing" aria-pressed="false">Racing</button>
+                            <button class="category-filter" type="button" data-category="Arcade" aria-pressed="false">Arcade</button>
+                            <button class="category-filter" type="button" data-category="Puzzle" aria-pressed="false">Puzzle</button>
+                            <button class="category-filter" type="button" data-category="Casual" aria-pressed="false">Casual</button>
+                            <button class="category-filter" type="button" data-category="Other" aria-pressed="false">Other</button>
+                        </div>
                         <p class="game-search-status" id="game-search-status" aria-live="polite"></p>
                 <div class="games-grid" id="all-games-grid">
                 <a class="game-card" href="Games/People%20Playground.html" style="--art-start: #d9c3aa; --art-end: #9db6a1">
@@ -449,6 +577,73 @@
             const popularGamesGrid = document.querySelector("#popular-games-grid");
             const gameSearch = document.querySelector("#game-search");
             const gameSearchStatus = document.querySelector("#game-search-status");
+            const categoryFilters = [...document.querySelectorAll(".category-filter")];
+            const categoryByGame = new Map([
+                ["People Playground", "Casual"],
+                ["Basket Random", "Sports"],
+                ["Soccer Random", "Sports"],
+                ["Boxing Random", "Sports"],
+                ["Google Baseball", "Sports"],
+                ["Google Dino", "Arcade"],
+                ["Snake", "Arcade"],
+                ["Time Shooter 2", "Arcade"],
+                ["Escape Road", "Racing"],
+                ["Ragdoll Hit", "Arcade"],
+                ["Ragdoll Archers", "Arcade"],
+                ["Rooftop Snipers 2", "Arcade"],
+                ["GrindCraft", "Puzzle"],
+                ["2048", "Puzzle"],
+                ["2 3 4 Player Games", "Arcade"],
+                ["Escape Road 3", "Racing"],
+                ["Retro Bowl", "Sports"],
+                ["Snow Rider 3D", "Racing"],
+                ["Sandboxels", "Casual"],
+                ["Super Smash Bros.", "Arcade"],
+                ["Funny Shooter 2", "Arcade"],
+                ["SUPERHOT", "Arcade"],
+                ["Time Shooter 3 SWAT", "Arcade"],
+                ["Moto X3M", "Racing"],
+                ["Moto X3M Winter", "Racing"],
+                ["Moto X3M Pool Party", "Racing"],
+                ["Moto X3M Spooky Land", "Racing"],
+                ["OvO 2", "Arcade"],
+                ["Paper.io", "Puzzle"],
+                ["Pixel Shooter 1", "Arcade"],
+                ["Please, Don’t Touch Anything", "Puzzle"],
+                ["Baseball Bros", "Sports"],
+                ["Basketball Legends", "Sports"],
+                ["Basketball Stars", "Sports"],
+                ["Basket Bros", "Sports"],
+                ["BitLife", "Casual"],
+                ["Tunnel Rush", "Racing"],
+                ["Papa's Bakeria", "Casual"],
+                ["Papa's Burgeria", "Casual"],
+                ["Papa's Cheeseria", "Casual"],
+                ["Papa's Pancakeria", "Casual"],
+                ["Papa's Sushiria", "Casual"],
+                ["Subway Surfers: San Francisco", "Racing"]
+            ]);
+            let selectedCategory = "all";
+
+            allGameCards.forEach((gameCard) => {
+                const gameName = gameCard.querySelector("strong").textContent.trim();
+                gameCard.dataset.category = categoryByGame.get(gameName) || "Other";
+            });
+
+            const updateGameResults = () => {
+                const query = gameSearch.value.trim().toLocaleLowerCase();
+                let visibleCount = 0;
+
+                allGameCards.forEach((gameCard) => {
+                    const gameName = gameCard.querySelector("strong").textContent.trim().toLocaleLowerCase();
+                    const matchesQuery = gameName.includes(query);
+                    const matchesCategory = selectedCategory === "all" || gameCard.dataset.category === selectedCategory;
+                    gameCard.hidden = !matchesQuery || !matchesCategory;
+                    if (!gameCard.hidden) visibleCount += 1;
+                });
+
+                gameSearchStatus.textContent = `${visibleCount} ${visibleCount === 1 ? "game" : "games"} found`;
+            };
 
             const popularGameHrefs = [
                 "Games/clbitlife.html",
@@ -468,17 +663,15 @@
                 if (gameCard) popularGamesGrid.append(gameCard.cloneNode(true));
             });
 
-            gameSearch.addEventListener("input", () => {
-                const query = gameSearch.value.trim().toLocaleLowerCase();
-                let visibleCount = 0;
-
-                allGameCards.forEach((gameCard) => {
-                    const gameName = gameCard.querySelector("strong").textContent.trim().toLocaleLowerCase();
-                    gameCard.hidden = !gameName.includes(query);
-                    if (!gameCard.hidden) visibleCount += 1;
+            gameSearch.addEventListener("input", updateGameResults);
+            categoryFilters.forEach((filter) => {
+                filter.addEventListener("click", () => {
+                    selectedCategory = filter.dataset.category;
+                    categoryFilters.forEach((button) => {
+                        button.setAttribute("aria-pressed", String(button === filter));
+                    });
+                    updateGameResults();
                 });
-
-                gameSearchStatus.textContent = `${visibleCount} ${visibleCount === 1 ? "game" : "games"} found`;
             });
             gameSearchStatus.textContent = `${allGameCards.length} games`;
 
