@@ -1818,6 +1818,10 @@
                         loading.classList.add("is-hidden");
                         gameWindow.setTimeout(() => {
                             loading.hidden = true;
+                            status.textContent = "Game loaded";
+                            gameWindow.setTimeout(() => {
+                                status.textContent = "";
+                            }, 2000);
                         }, 280);
                     }, remainingLoadingTime);
                 });
