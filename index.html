@@ -367,6 +367,7 @@
 
             .all-games-menu summary:focus-visible,
             .game-search:focus-visible,
+            .game-sort:focus-visible,
             .category-filter:focus-visible {
                 outline: 3px solid var(--focus-color);
                 outline-offset: 3px;
@@ -379,6 +380,17 @@
             .game-search {
                 width: 100%;
                 max-width: 480px;
+                padding: 12px 14px;
+                color: var(--page-text);
+                font: inherit;
+                background: var(--control-background);
+                border: 1px solid var(--control-border);
+                border-radius: 8px;
+            }
+
+            .game-sort {
+                width: 100%;
+                max-width: 280px;
                 padding: 12px 14px;
                 color: var(--page-text);
                 font: inherit;
@@ -411,6 +423,11 @@
                 border-color: var(--focus-color);
             }
 
+            .category-filter:disabled {
+                cursor: not-allowed;
+                opacity: 0.55;
+            }
+
             .category-filter[aria-pressed="true"] {
                 color: var(--surface-background);
                 background: var(--heading-color);
@@ -421,6 +438,16 @@
                 margin: 12px 0 18px;
                 color: var(--muted-color);
                 font-size: 0.9rem;
+            }
+
+            .game-empty-state {
+                margin: 0 0 18px;
+                padding: 18px;
+                color: var(--muted-color);
+                text-align: center;
+                background: var(--surface-background);
+                border: 1px solid var(--surface-border);
+                border-radius: 12px;
             }
 
             .games-grid {
@@ -716,6 +743,12 @@
                     <div class="all-games-content">
                         <label for="game-search">Search games</label><br>
                         <input class="game-search" id="game-search" type="search" placeholder="Type a game name..." autocomplete="off">
+                        <p><label for="game-sort">Sort games</label></p>
+                        <select class="game-sort" id="game-sort">
+                            <option value="recommended">Recommended</option>
+                            <option value="popular">Popular first</option>
+                            <option value="alphabetical">Name: A to Z</option>
+                        </select>
                         <div class="category-filters" role="group" aria-label="Filter games by category">
                             <button class="category-filter" type="button" data-category="all" aria-pressed="true">All</button>
                             <button class="category-filter" type="button" data-category="Sports" aria-pressed="false">Sports</button>
@@ -726,237 +759,8 @@
                             <button class="category-filter" type="button" data-category="Other" aria-pressed="false">Other</button>
                         </div>
                         <p class="game-search-status" id="game-search-status" aria-live="polite"></p>
-                <div class="games-grid" id="all-games-grid">
-                <a class="game-card" href="Assets/Games/People%20Playground.html" style="--art-start: #d9c3aa; --art-end: #9db6a1">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqLkBRPwA8_3DVcrOiau3ReQqEHLo8TJLZtgvxd9U56g&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>People Playground</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clfruitninja.html" style="--art-start: #f3d17b; --art-end: #c5694b">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAoP0sEeoy--XLPTNawbwUYiXh2fYSRJ22kIt4peG2tg&s=10" alt=""></span>
-                    <span class="game-copy"><strong>Fruit Ninja</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clforknsausage.html" style="--art-start: #e8b05f; --art-end: #8b4c3a">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsGhOJXhgYGhuHgw0dYN5AKzVsYiMoamAqZ0yJbHul_Q&s=10" alt=""></span>
-                    <span class="game-copy"><strong>Fork N Sausage</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clgetawayshootoutv2.html" style="--art-start: #d6d8ec; --art-end: #5a5d7a">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuzdPRVUUArJOmfh5lQywy9qiVK1WZtoli_EsyOgwfew&s=10" alt=""></span>
-                    <span class="game-copy"><strong>Getaway Shootout</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clrooftopsnipers.html" style="--art-start: #d1b8ff; --art-end: #6352a2">
-                    <span class="game-art" aria-hidden="true"><span aria-hidden="true" style="font-size: 4rem;">🏙️</span></span>
-                    <span class="game-copy"><strong>Rooftop Snipers</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clbasketrandom.html" style="--art-start: #f6c66b; --art-end: #ed8754">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_nFgw0OBMVL36vWb1x2QYSFrY3lrJvNMYLOu9a2T_FKLpl-7mfy-1BtBXBDkzIRj4Golq9LSCRbIBDXmgYamvI1xGFmrf_Y92v9_5w7jvUg&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Basket Random</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clsoccerrandom.html" style="--art-start: #a5d79a; --art-end: #48894d">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWp8HFa4hUU1WD9aYfLqa8X4fQdg-v9F-4cS5g1VkmAQ&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Soccer Random</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clboxingrandom.html" style="--art-start: #f1a3a3; --art-end: #b83f48">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5oL-3tjohtk204z4-wy5_cOrzb2ELwNONgRQw9oz1zg&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Boxing Random</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clgooglebaseball.html" style="--art-start: #173c70; --art-end: #5bb85c">
-                    <span class="game-art" aria-hidden="true"><img src="https://www.google.com/logos/doodles/2019/fourth-of-july-2019-6225363087654912.2-l.png" alt=""></span>
-                    <span class="game-copy"><strong>Google Baseball</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clgoogledino.html" style="--art-start: #f7f5ee; --art-end: #d4cbb3">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkF3AZ5pCVatTDywq2cy0q6G0TBvd1CyYNf3sAOyvp8g&amp;s" alt=""></span>
-                    <span class="game-copy"><strong>Google Dino</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clslitherio.html" style="--art-start: #9de0a4; --art-end: #3b9c7b">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT66v2A78wrqRcXmcQaQQQoGogJbU3VLqYE7mNYhMdcggLjHhkFY1cUk3YmuCT2kgr0dXHx8ddTq5H0cB-LdbdnLteoXHwcXFUpU9GAR4WZ&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Snake</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/cltimeshooter2.html" style="--art-start: #f5d66c; --art-end: #e88345">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRntQrmCqw_KJ1z1bi0MWXfye7uC8gtqQZNKbh8K0lHVg&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Time Shooter 2</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/cl1v1lol.html" style="--art-start: #b9d5ea; --art-end: #536b91">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEJvyWTXdCzN1oCHEc4ri1hAhP1yKA79PzxHCO_lrw7A&s=10" alt=""></span>
-                    <span class="game-copy"><strong>1v1.lol</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clescaperoad.html" style="--art-start: #a8d4e8; --art-end: #4f83a5">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkROUl3XGP3F9WMCNYGCNV7ysa_Qdvm8xSIkOk-Ropg&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Escape Road</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clescaperoad-2.html" style="--art-start: #f3b57d; --art-end: #bd6554">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGPdxb43NTms7UXdMgwQYUdapZIZ5Suk52mQ_MARouRQ&amp;s" alt=""></span>
-                    <span class="game-copy"><strong>Escape Road 2</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clescaperoadcity2.html" style="--art-start: #a8d4e8; --art-end: #4f83a5">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYt1VTOwmYR2ibL1ngXa4qgIXlTkv6V97A_ZL-XU-KVA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Escape Road City 2</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clragollhit.html" style="--art-start: #f1b0a0; --art-end: #bd5b59">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWT6el1UZ5J7KyAWqVy1GGtxZhaxgNYfREVx-nZM6oxg&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Ragdoll Hit</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clragdollarchers.html" style="--art-start: #b8d18d; --art-end: #668447">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq1LT4-60bQ_wPuPkRQtk4eseSEnQzfy-FXEiK3ov_IQ&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Ragdoll Archers</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clrooftopsnipers2.html" style="--art-start: #b8c8e8; --art-end: #655e9c">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW-EUnns_221-kjZvQ7HqLD8wwDAP6vlGSXlkTSuIo_w&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Rooftop Snipers 2</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clgrindcraft.html" style="--art-start: #dac28e; --art-end: #7d9c62">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL7rOS_Y8LH56FgZFYM5hFDGZ3sQu6qZHA_W_p3VjZwg&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>GrindCraft</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/cl2048.html" style="--art-start: #f4c27e; --art-end: #e9845d">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyze1bWJkHvH2sgbwrmWbr1Yez1t_QINmEYPKmmlwjsQ&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>2048</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/cl234playergame.html" style="--art-start: #c2b5e8; --art-end: #7d75b7">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8vXWri9VyQkZgvIaZOrDTvuaQgV9jTkq6i4nEs5aepQ&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>2 3 4 Player Games</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clrun3.html" style="--art-start: #b4b8f4; --art-end: #555b9e">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgv72pC8RwqFDLIq75hVPkt3OEP3gJTALBkQWvok7wKw&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Run 3</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clescaperoad3.html" style="--art-start: #f3b57d; --art-end: #bd6554">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTos09m-fAz4giTJ4gktO-EgGI01-lQeAr9yh6WLPbKRQ&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Escape Road 3</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clretrobowl.html" style="--art-start: #d9a771; --art-end: #894f58">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYIiOxUFlNK49yr1Icf9UqQb58P9oZD-QR3wcCAYV6VA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Retro Bowl</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clretrobowlcollege.html" style="--art-start: #d9a771; --art-end: #894f58">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCzfXtnt5TtBJ7S8BzkNNY-Elp3Jw_asyi-zHPsxXhJA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Retro Bowl College</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clsnowrider.html" style="--art-start: #d5eef2; --art-end: #76a9c1">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ_aL-Jq8JIdorlR8uOXA84Lrvo8uwgWswtjFKImDWHA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Snow Rider 3D</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/cleggycar.html" style="--art-start: #f5d17d; --art-end: #c77c3e">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyKSXm8KeM9AMWROM-hKWfIw9w4XAWpXOhCZHDubyQ2g&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Eggy Car</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clsandboxels.html" style="--art-start: #a7d8c0; --art-end: #6694ad">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUdZ_gD42pOThyuvnAW7SzFtEXpDHgPjxw_roEfbcEkA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Sandboxels</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clsupersmashbros.html" style="--art-start: #f3a76f; --art-end: #c85445">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoxRixLbbDNcXKZQK3ZKHqZyQ215C6zzfPbN5yvDyi3Q&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Super Smash Bros.</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clfunnyshooter2.html" style="--art-start: #a8d4a1; --art-end: #5e8b63">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeD1YdfD_eoP52qEhijZFVuD2IxZUQiEdON5Z7xFm1AA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Funny Shooter 2</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clsuperhot.html" style="--art-start: #f5a18e; --art-end: #b9333a">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScZiDzezzR2pIThPNA8UsJkID1aUVWeUMryZJkqWGbNg&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>SUPERHOT</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/cltimeshooter3.html" style="--art-start: #f1d06d; --art-end: #d77a45">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU3fwxjKlLbRWJ0uEUxuabVPZqAKSIR4Z9nOCgqQ5Xfg&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Time Shooter 3 SWAT</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clmotox3mm.html" style="--art-start: #f4bd70; --art-end: #db704d">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6MY8j-zwIfhdFaLJEQxu1sUlwzM4ZJ9tU6kcpEvZVCw&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Moto X3M</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clmotox3mwinter.html" style="--art-start: #d5eef2; --art-end: #76a9c1">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHNCUBmE_SWbzJOG9wmwbgLYiW4fVz5ku7Un92xJj2BQ&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Moto X3M Winter</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clmotox3mpoolparty.html" style="--art-start: #90d8e8; --art-end: #348eaf">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVpcIsmrWaSqVAylNhJl8nDDiSvReWlmoDuv8PEjdWEw&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Moto X3M Pool Party</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clmotox3mspookyland.html" style="--art-start: #bca6d9; --art-end: #53446e">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9ETqu33eViFLY8pWBE2rAQdFOMIqcwSbKjkVLQIFwcw&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Moto X3M Spooky Land</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clovo2.html" style="--art-start: #f4d789; --art-end: #e99550">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8W6YSrft0h9twBrDOsuGJCV_AZ0gbueHRj2Be5DKgZA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>OvO 2</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clpaperio.html" style="--art-start: #a9d7ef; --art-end: #638dc4">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQFR6HIgRH7LXvZUiCE5WaC-bLLLIj4761QlBiydiwCg&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Paper.io</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clpixelshooter.html" style="--art-start: #f5a18e; --art-end: #b9333a">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl5tRyflb24tw67RU7c7oCAoCdbClDCwjOcIErB52SKQ&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Pixel Shooter 1</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clpleasedonttouchanything.html" style="--art-start: #a8a8a8; --art-end: #565656">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDTX7gfcdem2J_IXNBV78kqbJoyJ5kWFWU5Eue2fT5vw&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Please, Don’t Touch Anything</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clbaseballbros.html" style="--art-start: #f3d39b; --art-end: #b96c45">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYk73nzdq0dCB_P5i0hv11UMhpcAr5SzanPWSPIDWSJQ&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Baseball Bros</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clbasketballlegends.html" style="--art-start: #f6c66b; --art-end: #d97842">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2QVURcnIr98XiEYU6YAxpu1JEbly8mT1Hm-HRqPwuQg&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Basketball Legends</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clbasketballstars.html" style="--art-start: #f1d98b; --art-end: #dc8c52">
-                    <span class="game-art" aria-hidden="true"><img src="Assets/basketball-stars.jpg" alt=""></span>
-                    <span class="game-copy"><strong>Basketball Stars</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clbasketbros.html" style="--art-start: #f4b878; --art-end: #be593d">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMVDLEUnLSZh-5pSoCIndaptCcqLNrDjfp36TSfRm2SA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Basket Bros</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clbitlife.html" style="--art-start: #b6d49a; --art-end: #547d59">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZdo5cBqkv1uAcfCofpC-WAViocRNLlysohwHMV2Lqzw&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>BitLife</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/cltunnelrushbetter.html" style="--art-start: #b5c5ee; --art-end: #6655a6">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsxveDflkupPK36X5xc41snTgwHtOR8kBYyWt4avWp2Q&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Tunnel Rush</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clpapabakeria.html" style="--art-start: #f2c4a2; --art-end: #d98266">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrmwL5lihvRCb0DIHGEU2L5ZJVtTeScRTwIeKeBIaZsA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Papa's Bakeria</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clpapasburgerIIIAAAAA.html" style="--art-start: #f5d17d; --art-end: #c77c3e">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0FCPe4c5DeoxceXPSAGFdkJulMkdKKZOALmc8aOXzHg&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Papa's Burgeria</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clpapascheeseria.html" style="--art-start: #f4d68a; --art-end: #d59a4c">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdRjixyZ-lapxG8Wy5CyMGEzw5024NGvsp3ca41elcJA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Papa's Cheeseria</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clpapaspancakeria.html" style="--art-start: #eccda1; --art-end: #bd8456">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4YvlmtAGZeuOkxKEVPwgIMXnnkKK6yCBLhc7X-h92kA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Papa's Pancakeria</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clpapassushiria.html" style="--art-start: #f2b8a9; --art-end: #bd6d71">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAyMnqWHGVyEt_IAbbb_-QljbHYi0nisXi0lDfRZjc5Q&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Papa's Sushiria</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clsubwaysurferssanfrancisco%20%281%29.html" style="--art-start: #f4b775; --art-end: #ca684b">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO2W8En0PnYWR7dLBfzfwEubKFAyex06MHa-knjFmqag&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Subway Surfers: San Francisco</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clfootballbros.html" style="--art-start: #d8b47b; --art-end: #7f553c">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbOwkg7JTDRfWVCYFNTK8G5i8t4XgKKkLVdA6zlH-xJQ&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Football Bros</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clsoccerbros.html" style="--art-start: #a5d79a; --art-end: #48894d">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKqdzBoRbsJJNY_8cfi_FRvpzEo0_0Ag-6bijmbbwXpw&amp;s" alt=""></span>
-                    <span class="game-copy"><strong>Soccer Bros</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clwrestlebros.html" style="--art-start: #f1a3a3; --art-end: #b83f48">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1KdIATgaiNYz46w-zNQ4rnl9WHgQ0qN_Q_M06Pnd8pQ&amp;s" alt=""></span>
-                    <span class="game-copy"><strong>Wrestle Bros</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                <a class="game-card" href="Assets/Games/clflappybird.html" style="--art-start: #f5d17d; --art-end: #c77c3e">
-                    <span class="game-art" aria-hidden="true"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMy7OvoPQ0xjbVGtZU9otyOd73tlJ7PXDSGp3ZNMNeeA&amp;s=10" alt=""></span>
-                    <span class="game-copy"><strong>Flappy Bird</strong><span class="play-label">Play &#8594;</span></span>
-                </a>
-                </div>
-                    </div>
+                        <p class="game-empty-state" id="game-empty-state" hidden>No games match your search. Try a different name or category.</p>
+                        <div class="games-grid" id="all-games-grid"></div>
                 </details>
             </section>
             <section class="content-section" id="apps" aria-labelledby="apps-heading">
@@ -999,10 +803,582 @@
             </div>
         </footer>
         <script>
-            const allGameCards = [...document.querySelectorAll("#all-games-grid .game-card")];
+            const games = [
+                {
+                    "name": "People Playground",
+                    "category": "Casual",
+                    "href": "Assets/Games/People%20Playground.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqLkBRPwA8_3DVcrOiau3ReQqEHLo8TJLZtgvxd9U56g&s=10",
+                    "emoji": null,
+                    "artStart": "#d9c3aa",
+                    "artEnd": "#9db6a1"
+                },
+                {
+                    "name": "Fruit Ninja",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clfruitninja.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAoP0sEeoy--XLPTNawbwUYiXh2fYSRJ22kIt4peG2tg&s=10",
+                    "emoji": null,
+                    "artStart": "#f3d17b",
+                    "artEnd": "#c5694b"
+                },
+                {
+                    "name": "Fork N Sausage",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clforknsausage.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsGhOJXhgYGhuHgw0dYN5AKzVsYiMoamAqZ0yJbHul_Q&s=10",
+                    "emoji": null,
+                    "artStart": "#e8b05f",
+                    "artEnd": "#8b4c3a"
+                },
+                {
+                    "name": "Getaway Shootout",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clgetawayshootoutv2.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuzdPRVUUArJOmfh5lQywy9qiVK1WZtoli_EsyOgwfew&s=10",
+                    "emoji": null,
+                    "artStart": "#d6d8ec",
+                    "artEnd": "#5a5d7a"
+                },
+                {
+                    "name": "Rooftop Snipers",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clrooftopsnipers.html",
+                    "image": null,
+                    "emoji": "🏙️",
+                    "artStart": "#d1b8ff",
+                    "artEnd": "#6352a2"
+                },
+                {
+                    "name": "Basket Random",
+                    "category": "Sports",
+                    "href": "Assets/Games/clbasketrandom.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_nFgw0OBMVL36vWb1x2QYSFrY3lrJvNMYLOu9a2T_FKLpl-7mfy-1BtBXBDkzIRj4Golq9LSCRbIBDXmgYamvI1xGFmrf_Y92v9_5w7jvUg&s=10",
+                    "emoji": null,
+                    "artStart": "#f6c66b",
+                    "artEnd": "#ed8754",
+                    "popular": 7
+                },
+                {
+                    "name": "Soccer Random",
+                    "category": "Sports",
+                    "href": "Assets/Games/clsoccerrandom.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWp8HFa4hUU1WD9aYfLqa8X4fQdg-v9F-4cS5g1VkmAQ&s=10",
+                    "emoji": null,
+                    "artStart": "#a5d79a",
+                    "artEnd": "#48894d",
+                    "popular": 8
+                },
+                {
+                    "name": "Boxing Random",
+                    "category": "Sports",
+                    "href": "Assets/Games/clboxingrandom.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5oL-3tjohtk204z4-wy5_cOrzb2ELwNONgRQw9oz1zg&s=10",
+                    "emoji": null,
+                    "artStart": "#f1a3a3",
+                    "artEnd": "#b83f48"
+                },
+                {
+                    "name": "Google Baseball",
+                    "category": "Sports",
+                    "href": "Assets/Games/clgooglebaseball.html",
+                    "image": "https://www.google.com/logos/doodles/2019/fourth-of-july-2019-6225363087654912.2-l.png",
+                    "emoji": null,
+                    "artStart": "#173c70",
+                    "artEnd": "#5bb85c"
+                },
+                {
+                    "name": "Google Dino",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clgoogledino.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkF3AZ5pCVatTDywq2cy0q6G0TBvd1CyYNf3sAOyvp8g&s",
+                    "emoji": null,
+                    "artStart": "#f7f5ee",
+                    "artEnd": "#d4cbb3",
+                    "popular": 10
+                },
+                {
+                    "name": "Snake",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clslitherio.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT66v2A78wrqRcXmcQaQQQoGogJbU3VLqYE7mNYhMdcggLjHhkFY1cUk3YmuCT2kgr0dXHx8ddTq5H0cB-LdbdnLteoXHwcXFUpU9GAR4WZ&s=10",
+                    "emoji": null,
+                    "artStart": "#9de0a4",
+                    "artEnd": "#3b9c7b"
+                },
+                {
+                    "name": "Time Shooter 2",
+                    "category": "Arcade",
+                    "href": "Assets/Games/cltimeshooter2.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRntQrmCqw_KJ1z1bi0MWXfye7uC8gtqQZNKbh8K0lHVg&s=10",
+                    "emoji": null,
+                    "artStart": "#f5d66c",
+                    "artEnd": "#e88345"
+                },
+                {
+                    "name": "1v1.lol",
+                    "category": "Arcade",
+                    "href": "Assets/Games/cl1v1lol.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEJvyWTXdCzN1oCHEc4ri1hAhP1yKA79PzxHCO_lrw7A&s=10",
+                    "emoji": null,
+                    "artStart": "#b9d5ea",
+                    "artEnd": "#536b91"
+                },
+                {
+                    "name": "Escape Road",
+                    "category": "Racing",
+                    "href": "Assets/Games/clescaperoad.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkROUl3XGP3F9WMCNYGCNV7ysa_Qdvm8xSIkOk-Ropg&s=10",
+                    "emoji": null,
+                    "artStart": "#a8d4e8",
+                    "artEnd": "#4f83a5"
+                },
+                {
+                    "name": "Escape Road 2",
+                    "category": "Racing",
+                    "href": "Assets/Games/clescaperoad-2.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGPdxb43NTms7UXdMgwQYUdapZIZ5Suk52mQ_MARouRQ&s",
+                    "emoji": null,
+                    "artStart": "#f3b57d",
+                    "artEnd": "#bd6554"
+                },
+                {
+                    "name": "Escape Road City 2",
+                    "category": "Racing",
+                    "href": "Assets/Games/clescaperoadcity2.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYt1VTOwmYR2ibL1ngXa4qgIXlTkv6V97A_ZL-XU-KVA&s=10",
+                    "emoji": null,
+                    "artStart": "#a8d4e8",
+                    "artEnd": "#4f83a5"
+                },
+                {
+                    "name": "Ragdoll Hit",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clragollhit.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWT6el1UZ5J7KyAWqVy1GGtxZhaxgNYfREVx-nZM6oxg&s=10",
+                    "emoji": null,
+                    "artStart": "#f1b0a0",
+                    "artEnd": "#bd5b59"
+                },
+                {
+                    "name": "Ragdoll Archers",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clragdollarchers.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq1LT4-60bQ_wPuPkRQtk4eseSEnQzfy-FXEiK3ov_IQ&s=10",
+                    "emoji": null,
+                    "artStart": "#b8d18d",
+                    "artEnd": "#668447"
+                },
+                {
+                    "name": "Rooftop Snipers 2",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clrooftopsnipers2.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW-EUnns_221-kjZvQ7HqLD8wwDAP6vlGSXlkTSuIo_w&s=10",
+                    "emoji": null,
+                    "artStart": "#b8c8e8",
+                    "artEnd": "#655e9c"
+                },
+                {
+                    "name": "GrindCraft",
+                    "category": "Puzzle",
+                    "href": "Assets/Games/clgrindcraft.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL7rOS_Y8LH56FgZFYM5hFDGZ3sQu6qZHA_W_p3VjZwg&s=10",
+                    "emoji": null,
+                    "artStart": "#dac28e",
+                    "artEnd": "#7d9c62"
+                },
+                {
+                    "name": "2048",
+                    "category": "Puzzle",
+                    "href": "Assets/Games/cl2048.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyze1bWJkHvH2sgbwrmWbr1Yez1t_QINmEYPKmmlwjsQ&s=10",
+                    "emoji": null,
+                    "artStart": "#f4c27e",
+                    "artEnd": "#e9845d",
+                    "popular": 9
+                },
+                {
+                    "name": "2 3 4 Player Games",
+                    "category": "Arcade",
+                    "href": "Assets/Games/cl234playergame.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8vXWri9VyQkZgvIaZOrDTvuaQgV9jTkq6i4nEs5aepQ&s=10",
+                    "emoji": null,
+                    "artStart": "#c2b5e8",
+                    "artEnd": "#7d75b7"
+                },
+                {
+                    "name": "Run 3",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clrun3.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgv72pC8RwqFDLIq75hVPkt3OEP3gJTALBkQWvok7wKw&s=10",
+                    "emoji": null,
+                    "artStart": "#b4b8f4",
+                    "artEnd": "#555b9e"
+                },
+                {
+                    "name": "Escape Road 3",
+                    "category": "Racing",
+                    "href": "Assets/Games/clescaperoad3.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTos09m-fAz4giTJ4gktO-EgGI01-lQeAr9yh6WLPbKRQ&s=10",
+                    "emoji": null,
+                    "artStart": "#f3b57d",
+                    "artEnd": "#bd6554"
+                },
+                {
+                    "name": "Retro Bowl",
+                    "category": "Sports",
+                    "href": "Assets/Games/clretrobowl.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYIiOxUFlNK49yr1Icf9UqQb58P9oZD-QR3wcCAYV6VA&s=10",
+                    "emoji": null,
+                    "artStart": "#d9a771",
+                    "artEnd": "#894f58",
+                    "popular": 2
+                },
+                {
+                    "name": "Retro Bowl College",
+                    "category": "Sports",
+                    "href": "Assets/Games/clretrobowlcollege.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCzfXtnt5TtBJ7S8BzkNNY-Elp3Jw_asyi-zHPsxXhJA&s=10",
+                    "emoji": null,
+                    "artStart": "#d9a771",
+                    "artEnd": "#894f58"
+                },
+                {
+                    "name": "Snow Rider 3D",
+                    "category": "Racing",
+                    "href": "Assets/Games/clsnowrider.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ_aL-Jq8JIdorlR8uOXA84Lrvo8uwgWswtjFKImDWHA&s=10",
+                    "emoji": null,
+                    "artStart": "#d5eef2",
+                    "artEnd": "#76a9c1"
+                },
+                {
+                    "name": "Eggy Car",
+                    "category": "Racing",
+                    "href": "Assets/Games/cleggycar.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyKSXm8KeM9AMWROM-hKWfIw9w4XAWpXOhCZHDubyQ2g&s=10",
+                    "emoji": null,
+                    "artStart": "#f5d17d",
+                    "artEnd": "#c77c3e"
+                },
+                {
+                    "name": "Sandboxels",
+                    "category": "Casual",
+                    "href": "Assets/Games/clsandboxels.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUdZ_gD42pOThyuvnAW7SzFtEXpDHgPjxw_roEfbcEkA&s=10",
+                    "emoji": null,
+                    "artStart": "#a7d8c0",
+                    "artEnd": "#6694ad"
+                },
+                {
+                    "name": "Super Smash Bros.",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clsupersmashbros.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoxRixLbbDNcXKZQK3ZKHqZyQ215C6zzfPbN5yvDyi3Q&s=10",
+                    "emoji": null,
+                    "artStart": "#f3a76f",
+                    "artEnd": "#c85445"
+                },
+                {
+                    "name": "Funny Shooter 2",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clfunnyshooter2.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeD1YdfD_eoP52qEhijZFVuD2IxZUQiEdON5Z7xFm1AA&s=10",
+                    "emoji": null,
+                    "artStart": "#a8d4a1",
+                    "artEnd": "#5e8b63"
+                },
+                {
+                    "name": "SUPERHOT",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clsuperhot.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScZiDzezzR2pIThPNA8UsJkID1aUVWeUMryZJkqWGbNg&s=10",
+                    "emoji": null,
+                    "artStart": "#f5a18e",
+                    "artEnd": "#b9333a"
+                },
+                {
+                    "name": "Time Shooter 3 SWAT",
+                    "category": "Arcade",
+                    "href": "Assets/Games/cltimeshooter3.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU3fwxjKlLbRWJ0uEUxuabVPZqAKSIR4Z9nOCgqQ5Xfg&s=10",
+                    "emoji": null,
+                    "artStart": "#f1d06d",
+                    "artEnd": "#d77a45"
+                },
+                {
+                    "name": "Moto X3M",
+                    "category": "Racing",
+                    "href": "Assets/Games/clmotox3mm.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6MY8j-zwIfhdFaLJEQxu1sUlwzM4ZJ9tU6kcpEvZVCw&s=10",
+                    "emoji": null,
+                    "artStart": "#f4bd70",
+                    "artEnd": "#db704d",
+                    "popular": 4
+                },
+                {
+                    "name": "Moto X3M Winter",
+                    "category": "Racing",
+                    "href": "Assets/Games/clmotox3mwinter.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHNCUBmE_SWbzJOG9wmwbgLYiW4fVz5ku7Un92xJj2BQ&s=10",
+                    "emoji": null,
+                    "artStart": "#d5eef2",
+                    "artEnd": "#76a9c1"
+                },
+                {
+                    "name": "Moto X3M Pool Party",
+                    "category": "Racing",
+                    "href": "Assets/Games/clmotox3mpoolparty.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVpcIsmrWaSqVAylNhJl8nDDiSvReWlmoDuv8PEjdWEw&s=10",
+                    "emoji": null,
+                    "artStart": "#90d8e8",
+                    "artEnd": "#348eaf"
+                },
+                {
+                    "name": "Moto X3M Spooky Land",
+                    "category": "Racing",
+                    "href": "Assets/Games/clmotox3mspookyland.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9ETqu33eViFLY8pWBE2rAQdFOMIqcwSbKjkVLQIFwcw&s=10",
+                    "emoji": null,
+                    "artStart": "#bca6d9",
+                    "artEnd": "#53446e"
+                },
+                {
+                    "name": "OvO 2",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clovo2.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8W6YSrft0h9twBrDOsuGJCV_AZ0gbueHRj2Be5DKgZA&s=10",
+                    "emoji": null,
+                    "artStart": "#f4d789",
+                    "artEnd": "#e99550"
+                },
+                {
+                    "name": "Paper.io",
+                    "category": "Puzzle",
+                    "href": "Assets/Games/clpaperio.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQFR6HIgRH7LXvZUiCE5WaC-bLLLIj4761QlBiydiwCg&s=10",
+                    "emoji": null,
+                    "artStart": "#a9d7ef",
+                    "artEnd": "#638dc4"
+                },
+                {
+                    "name": "Pixel Shooter 1",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clpixelshooter.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl5tRyflb24tw67RU7c7oCAoCdbClDCwjOcIErB52SKQ&s=10",
+                    "emoji": null,
+                    "artStart": "#f5a18e",
+                    "artEnd": "#b9333a"
+                },
+                {
+                    "name": "Please, Don’t Touch Anything",
+                    "category": "Puzzle",
+                    "href": "Assets/Games/clpleasedonttouchanything.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDTX7gfcdem2J_IXNBV78kqbJoyJ5kWFWU5Eue2fT5vw&s=10",
+                    "emoji": null,
+                    "artStart": "#a8a8a8",
+                    "artEnd": "#565656"
+                },
+                {
+                    "name": "Baseball Bros",
+                    "category": "Sports",
+                    "href": "Assets/Games/clbaseballbros.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYk73nzdq0dCB_P5i0hv11UMhpcAr5SzanPWSPIDWSJQ&s=10",
+                    "emoji": null,
+                    "artStart": "#f3d39b",
+                    "artEnd": "#b96c45"
+                },
+                {
+                    "name": "Basketball Legends",
+                    "category": "Sports",
+                    "href": "Assets/Games/clbasketballlegends.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2QVURcnIr98XiEYU6YAxpu1JEbly8mT1Hm-HRqPwuQg&s=10",
+                    "emoji": null,
+                    "artStart": "#f6c66b",
+                    "artEnd": "#d97842",
+                    "popular": 3
+                },
+                {
+                    "name": "Basketball Stars",
+                    "category": "Sports",
+                    "href": "Assets/Games/clbasketballstars.html",
+                    "image": "Assets/basketball-stars.jpg",
+                    "emoji": null,
+                    "artStart": "#f1d98b",
+                    "artEnd": "#dc8c52",
+                    "popular": 6
+                },
+                {
+                    "name": "Basket Bros",
+                    "category": "Sports",
+                    "href": "Assets/Games/clbasketbros.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMVDLEUnLSZh-5pSoCIndaptCcqLNrDjfp36TSfRm2SA&s=10",
+                    "emoji": null,
+                    "artStart": "#f4b878",
+                    "artEnd": "#be593d"
+                },
+                {
+                    "name": "BitLife",
+                    "category": "Casual",
+                    "href": "Assets/Games/clbitlife.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZdo5cBqkv1uAcfCofpC-WAViocRNLlysohwHMV2Lqzw&s=10",
+                    "emoji": null,
+                    "artStart": "#b6d49a",
+                    "artEnd": "#547d59",
+                    "popular": 1
+                },
+                {
+                    "name": "Tunnel Rush",
+                    "category": "Racing",
+                    "href": "Assets/Games/cltunnelrushbetter.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsxveDflkupPK36X5xc41snTgwHtOR8kBYyWt4avWp2Q&s=10",
+                    "emoji": null,
+                    "artStart": "#b5c5ee",
+                    "artEnd": "#6655a6"
+                },
+                {
+                    "name": "Papa's Bakeria",
+                    "category": "Casual",
+                    "href": "Assets/Games/clpapabakeria.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrmwL5lihvRCb0DIHGEU2L5ZJVtTeScRTwIeKeBIaZsA&s=10",
+                    "emoji": null,
+                    "artStart": "#f2c4a2",
+                    "artEnd": "#d98266"
+                },
+                {
+                    "name": "Papa's Burgeria",
+                    "category": "Casual",
+                    "href": "Assets/Games/clpapasburgerIIIAAAAA.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0FCPe4c5DeoxceXPSAGFdkJulMkdKKZOALmc8aOXzHg&s=10",
+                    "emoji": null,
+                    "artStart": "#f5d17d",
+                    "artEnd": "#c77c3e"
+                },
+                {
+                    "name": "Papa's Cheeseria",
+                    "category": "Casual",
+                    "href": "Assets/Games/clpapascheeseria.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdRjixyZ-lapxG8Wy5CyMGEzw5024NGvsp3ca41elcJA&s=10",
+                    "emoji": null,
+                    "artStart": "#f4d68a",
+                    "artEnd": "#d59a4c"
+                },
+                {
+                    "name": "Papa's Pancakeria",
+                    "category": "Casual",
+                    "href": "Assets/Games/clpapaspancakeria.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4YvlmtAGZeuOkxKEVPwgIMXnnkKK6yCBLhc7X-h92kA&s=10",
+                    "emoji": null,
+                    "artStart": "#eccda1",
+                    "artEnd": "#bd8456"
+                },
+                {
+                    "name": "Papa's Sushiria",
+                    "category": "Casual",
+                    "href": "Assets/Games/clpapassushiria.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAyMnqWHGVyEt_IAbbb_-QljbHYi0nisXi0lDfRZjc5Q&s=10",
+                    "emoji": null,
+                    "artStart": "#f2b8a9",
+                    "artEnd": "#bd6d71"
+                },
+                {
+                    "name": "Subway Surfers: San Francisco",
+                    "category": "Racing",
+                    "href": "Assets/Games/clsubwaysurferssanfrancisco%20%281%29.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO2W8En0PnYWR7dLBfzfwEubKFAyex06MHa-knjFmqag&s=10",
+                    "emoji": null,
+                    "artStart": "#f4b775",
+                    "artEnd": "#ca684b",
+                    "popular": 5
+                },
+                {
+                    "name": "Football Bros",
+                    "category": "Sports",
+                    "href": "Assets/Games/clfootballbros.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbOwkg7JTDRfWVCYFNTK8G5i8t4XgKKkLVdA6zlH-xJQ&s=10",
+                    "emoji": null,
+                    "artStart": "#d8b47b",
+                    "artEnd": "#7f553c"
+                },
+                {
+                    "name": "Soccer Bros",
+                    "category": "Sports",
+                    "href": "Assets/Games/clsoccerbros.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKqdzBoRbsJJNY_8cfi_FRvpzEo0_0Ag-6bijmbbwXpw&s",
+                    "emoji": null,
+                    "artStart": "#a5d79a",
+                    "artEnd": "#48894d"
+                },
+                {
+                    "name": "Wrestle Bros",
+                    "category": "Sports",
+                    "href": "Assets/Games/clwrestlebros.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1KdIATgaiNYz46w-zNQ4rnl9WHgQ0qN_Q_M06Pnd8pQ&s",
+                    "emoji": null,
+                    "artStart": "#f1a3a3",
+                    "artEnd": "#b83f48"
+                },
+                {
+                    "name": "Flappy Bird",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clflappybird.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMy7OvoPQ0xjbVGtZU9otyOd73tlJ7PXDSGp3ZNMNeeA&s=10",
+                    "emoji": null,
+                    "artStart": "#f5d17d",
+                    "artEnd": "#c77c3e"
+                }
+            ];
+            const allGamesGrid = document.querySelector("#all-games-grid");
+            const renderGameCard = (game) => {
+                const card = document.createElement("a");
+                card.className = "game-card";
+                card.href = game.href;
+                card.dataset.category = game.category;
+                card.style.setProperty("--art-start", game.artStart);
+                card.style.setProperty("--art-end", game.artEnd);
+
+                const art = document.createElement("span");
+                art.className = "game-art";
+                art.setAttribute("aria-hidden", "true");
+
+                if (game.image) {
+                    const image = document.createElement("img");
+                    image.src = game.image;
+                    image.alt = "";
+                    image.loading = "lazy";
+                    image.decoding = "async";
+                    art.append(image);
+                } else {
+                    const icon = document.createElement("span");
+                    icon.textContent = game.emoji;
+                    icon.style.fontSize = "4rem";
+                    art.append(icon);
+                }
+
+                const copy = document.createElement("span");
+                copy.className = "game-copy";
+                const title = document.createElement("strong");
+                title.textContent = game.name;
+                const playLabel = document.createElement("span");
+                playLabel.className = "play-label";
+                playLabel.textContent = "Play →";
+                copy.append(title, playLabel);
+                card.append(art, copy);
+                return card;
+            };
+
+            games.forEach((game) => {
+                allGamesGrid.append(renderGameCard(game));
+            });
+            const allGameCards = [...allGamesGrid.querySelectorAll(".game-card")];
             const popularGamesGrid = document.querySelector("#popular-games-grid");
+            games.filter((game) => game.popular).sort((first, second) => first.popular - second.popular).forEach((game) => {
+                popularGamesGrid.append(renderGameCard(game));
+            });
             const gameSearch = document.querySelector("#game-search");
+            const gameSort = document.querySelector("#game-sort");
             const gameSearchStatus = document.querySelector("#game-search-status");
+            const gameEmptyState = document.querySelector("#game-empty-state");
             const themeToggle = document.querySelector("#theme-toggle");
             const musicToggle = document.querySelector("#music-toggle");
             const eightBitToggle = document.querySelector("#eight-bit-toggle");
@@ -1201,71 +1577,37 @@
                 }
             });
             const categoryFilters = [...document.querySelectorAll(".category-filter")];
-            const categoryByGame = new Map([
-                ["People Playground", "Casual"],
-                ["Fruit Ninja", "Arcade"],
-                ["Fork N Sausage", "Arcade"],
-                ["Getaway Shootout", "Arcade"],
-                ["Rooftop Snipers", "Arcade"],
-                ["Basket Random", "Sports"],
-                ["Soccer Random", "Sports"],
-                ["Boxing Random", "Sports"],
-                ["Google Baseball", "Sports"],
-                ["Google Dino", "Arcade"],
-                ["Snake", "Arcade"],
-                ["Time Shooter 2", "Arcade"],
-                ["1v1.lol", "Arcade"],
-                ["Escape Road", "Racing"],
-                ["Escape Road 2", "Racing"],
-                ["Escape Road City 2", "Racing"],
-                ["Ragdoll Hit", "Arcade"],
-                ["Ragdoll Archers", "Arcade"],
-                ["Rooftop Snipers 2", "Arcade"],
-                ["GrindCraft", "Puzzle"],
-                ["2048", "Puzzle"],
-                ["2 3 4 Player Games", "Arcade"],
-                ["Run 3", "Arcade"],
-                ["Escape Road 3", "Racing"],
-                ["Retro Bowl", "Sports"],
-                ["Retro Bowl College", "Sports"],
-                ["Snow Rider 3D", "Racing"],
-                ["Eggy Car", "Racing"],
-                ["Sandboxels", "Casual"],
-                ["Super Smash Bros.", "Arcade"],
-                ["Funny Shooter 2", "Arcade"],
-                ["SUPERHOT", "Arcade"],
-                ["Time Shooter 3 SWAT", "Arcade"],
-                ["Moto X3M", "Racing"],
-                ["Moto X3M Winter", "Racing"],
-                ["Moto X3M Pool Party", "Racing"],
-                ["Moto X3M Spooky Land", "Racing"],
-                ["OvO 2", "Arcade"],
-                ["Paper.io", "Puzzle"],
-                ["Pixel Shooter 1", "Arcade"],
-                ["Please, Don’t Touch Anything", "Puzzle"],
-                ["Baseball Bros", "Sports"],
-                ["Basketball Legends", "Sports"],
-                ["Basketball Stars", "Sports"],
-                ["Basket Bros", "Sports"],
-                ["BitLife", "Casual"],
-                ["Tunnel Rush", "Racing"],
-                ["Papa's Bakeria", "Casual"],
-                ["Papa's Burgeria", "Casual"],
-                ["Papa's Cheeseria", "Casual"],
-                ["Papa's Pancakeria", "Casual"],
-                ["Papa's Sushiria", "Casual"],
-                ["Subway Surfers: San Francisco", "Racing"],
-                ["Football Bros", "Sports"],
-                ["Soccer Bros", "Sports"],
-                ["Wrestle Bros", "Sports"],
-                ["Flappy Bird", "Arcade"]
-            ]);
+
             let selectedCategory = "all";
 
-            allGameCards.forEach((gameCard) => {
-                const gameName = gameCard.querySelector("strong").textContent.trim();
-                gameCard.dataset.category = categoryByGame.get(gameName) || "Other";
-            });
+            const updateCategoryCounts = () => {
+                categoryFilters.forEach((filter) => {
+                    const category = filter.dataset.category;
+                    const count = category === "all"
+                        ? games.length
+                        : games.filter((game) => game.category === category).length;
+                    filter.dataset.label = filter.textContent.trim();
+                    filter.textContent = `${filter.dataset.label} (${count})`;
+                    filter.disabled = category !== "all" && count === 0;
+                });
+            };
+
+            const sortGameCards = () => {
+                const sortedGames = [...games];
+                if (gameSort.value === "alphabetical") {
+                    sortedGames.sort((first, second) => first.name.localeCompare(second.name));
+                } else if (gameSort.value === "popular") {
+                    sortedGames.sort((first, second) =>
+                        (first.popular ?? Number.POSITIVE_INFINITY) - (second.popular ?? Number.POSITIVE_INFINITY)
+                        || first.name.localeCompare(second.name)
+                    );
+                }
+
+                const cardsByHref = new Map(allGameCards.map((card) => [card.getAttribute("href"), card]));
+                const fragment = document.createDocumentFragment();
+                sortedGames.forEach((game) => fragment.append(cardsByHref.get(game.href)));
+                allGamesGrid.append(fragment);
+            };
 
             const updateGameResults = () => {
                 const query = gameSearch.value.trim().toLocaleLowerCase();
@@ -1280,26 +1622,11 @@
                 });
 
                 gameSearchStatus.textContent = `${visibleCount} ${visibleCount === 1 ? "game" : "games"} found`;
+                gameEmptyState.hidden = visibleCount > 0;
             };
-
-            const popularGameHrefs = [
-                "Assets/Games/clbitlife.html",
-                "Assets/Games/clretrobowl.html",
-                "Assets/Games/clbasketballlegends.html",
-                "Assets/Games/clmotox3mm.html",
-                "Assets/Games/clsubwaysurferssanfrancisco%20%281%29.html",
-                "Assets/Games/clbasketballstars.html",
-                "Assets/Games/clbasketrandom.html",
-                "Assets/Games/clsoccerrandom.html",
-                "Assets/Games/cl2048.html",
-                "Assets/Games/clgoogledino.html"
-            ];
-
-            popularGameHrefs.forEach((href) => {
-                const gameCard = allGameCards.find((card) => card.getAttribute("href") === href);
-                if (gameCard) popularGamesGrid.append(gameCard.cloneNode(true));
-            });
-
+            updateCategoryCounts();
+            sortGameCards();
+            gameSort.addEventListener("change", sortGameCards);
             gameSearch.addEventListener("input", updateGameResults);
             categoryFilters.forEach((filter) => {
                 filter.addEventListener("click", () => {
@@ -1328,14 +1655,147 @@
 
                 const gameTitle = gameLink.querySelector("strong").textContent;
                 gameWindow.document.title = gameTitle;
-                gameWindow.document.body.style.margin = "0";
+                gameWindow.document.documentElement.style.height = "100%";
+                gameWindow.document.body.style.cssText = "display:flex;flex-direction:column;height:100%;margin:0;background:#101816;color:#f8f6ed;font-family:Arial,sans-serif";
 
+                const playerStyles = gameWindow.document.createElement("style");
+                playerStyles.textContent = `
+                    * { box-sizing: border-box; }
+                    .player-toolbar {
+                        display: flex;
+                        min-height: 58px;
+                        align-items: center;
+                        justify-content: space-between;
+                        gap: 16px;
+                        padding: 10px 18px;
+                        background: #183c36;
+                        border-bottom: 3px solid #d2a85a;
+                    }
+                    .player-heading { min-width: 0; }
+                    .player-heading h1 {
+                        overflow: hidden;
+                        margin: 0;
+                        font-size: 1rem;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                    .player-status { margin: 4px 0 0; color: #d8e5dc; font-size: .8rem; }
+                    .player-controls { display: flex; flex: 0 0 auto; gap: 8px; }
+                    .player-controls button {
+                        padding: 9px 12px;
+                        color: #183c36;
+                        font: inherit;
+                        font-weight: 700;
+                        background: #f8f6ed;
+                        border: 0;
+                        border-radius: 8px;
+                        cursor: pointer;
+                    }
+                    .player-controls button:hover { background: #e8c77e; }
+                    .player-controls button:focus-visible { outline: 3px solid #e8c77e; outline-offset: 3px; }
+                    .game-stage { position: relative; min-height: 0; flex: 1; background: #000; }
+                    .game-frame { width: 100%; height: 100%; border: 0; }
+                    .game-loading {
+                        position: absolute;
+                        inset: 0;
+                        display: grid;
+                        align-content: center;
+                        justify-items: center;
+                        gap: 14px;
+                        background: #101816;
+                    }
+                    .game-loading[hidden] { display: none; }
+                    .loading-spinner {
+                        width: 38px;
+                        height: 38px;
+                        border: 4px solid #52645d;
+                        border-top-color: #e8c77e;
+                        border-radius: 50%;
+                        animation: spin .8s linear infinite;
+                    }
+                    @keyframes spin { to { transform: rotate(360deg); } }
+                    @media (max-width: 520px) {
+                        .player-toolbar { align-items: flex-start; flex-direction: column; gap: 10px; }
+                        .player-controls { width: 100%; }
+                        .player-controls button { flex: 1; }
+                    }
+                    @media (prefers-reduced-motion: reduce) {
+                        .loading-spinner { animation-duration: 2s; }
+                    }
+                `;
+                gameWindow.document.head.append(playerStyles);
+
+                const toolbar = gameWindow.document.createElement("header");
+                toolbar.className = "player-toolbar";
+                const heading = gameWindow.document.createElement("div");
+                heading.className = "player-heading";
+                const title = gameWindow.document.createElement("h1");
+                title.textContent = gameTitle;
+                const status = gameWindow.document.createElement("p");
+                status.className = "player-status";
+                status.setAttribute("role", "status");
+                status.setAttribute("aria-live", "polite");
+                status.textContent = "Loading game…";
+                heading.append(title, status);
+
+                const controls = gameWindow.document.createElement("div");
+                controls.className = "player-controls";
+                const fullscreenButton = gameWindow.document.createElement("button");
+                fullscreenButton.type = "button";
+                fullscreenButton.textContent = "Enter fullscreen";
+                const closeButton = gameWindow.document.createElement("button");
+                closeButton.type = "button";
+                closeButton.textContent = "Back to library";
+                controls.append(fullscreenButton, closeButton);
+                toolbar.append(heading, controls);
+
+                const stage = gameWindow.document.createElement("main");
+                stage.className = "game-stage";
+                const loading = gameWindow.document.createElement("div");
+                loading.className = "game-loading";
+                loading.setAttribute("aria-hidden", "true");
+                const spinner = gameWindow.document.createElement("span");
+                spinner.className = "loading-spinner";
+                spinner.setAttribute("aria-hidden", "true");
+                const loadingMessage = gameWindow.document.createElement("span");
+                loadingMessage.textContent = "Loading game…";
+                loading.append(spinner, loadingMessage);
                 const gameFrame = gameWindow.document.createElement("iframe");
-                gameFrame.src = gameUrl;
+                gameFrame.className = "game-frame";
                 gameFrame.title = gameTitle;
                 gameFrame.allow = "autoplay; fullscreen; gamepad";
-                gameFrame.style.cssText = "position:fixed;inset:0;width:100%;height:100%;border:0";
-                gameWindow.document.body.append(gameFrame);
+                gameFrame.allowFullscreen = true;
+                gameFrame.addEventListener("load", () => {
+                    loading.hidden = true;
+                    status.textContent = "Game loaded";
+                });
+                stage.append(loading, gameFrame);
+                gameWindow.document.body.append(toolbar, stage);
+                gameFrame.src = gameUrl;
+
+                fullscreenButton.addEventListener("click", async () => {
+                    try {
+                        if (gameWindow.document.fullscreenElement) {
+                            await gameWindow.document.exitFullscreen();
+                        } else {
+                            await gameFrame.requestFullscreen();
+                        }
+                    } catch (error) {
+                        console.warn("Could not change game fullscreen mode.", error);
+                        status.textContent = "Fullscreen is unavailable in this browser.";
+                    }
+                });
+                gameWindow.document.addEventListener("fullscreenchange", () => {
+                    fullscreenButton.textContent = gameWindow.document.fullscreenElement
+                        ? "Exit fullscreen"
+                        : "Enter fullscreen";
+                });
+                closeButton.addEventListener("click", () => {
+                    gameWindow.close();
+                    if (!gameWindow.closed) {
+                        status.textContent = "Close this browser tab to return to the game list.";
+                    }
+                });
             });
         </script>
     </body>
