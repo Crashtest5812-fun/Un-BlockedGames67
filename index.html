@@ -1707,16 +1707,6 @@
                     }
                     .game-loading[hidden] { display: none; }
                     .game-loading.is-hidden { opacity: 0; pointer-events: none; }
-                    .game-loading img {
-                        position: absolute;
-                        inset: 0;
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        filter: blur(2px);
-                        opacity: .55;
-                        transform: scale(1.03);
-                    }
                     .loading-content {
                         position: relative;
                         z-index: 1;
@@ -1729,7 +1719,7 @@
                         text-shadow: 0 2px 10px rgb(0 0 0 / 75%);
                     }
                     .loading-content strong { font-size: clamp(1.4rem, 4vw, 2.25rem); }
-                    .loading-content span:last-child { font-size: .95rem; }
+                    .loading-message { font-size: .95rem; }
                     .loading-spinner {
                         width: 38px;
                         height: 38px;
@@ -1737,15 +1727,30 @@
                         border-top-color: #e8c77e;
                         border-radius: 50%;
                         animation: spin .8s linear infinite;
+                        box-shadow: 0 0 18px rgb(232 199 126 / 35%);
                     }
                     @keyframes spin { to { transform: rotate(360deg); } }
+                    .loading-dots { display: flex; gap: 6px; }
+                    .loading-dots span {
+                        width: 7px;
+                        height: 7px;
+                        background: #e8c77e;
+                        border-radius: 50%;
+                        animation: dot-bounce 900ms ease-in-out infinite;
+                    }
+                    .loading-dots span:nth-child(2) { animation-delay: 120ms; }
+                    .loading-dots span:nth-child(3) { animation-delay: 240ms; }
+                    @keyframes dot-bounce {
+                        0%, 60%, 100% { opacity: .45; transform: translateY(0); }
+                        30% { opacity: 1; transform: translateY(-6px); }
+                    }
                     @media (max-width: 520px) {
                         .player-toolbar { align-items: flex-start; flex-direction: column; gap: 10px; }
                         .player-controls { width: 100%; }
                         .player-controls button { flex: 1; }
                     }
                     @media (prefers-reduced-motion: reduce) {
-                        .loading-spinner { animation-duration: 2s; }
+                        .loading-spinner, .loading-dots span { animation: none; }
                     }
                 `;
                 gameWindow.document.head.append(playerStyles);
@@ -1779,21 +1784,11 @@
                 const loading = gameWindow.document.createElement("div");
                 loading.className = "game-loading";
                 loading.setAttribute("aria-hidden", "true");
-                const gameArt = gameLink.querySelector(".game-art");
-                const thumbnail = gameArt.querySelector("img");
                 const artStart = getComputedStyle(gameLink).getPropertyValue("--art-start").trim();
                 const artEnd = getComputedStyle(gameLink).getPropertyValue("--art-end").trim();
                 if (artStart && artEnd) {
                     loading.style.setProperty("--art-start", artStart);
                     loading.style.setProperty("--art-end", artEnd);
-                }
-                if (thumbnail) {
-                    const splashImage = gameWindow.document.createElement("img");
-                    splashImage.src = thumbnail.currentSrc || thumbnail.src;
-                    splashImage.alt = "";
-                    splashImage.setAttribute("aria-hidden", "true");
-                    splashImage.addEventListener("error", () => splashImage.remove(), { once: true });
-                    loading.append(splashImage);
                 }
                 const loadingContent = gameWindow.document.createElement("div");
                 loadingContent.className = "loading-content";
@@ -1803,8 +1798,15 @@
                 const loadingTitle = gameWindow.document.createElement("strong");
                 loadingTitle.textContent = gameTitle;
                 const loadingMessage = gameWindow.document.createElement("span");
+                loadingMessage.className = "loading-message";
                 loadingMessage.textContent = "Getting your game ready…";
-                loadingContent.append(spinner, loadingTitle, loadingMessage);
+                const loadingDots = gameWindow.document.createElement("span");
+                loadingDots.className = "loading-dots";
+                loadingDots.setAttribute("aria-hidden", "true");
+                for (let index = 0; index < 3; index += 1) {
+                    loadingDots.append(gameWindow.document.createElement("span"));
+                }
+                loadingContent.append(spinner, loadingTitle, loadingMessage, loadingDots);
                 loading.append(loadingContent);
                 const gameFrame = gameWindow.document.createElement("iframe");
                 gameFrame.className = "game-frame";
