@@ -1702,7 +1702,7 @@
                         align-content: center;
                         justify-items: center;
                         overflow: hidden;
-                        background: linear-gradient(135deg, var(--art-start, #183c36), var(--art-end, #101816));
+                        background: linear-gradient(135deg, #18211e, #111715);
                         transition: opacity 260ms ease;
                     }
                     .game-loading[hidden] { display: none; }
@@ -1723,18 +1723,18 @@
                     .loading-spinner {
                         width: 38px;
                         height: 38px;
-                        border: 4px solid #52645d;
-                        border-top-color: #e8c77e;
+                        border: 4px solid #3b4540;
+                        border-top-color: #a88b58;
                         border-radius: 50%;
                         animation: spin .8s linear infinite;
-                        box-shadow: 0 0 18px rgb(232 199 126 / 35%);
+                        box-shadow: 0 0 10px rgb(168 139 88 / 16%);
                     }
                     @keyframes spin { to { transform: rotate(360deg); } }
                     .loading-dots { display: flex; gap: 6px; }
                     .loading-dots span {
                         width: 7px;
                         height: 7px;
-                        background: #e8c77e;
+                        background: #a88b58;
                         border-radius: 50%;
                         animation: dot-bounce 900ms ease-in-out infinite;
                     }
@@ -1784,12 +1784,6 @@
                 const loading = gameWindow.document.createElement("div");
                 loading.className = "game-loading";
                 loading.setAttribute("aria-hidden", "true");
-                const artStart = getComputedStyle(gameLink).getPropertyValue("--art-start").trim();
-                const artEnd = getComputedStyle(gameLink).getPropertyValue("--art-end").trim();
-                if (artStart && artEnd) {
-                    loading.style.setProperty("--art-start", artStart);
-                    loading.style.setProperty("--art-end", artEnd);
-                }
                 const loadingContent = gameWindow.document.createElement("div");
                 loadingContent.className = "loading-content";
                 const spinner = gameWindow.document.createElement("span");
@@ -1813,12 +1807,19 @@
                 gameFrame.title = gameTitle;
                 gameFrame.allow = "autoplay; fullscreen; gamepad";
                 gameFrame.allowFullscreen = true;
+                const minimumLoadingTime = 2500;
+                const loadingStartedAt = performance.now();
                 gameFrame.addEventListener("load", () => {
-                    loading.classList.add("is-hidden");
-                    status.textContent = "Game loaded";
+                    const remainingLoadingTime = Math.max(
+                        0,
+                        minimumLoadingTime - (performance.now() - loadingStartedAt)
+                    );
                     gameWindow.setTimeout(() => {
-                        loading.hidden = true;
-                    }, 280);
+                        loading.classList.add("is-hidden");
+                        gameWindow.setTimeout(() => {
+                            loading.hidden = true;
+                        }, 280);
+                    }, remainingLoadingTime);
                 });
                 stage.append(loading, gameFrame);
                 gameWindow.document.body.append(toolbar, stage);
