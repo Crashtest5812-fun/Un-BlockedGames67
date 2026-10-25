@@ -262,6 +262,9 @@
             }
 
             .side-menu nav a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
                 padding: 10px;
                 color: var(--page-text);
                 font-weight: 700;
@@ -287,6 +290,7 @@
 
             .theme-toggle {
                 width: 100%;
+                min-height: 44px;
                 padding: 11px 12px;
                 color: var(--page-text);
                 font: inherit;
@@ -305,6 +309,7 @@
 
             .audio-toggle {
                 width: 100%;
+                min-height: 44px;
                 padding: 10px 12px;
                 color: var(--page-text);
                 font: inherit;
@@ -320,6 +325,11 @@
 
             .audio-toggle:hover {
                 border-color: var(--focus-color);
+            }
+
+            .theme-toggle:focus-visible {
+                outline: 3px solid var(--focus-color);
+                outline-offset: 3px;
             }
 
             .audio-toggle:focus-visible {
@@ -380,6 +390,7 @@
             .game-search {
                 width: 100%;
                 max-width: 480px;
+                min-height: 44px;
                 padding: 12px 14px;
                 color: var(--page-text);
                 font: inherit;
@@ -391,6 +402,7 @@
             .game-sort {
                 width: 100%;
                 max-width: 280px;
+                min-height: 44px;
                 padding: 12px 14px;
                 color: var(--page-text);
                 font: inherit;
@@ -407,6 +419,7 @@
             }
 
             .category-filter {
+                min-height: 44px;
                 padding: 8px 13px;
                 color: var(--heading-color);
                 font: inherit;
@@ -528,10 +541,16 @@
             .game-copy {
                 display: flex;
                 flex: 1;
-                align-items: center;
+                align-items: flex-start;
                 justify-content: space-between;
                 gap: 10px;
                 padding: 14px 16px;
+            }
+
+            .game-info {
+                display: grid;
+                gap: 5px;
+                min-width: 0;
             }
 
             .game-copy strong {
@@ -539,8 +558,28 @@
                 line-height: 1.35;
             }
 
+            .game-description {
+                margin: 0;
+                color: var(--muted-color);
+                font-size: 0.82rem;
+                line-height: 1.45;
+            }
+
+            .game-category {
+                width: fit-content;
+                padding: 3px 8px;
+                color: var(--heading-color);
+                font-size: 0.72rem;
+                font-weight: 700;
+                background: rgb(40 89 77 / 10%);
+                border-radius: 999px;
+            }
+
             .play-label {
                 flex: 0 0 auto;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
                 color: var(--heading-color);
                 font-size: 0.85rem;
                 font-weight: 700;
@@ -1202,8 +1241,8 @@
                     "name": "Basketball Stars",
                     "category": "Sports",
                     "href": "Assets/Games/clbasketballstars.html",
-                    "image": "Assets/basketball-stars.jpg",
-                    "emoji": null,
+                    "image": null,
+                    "emoji": "🏀",
                     "artStart": "#f1d98b",
                     "artEnd": "#dc8c52",
                     "popular": 6
@@ -1328,6 +1367,65 @@
                     "artEnd": "#c77c3e"
                 }
             ];
+            const gameDescriptions = new Map([
+                ["People Playground", "Experiment with physics, objects, and ragdoll characters in a sandbox."],
+                ["Fruit Ninja", "Slice flying fruit with quick swipes and avoid the hazards."],
+                ["Fork N Sausage", "Guide a sausage onto a fork through tricky physics puzzles."],
+                ["Getaway Shootout", "Race other players through chaotic obstacle-filled escapes."],
+                ["Rooftop Snipers", "Duel an opponent on a rooftop and try to knock them off."],
+                ["Basket Random", "Play unpredictable, one-button basketball rounds."],
+                ["Soccer Random", "Score goals in goofy, physics-driven soccer matches."],
+                ["Boxing Random", "Trade wild punches in fast, physics-based boxing rounds."],
+                ["Google Baseball", "Swing for the fences in a playful baseball mini-game."],
+                ["Google Dino", "Jump over obstacles and see how far you can run."],
+                ["Snake", "Guide the growing snake, collect items, and avoid collisions."],
+                ["Time Shooter 2", "Use movement to control time in a first-person action game."],
+                ["1v1.lol", "Build, aim, and compete in quick online-style arena battles."],
+                ["Escape Road", "Drive through traffic while trying to escape pursuit."],
+                ["Escape Road 2", "Keep driving, dodge obstacles, and evade the chase."],
+                ["Escape Road City 2", "Race through city streets and escape pursuing cars."],
+                ["Ragdoll Hit", "Use ragdoll physics to outfight your opponent."],
+                ["Ragdoll Archers", "Aim carefully and duel opponents with a bow."],
+                ["Rooftop Snipers 2", "Challenge a friend to another fast rooftop duel."],
+                ["GrindCraft", "Gather resources and craft your way through a pixel world."],
+                ["2048", "Slide numbered tiles together to build the 2048 tile."],
+                ["2 3 4 Player Games", "Choose from a collection of quick local multiplayer games."],
+                ["Run 3", "Run and jump through a twisting space tunnel."],
+                ["Escape Road 3", "Take another high-speed escape through busy roads."],
+                ["Retro Bowl", "Manage a retro-style football team and play its matches."],
+                ["Retro Bowl College", "Build a college football program and lead it through a season."],
+                ["Snow Rider 3D", "Steer downhill, avoid obstacles, and collect gifts."],
+                ["Eggy Car", "Drive carefully over hills while keeping an egg balanced."],
+                ["Sandboxels", "Mix elements and watch them interact in a pixel sandbox."],
+                ["Super Smash Bros.", "Battle a roster of characters in a platform fighting game."],
+                ["Funny Shooter 2", "Fight waves of unusual enemies in a colorful shooter."],
+                ["SUPERHOT", "Move through a stylized shooter where time follows your movement."],
+                ["Time Shooter 3 SWAT", "Use timing and movement to take on a SWAT-themed action level."],
+                ["Moto X3M", "Race a stunt bike through obstacle-filled tracks."],
+                ["Moto X3M Winter", "Ride a stunt bike across snowy tracks and jumps."],
+                ["Moto X3M Pool Party", "Perform bike stunts on sunny, obstacle-filled tracks."],
+                ["Moto X3M Spooky Land", "Race a stunt bike through spooky themed levels."],
+                ["OvO 2", "Run, jump, and slide through precision platforming levels."],
+                ["Paper.io", "Claim territory by drawing loops and protecting your trail."],
+                ["Pixel Shooter 1", "Jump into a pixel-art shooter and battle opponents."],
+                ["Please, Don’t Touch Anything", "Explore a puzzle box where every button may change things."],
+                ["Baseball Bros", "Play quick arcade baseball with big swings and fast rounds."],
+                ["Basketball Legends", "Compete in arcade basketball games with famous-style players."],
+                ["Basketball Stars", "Take on one-on-one basketball challenges and shoot for the win."],
+                ["Basket Bros", "Play fast basketball matches with arcade-style moves."],
+                ["BitLife", "Make choices and guide a character through a simulated life."],
+                ["Tunnel Rush", "Dodge obstacles as you speed through a colorful tunnel."],
+                ["Papa's Bakeria", "Take bakery orders and prepare customers' favorite pies."],
+                ["Papa's Burgeria", "Grill, stack, and serve burgers to hungry customers."],
+                ["Papa's Cheeseria", "Build toasted sandwiches and serve customers on time."],
+                ["Papa's Pancakeria", "Prepare pancakes and toppings to match each order."],
+                ["Papa's Sushiria", "Roll sushi and serve customers in a busy restaurant."],
+                ["Subway Surfers: San Francisco", "Dash through the city, dodge trains, and collect coins."],
+                ["Football Bros", "Play quick arcade football matches against a rival."],
+                ["Soccer Bros", "Compete in quick soccer matches with arcade-style controls."],
+                ["Wrestle Bros", "Wrestle opponents in energetic, physics-driven matches."],
+                ["Flappy Bird", "Tap to keep flying and weave through narrow gaps."]
+            ]);
             const allGamesGrid = document.querySelector("#all-games-grid");
             const renderGameCard = (game) => {
                 const card = document.createElement("a");
@@ -1343,10 +1441,11 @@
 
                 if (game.image) {
                     const image = document.createElement("img");
-                    image.src = game.image;
                     image.alt = "";
                     image.loading = "lazy";
                     image.decoding = "async";
+                    image.addEventListener("error", () => image.remove(), { once: true });
+                    image.src = game.image;
                     art.append(image);
                 } else {
                     const icon = document.createElement("span");
@@ -1359,10 +1458,19 @@
                 copy.className = "game-copy";
                 const title = document.createElement("strong");
                 title.textContent = game.name;
+                const description = document.createElement("p");
+                description.className = "game-description";
+                description.textContent = gameDescriptions.get(game.name);
+                const category = document.createElement("span");
+                category.className = "game-category";
+                category.textContent = game.category;
                 const playLabel = document.createElement("span");
                 playLabel.className = "play-label";
                 playLabel.textContent = "Play →";
-                copy.append(title, playLabel);
+                const info = document.createElement("span");
+                info.className = "game-info";
+                info.append(title, category, description);
+                copy.append(info, playLabel);
                 card.append(art, copy);
                 return card;
             };
@@ -1615,7 +1723,11 @@
 
                 allGameCards.forEach((gameCard) => {
                     const gameName = gameCard.querySelector("strong").textContent.trim().toLocaleLowerCase();
-                    const matchesQuery = gameName.includes(query);
+                    const gameDescription = gameCard.querySelector(".game-description").textContent.toLocaleLowerCase();
+                    const gameCategory = gameCard.dataset.category.toLocaleLowerCase();
+                    const matchesQuery = gameName.includes(query)
+                        || gameDescription.includes(query)
+                        || gameCategory.includes(query);
                     const matchesCategory = selectedCategory === "all" || gameCard.dataset.category === selectedCategory;
                     gameCard.hidden = !matchesQuery || !matchesCategory;
                     if (!gameCard.hidden) visibleCount += 1;
@@ -1671,17 +1783,20 @@
                         background: #183c36;
                         border-bottom: 3px solid #d2a85a;
                     }
-                    .player-heading { min-width: 0; }
+                    .player-heading { min-width: 0; flex: 1; }
                     .player-heading h1 {
                         overflow: hidden;
                         margin: 0;
                         font-size: 1rem;
                         text-overflow: ellipsis;
                         white-space: nowrap;
+                        transition: font-size 240ms ease;
                     }
+                    .player-heading.is-expanded h1 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
                     .player-status { margin: 4px 0 0; color: #d8e5dc; font-size: .8rem; }
                     .player-controls { display: flex; flex: 0 0 auto; gap: 8px; }
                     .player-controls button {
+                        min-height: 44px;
                         padding: 9px 12px;
                         color: #183c36;
                         font: inherit;
@@ -1751,6 +1866,7 @@
                     }
                     @media (prefers-reduced-motion: reduce) {
                         .loading-spinner, .loading-dots span { animation: none; }
+                        .player-heading h1 { transition: none; }
                     }
                 `;
                 gameWindow.document.head.append(playerStyles);
@@ -1807,23 +1923,17 @@
                 gameFrame.title = gameTitle;
                 gameFrame.allow = "autoplay; fullscreen; gamepad";
                 gameFrame.allowFullscreen = true;
-                const minimumLoadingTime = 2500;
-                const loadingStartedAt = performance.now();
                 gameFrame.addEventListener("load", () => {
-                    const remainingLoadingTime = Math.max(
-                        0,
-                        minimumLoadingTime - (performance.now() - loadingStartedAt)
-                    );
+                    loading.classList.add("is-hidden");
                     gameWindow.setTimeout(() => {
-                        loading.classList.add("is-hidden");
+                        loading.hidden = true;
+                        status.textContent = "Game loaded";
                         gameWindow.setTimeout(() => {
-                            loading.hidden = true;
-                            status.textContent = "Game loaded";
-                            gameWindow.setTimeout(() => {
-                                status.textContent = "";
-                            }, 2000);
-                        }, 280);
-                    }, remainingLoadingTime);
+                            status.textContent = "";
+                            status.hidden = true;
+                            heading.classList.add("is-expanded");
+                        }, 2000);
+                    }, 280);
                 });
                 stage.append(loading, gameFrame);
                 gameWindow.document.body.append(toolbar, stage);
