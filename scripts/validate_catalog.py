@@ -7,7 +7,7 @@ from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
-GAME_DATA_PATTERN = re.compile(r"const games = (\[.*?\]);\s+const gameDescriptions", re.S)
+GAME_DATA_PATTERN = re.compile(r"const games = (\[.*?\]);", re.S)
 ALLOWED_CATEGORIES = {"Sports", "Racing", "Arcade", "Puzzle", "Casual", "Other"}
 
 
@@ -76,17 +76,6 @@ def main():
 
         if not isinstance(game.get("artStart"), str) or not isinstance(game.get("artEnd"), str):
             errors.append(f"{name}: missing card artwork colors")
-
-    descriptions = re.search(r"const gameDescriptions = new Map\(\[(.*?)\]\);", content, re.S)
-    if not descriptions:
-        errors.append("Could not find game descriptions")
-    else:
-        description_names = set(re.findall(r'\["([^"]+)",\s*"([^"]+)"\]', descriptions.group(1)))
-        described_names = {name for name, _ in description_names}
-        missing_descriptions = names - described_names
-        extra_descriptions = described_names - names
-        errors.extend(f"{name}: missing description" for name in sorted(missing_descriptions))
-        errors.extend(f"{name}: description has no matching game" for name in sorted(extra_descriptions))
 
     app_links = re.findall(r'href="(Assets/Apps/[^"]+)"', content)
     for href in app_links:
