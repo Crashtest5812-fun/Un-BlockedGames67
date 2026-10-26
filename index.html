@@ -102,6 +102,19 @@
                 text-transform: uppercase;
             }
 
+            .version-badge {
+                display: inline-block;
+                margin-top: 8px;
+                padding: 4px 9px;
+                color: var(--header-color-start);
+                font-size: 0.72rem;
+                font-weight: 800;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                background: rgba(232, 199, 126, 0.95);
+                border-radius: 999px;
+            }
+
             main {
                 width: min(1200px, 100%);
                 margin: 0 auto;
@@ -805,6 +818,7 @@
             <div class="brand-copy">
                 <h1>Un-Blocked Games</h1>
                 <p>Play • Explore • Enjoy</p>
+                <span class="version-badge">v26.0.1</span>
             </div>
         </header>
         <div class="page-layout">
@@ -913,6 +927,7 @@
                 <section class="footer-section" aria-labelledby="footer-credits-heading">
                     <h2 id="footer-credits-heading">Credits</h2>
                     <p class="footer-credit">Made by: Adrian Virrueta &amp; Liam Soto</p>
+                    <p>Thank you to our BETA testers: Andrew Dave, Nathan Lepe, Adriana Mascorro, Brandon Oliver, Brandon Macias, Lucia Nanda, and Isabelle Swink.</p>
                 </section>
             </div>
         </footer>
@@ -1469,6 +1484,15 @@
                     "artStart": "#a8d4e8",
                     "artEnd": "#4f83a5",
                     "popular": 7
+                },
+                {
+                    "name": "Level Devil",
+                    "category": "Puzzle",
+                    "href": "Assets/Games/clleveldevil.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6TZXJV8u1bYlASf5YJPXtd75nnRUKbbrBXYO2mGNvuQ&s=10",
+                    "emoji": null,
+                    "artStart": "#f4b878",
+                    "artEnd": "#be593d"
                 }
             ];
             const gameRatings = new Map([
@@ -1531,7 +1555,8 @@
                 ["Flappy Bird", 4],
                 ["Harvest Simulator", 3],
                 ["Brotato", 5],
-                ["Poly Track", 4]
+                ["Poly Track", 4],
+                ["Level Devil", 5]
             ]);
             const allGamesGrid = document.querySelector("#all-games-grid");
             const renderGameCard = (game) => {
@@ -1755,7 +1780,15 @@
                 playClickSound();
             });
 
+            const pageTitle = document.title;
+            const favicon = document.querySelector('link[rel="icon"]');
+            const pageFavicon = favicon.getAttribute("href");
             document.addEventListener("visibilitychange", () => {
+                document.title = document.hidden ? "Home" : pageTitle;
+                favicon.setAttribute(
+                    "href",
+                    document.hidden ? "https://ssl.gstatic.com/classroom/favicon.png" : pageFavicon
+                );
                 if (musicEnabled) {
                     if (document.hidden) backgroundMusic.pause();
                     else playBackgroundMusic();
