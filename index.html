@@ -189,6 +189,237 @@
                 border-top: 4px solid var(--header-accent);
             }
 
+            .policy-dialog {
+                width: min(820px, calc(100% - 32px));
+                max-width: none;
+                max-height: min(90vh, 900px);
+                padding: clamp(20px, 4vw, 32px);
+                color: var(--page-text);
+                background: var(--surface-background);
+                border: 1px solid var(--surface-border);
+                border-top: 5px solid var(--header-accent);
+                border-radius: 20px;
+                box-shadow: 0 24px 80px rgb(0 0 0 / 40%);
+            }
+
+            .policy-dialog::backdrop {
+                background: rgb(9 17 14 / 78%);
+                backdrop-filter: blur(3px);
+            }
+
+            .policy-dialog h2 {
+                margin: 0 0 6px;
+                color: var(--heading-color);
+                font-size: clamp(1.5rem, 3vw, 2rem);
+                letter-spacing: -0.025em;
+            }
+
+            .policy-intro,
+            .policy-instructions {
+                color: var(--muted-color);
+                line-height: 1.5;
+            }
+
+            .policy-intro {
+                margin: 0;
+                font-size: 1rem;
+            }
+
+            .policy-instructions {
+                margin: 8px 0 18px;
+                font-size: 0.9rem;
+            }
+
+            .policy-document {
+                max-height: 26vh;
+                overflow: auto;
+                margin-top: 12px;
+                padding: clamp(16px, 3vw, 22px);
+                color: var(--page-text);
+                line-height: 1.6;
+                background: var(--control-background);
+                border: 1px solid var(--control-border);
+                border-radius: 14px;
+                overscroll-behavior: contain;
+                scrollbar-color: var(--focus-color) var(--surface-background);
+            }
+
+            .policy-document h3 {
+                position: sticky;
+                top: calc(-1 * clamp(16px, 3vw, 22px));
+                z-index: 1;
+                margin: calc(-1 * clamp(16px, 3vw, 22px)) calc(-1 * clamp(16px, 3vw, 22px)) 16px;
+                padding: 14px clamp(16px, 3vw, 22px);
+                color: var(--heading-color);
+                font-size: 1.08rem;
+                background: var(--surface-background);
+                border-bottom: 1px solid var(--surface-border);
+            }
+
+            .policy-document h4 {
+                margin: 20px 0 7px;
+                color: var(--heading-color);
+                font-size: 0.98rem;
+                line-height: 1.4;
+            }
+
+            .policy-document h4:first-of-type {
+                margin-top: 0;
+            }
+
+            .policy-document p {
+                margin: 8px 0;
+            }
+
+            .policy-document ul {
+                display: grid;
+                gap: 8px;
+                margin: 8px 0 14px;
+                padding-left: 22px;
+            }
+
+            .policy-document li {
+                padding-left: 3px;
+            }
+
+            .policy-document li::marker {
+                color: var(--header-accent);
+            }
+
+            .policy-document .policy-effective-date {
+                display: inline-block;
+                margin: 0 0 14px;
+                padding: 4px 10px;
+                color: var(--heading-color);
+                font-size: 0.82rem;
+                font-weight: 700;
+                background: rgb(40 89 77 / 10%);
+                border-radius: 999px;
+            }
+
+            .policy-document > :last-child {
+                margin-bottom: 0;
+            }
+
+            :root[data-theme="dark"] .policy-document .policy-effective-date {
+                background: rgb(196 225 206 / 10%);
+            }
+
+            .policy-consent {
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                margin-top: 18px;
+                line-height: 1.5;
+            }
+
+            .policy-email-field {
+                display: grid;
+                gap: 7px;
+                margin-top: 18px;
+                font-weight: 700;
+            }
+
+            .policy-email-field input {
+                width: 100%;
+                min-height: 46px;
+                padding: 11px 12px;
+                color: var(--page-text);
+                font: inherit;
+                font-weight: 400;
+                background: var(--control-background);
+                border: 1px solid var(--control-border);
+                border-radius: 9px;
+            }
+
+            .policy-email-field input:focus-visible {
+                outline: 3px solid var(--focus-color);
+                outline-offset: 3px;
+            }
+
+            .policy-email-hint {
+                margin: 0;
+                color: var(--muted-color);
+                font-size: 0.88rem;
+                font-weight: 400;
+                line-height: 1.5;
+            }
+
+            .policy-consent input {
+                width: 20px;
+                height: 20px;
+                flex: 0 0 auto;
+                margin: 1px 0 0;
+                accent-color: var(--focus-color);
+            }
+
+            .policy-consent input:focus-visible,
+            .policy-accept:focus-visible {
+                outline: 3px solid var(--focus-color);
+                outline-offset: 3px;
+            }
+
+            .policy-progress {
+                min-height: 1.4em;
+                margin: 8px 0;
+                color: var(--muted-color);
+                font-size: 0.9rem;
+            }
+
+            .policy-error {
+                margin: 12px 0 0;
+                color: #a32121;
+                font-weight: 700;
+            }
+
+            :root[data-theme="dark"] .policy-error {
+                color: #ff9a9a;
+            }
+
+            .policy-actions {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 18px;
+            }
+
+            .policy-accept {
+                min-height: 46px;
+                padding: 11px 18px;
+                color: var(--header-text);
+                font: inherit;
+                font-weight: 700;
+                background: var(--header-color-end);
+                border: 0;
+                border-radius: 9px;
+                cursor: pointer;
+            }
+
+            .policy-accept:disabled {
+                opacity: 0.55;
+                cursor: not-allowed;
+            }
+
+            @media (max-width: 520px) {
+                .policy-dialog {
+                    max-height: 94vh;
+                    padding: 18px;
+                    border-radius: 14px;
+                }
+
+                .policy-document {
+                    max-height: 23vh;
+                    margin-top: 10px;
+                    padding: 14px;
+                    border-radius: 11px;
+                }
+
+                .policy-document h3 {
+                    top: -14px;
+                    margin: -14px -14px 12px;
+                    padding: 12px 14px;
+                }
+            }
+
             .footer-content {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -922,6 +1153,84 @@
             </section>
             </main>
         </div>
+        <dialog class="policy-dialog" id="policy-dialog" aria-labelledby="policy-heading" aria-describedby="policy-instructions">
+            <h2 id="policy-heading">Please review our policies</h2>
+            <p class="policy-intro">Read both documents to the end and confirm that you agree before using the site.</p>
+            <p class="policy-instructions" id="policy-instructions">Scroll each document all the way to the bottom. You must review both documents before the confirmation option becomes available.</p>
+            <section class="policy-document" id="terms-document" tabindex="0" aria-labelledby="terms-heading">
+                <h3 id="terms-heading">Terms of Service</h3>
+                <p class="policy-effective-date">Effective October 27, 2026</p>
+                <h4>1. Acceptance of Terms</h4>
+                <p>By accessing, browsing, or using Unblocked Games 67, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you must discontinue your use of the website immediately.</p>
+                <h4>2. Description of Service</h4>
+                <p>Unblocked Games 67 provides a collection of free, browser-based casual, action, racing, and multiplayer games intended for casual entertainment. The service is provided "as is" and "as available" without warranties of any kind.</p>
+                <h4>3. Acceptable Use and Classroom/Network Policies</h4>
+                <ul>
+                    <li><strong>No Interference:</strong> You agree not to disrupt, overload, or compromise the functionality of the website or the network infrastructure it is accessed through.</li>
+                    <li><strong>School and Institutional Rules:</strong> While the platform aims to provide accessible browser games, you are solely responsible for complying with your local school, library, or workplace acceptable use policies (AUP). We are not responsible for any disciplinary actions, detentions, or network restrictions resulting from your use of this site during school or work hours.</li>
+                </ul>
+                <h4>4. Third-Party Content and External Links</h4>
+                <ul>
+                    <li><strong>Embedded Games:</strong> Many games hosted or linked on Unblocked Games 67 belong to third-party developers, creators, or external platforms (such as FreezeNova or other web game providers). We do not claim ownership over third-party source codes or intellectual property unless explicitly stated.</li>
+                    <li><strong>Advertisements and Redirects:</strong> Unblocked games websites may feature third-party advertisements, pop-ups, or external links. We do not endorse, control, or take responsibility for the content, privacy policies, or security of third-party websites or ad networks. Use caution and avoid clicking deceptive links or downloading unverified files.</li>
+                </ul>
+                <h4>5. Disclaimer of Warranties and Limitation of Liability</h4>
+                <ul>
+                    <li><strong>No Guarantee of Uptime:</strong> We do not guarantee that the website will be uninterrupted, error-free, or permanently accessible, as network administrators or hosting providers may restrict access at any time.</li>
+                    <li><strong>No Liability for Damages:</strong> Under no circumstances shall the operators of Unblocked Games 67 be liable for any direct, indirect, incidental, or consequential damages arising out of your use of or inability to use the website, including loss of data or school/work penalties.</li>
+                </ul>
+                <h4>6. Changes to the Terms</h4>
+                <p>We reserve the right to modify or update these Terms of Service at any time without prior notice. Continued use of the website after any modifications indicates your acceptance of the updated terms.</p>
+                <h4>7. Contact</h4>
+                <p>If you have any questions or concerns regarding these Terms of Service, you may reach out through the site's administrator contact or support channel.</p>
+            </section>
+            <section class="policy-document" id="confidentiality-document" tabindex="0" aria-labelledby="confidentiality-heading">
+                <h3 id="confidentiality-heading">Confidentiality Policy</h3>
+                <p class="policy-effective-date">Effective October 27, 2026</p>
+                <p>Welcome to our Unblocked Games website. We value the privacy of our contributors and users. This Confidentiality Policy explains how we collect, protect, and handle your information when you request access to share games on our platform.</p>
+                <h4>1. Information We Collect</h4>
+                <p>To maintain a safe and high-quality sharing environment, we require contributors to request access before publishing content.</p>
+                <ul>
+                    <li><strong>Email Address:</strong> We collect your email address when you submit a request for sharing access.</li>
+                    <li><strong>Game Submission Details:</strong> Any metadata, files, links, or communication sent alongside your request.</li>
+                </ul>
+                <h4>2. How We Use Your Information</h4>
+                <p>We strictly limit the use of your data. Your email and submission details are used solely to:</p>
+                <ul>
+                    <li>Verify and review your request for sharing access.</li>
+                    <li>Communicate with you regarding your submission status or technical issues.</li>
+                    <li>Maintain the security and integrity of our website.</li>
+                </ul>
+                <h4>3. Confidentiality and Data Protection</h4>
+                <p>We treat your personal information with strict confidentiality.</p>
+                <ul>
+                    <li><strong>No Selling or Sharing:</strong> We will never sell, rent, or trade your email address or personal details to third-party marketers or advertisers.</li>
+                    <li><strong>Internal Access Only:</strong> Access to your email and submission data is restricted to authorized site administrators who need it to review content.</li>
+                    <li><strong>Data Security:</strong> We implement standard security measures to protect your email address from unauthorized access, alteration, or disclosure.</li>
+                </ul>
+                <h4>4. Publicly Shared Content</h4>
+                <p>Please note that while your email address remains strictly confidential, any games, titles, descriptions, or developer names you explicitly choose to make public will be visible to all users visiting the website once approved.</p>
+                <h4>5. Data Retention and Deletion</h4>
+                <p>We keep your email on file as long as you maintain sharing access on our platform. If you wish to revoke your access and have your email permanently deleted from our records, please contact us through our official support channels.</p>
+                <h4>6. Updates to This Policy</h4>
+                <p>We may update this policy occasionally to reflect changes in our site features or legal requirements. The "Effective Date" at the top will be updated accordingly.</p>
+            </section>
+            <p class="policy-progress" id="policy-progress" role="status" aria-live="polite"></p>
+            <label class="policy-email-field" for="policy-email">
+                C-VUSD email address
+                <input id="policy-email" type="email" autocomplete="email" inputmode="email" required aria-describedby="policy-email-hint policy-email-status">
+            </label>
+            <p class="policy-email-hint" id="policy-email-hint">Enter a valid address ending in @c-vusd.org. After agreeing, continue to the Google Form to record your verified school email.</p>
+            <p class="policy-progress" id="policy-email-status" role="status" aria-live="polite"></p>
+            <label class="policy-consent">
+                <input id="policy-consent" type="checkbox" disabled>
+                <span>I have read and agree to the Terms of Service and Confidentiality Policy.</span>
+            </label>
+            <p class="policy-error" id="policy-error" role="alert" hidden></p>
+            <div class="policy-actions">
+                <button class="policy-accept" id="policy-accept" type="button" disabled>Agree and continue</button>
+            </div>
+        </dialog>
         <footer class="site-footer">
             <div class="footer-content">
                 <section class="footer-section" aria-labelledby="footer-contact-heading">
@@ -953,6 +1262,70 @@
             </div>
         </footer>
         <script>
+            const policyDialog = document.querySelector("#policy-dialog");
+            const policyDocuments = [...document.querySelectorAll(".policy-document")];
+            const policyProgress = document.querySelector("#policy-progress");
+            const policyConsent = document.querySelector("#policy-consent");
+            const policyAccept = document.querySelector("#policy-accept");
+            const policyError = document.querySelector("#policy-error");
+            const policyEmail = document.querySelector("#policy-email");
+            const policyEmailStatus = document.querySelector("#policy-email-status");
+            const policyStorageKey = "unblockedgames-policies-accepted-v2";
+            const policyFormUrl = "https://forms.gle/ehshJREYLCBgxEB89";
+            const policiesRead = new Set();
+            let policyAcceptanceStored = false;
+
+            const updatePolicyProgress = () => {
+                policyProgress.textContent = `${policiesRead.size} of ${policyDocuments.length} documents read.`;
+                policyConsent.disabled = policiesRead.size !== policyDocuments.length;
+                const emailIsAllowed = policyEmail.validity.valid && policyEmail.value.trim().toLowerCase().endsWith("@c-vusd.org");
+                policyAccept.disabled = !policyConsent.checked || policiesRead.size !== policyDocuments.length || !emailIsAllowed;
+                policyEmailStatus.textContent = !policyEmail.value
+                    ? "A C-VUSD email is required to continue."
+                    : emailIsAllowed
+                        ? "C-VUSD email format accepted. Your verified account email will be recorded by Google Forms."
+                        : "Enter a valid email address ending in @c-vusd.org.";
+            };
+
+            const markPolicyRead = (documentSection) => {
+                const hasReachedEnd = documentSection.scrollTop + documentSection.clientHeight >= documentSection.scrollHeight - 2;
+                if (hasReachedEnd) policiesRead.add(documentSection.id);
+                updatePolicyProgress();
+            };
+
+            policyDocuments.forEach((documentSection) => {
+                documentSection.addEventListener("scroll", () => markPolicyRead(documentSection));
+                markPolicyRead(documentSection);
+            });
+
+            policyConsent.addEventListener("change", updatePolicyProgress);
+            policyEmail.addEventListener("input", updatePolicyProgress);
+            policyDialog.addEventListener("cancel", (event) => event.preventDefault());
+            policyAccept.addEventListener("click", () => {
+                const emailIsAllowed = policyEmail.validity.valid && policyEmail.value.trim().toLowerCase().endsWith("@c-vusd.org");
+                if (policiesRead.size !== policyDocuments.length || !policyConsent.checked || !emailIsAllowed) return;
+
+                try {
+                    localStorage.setItem(policyStorageKey, "true");
+                    policyAcceptanceStored = true;
+                } catch (error) {
+                    console.error("Could not save policy acceptance.", error);
+                    policyError.textContent = "Your agreement could not be saved in this browser. Check your browser storage settings and try again.";
+                    policyError.hidden = false;
+                    return;
+                }
+
+                window.location.assign(policyFormUrl);
+            });
+
+            try {
+                policyAcceptanceStored = localStorage.getItem(policyStorageKey) === "true";
+            } catch (error) {
+                console.error("Could not load policy acceptance.", error);
+            }
+
+            if (!policyAcceptanceStored) policyDialog.showModal();
+
             const games = [
                 {
                     "name": "People Playground",
