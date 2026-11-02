@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Un-Blocked Games</title>
+        <title>Un-Blocked Games 67</title>
         <link rel="icon" type="image/png" href="https://freepngimg.com/thumb/letter/130045-c-letter-png-image-high-quality.png">
         <style>
             :root {
@@ -57,6 +57,8 @@
             }
 
             header {
+                position: relative;
+                z-index: 10;
                 display: flex;
                 align-items: center;
                 gap: 16px;
@@ -65,6 +67,132 @@
                 background: linear-gradient(115deg, var(--header-color-start), var(--header-color-end));
                 border-bottom: 4px solid var(--header-accent);
                 box-shadow: 0 4px 14px rgb(28 43 36 / 18%);
+            }
+
+            .menu-toggle {
+                display: grid;
+                width: 48px;
+                height: 48px;
+                flex: 0 0 48px;
+                place-content: center;
+                gap: 5px;
+                margin-left: auto;
+                padding: 10px;
+                color: var(--header-text);
+                background: transparent;
+                border: 1px solid rgb(248 246 237 / 45%);
+                border-radius: 10px;
+                cursor: pointer;
+            }
+
+            .menu-toggle:hover {
+                background: rgb(248 246 237 / 12%);
+            }
+
+            .menu-toggle:focus-visible {
+                outline: 3px solid var(--header-accent);
+                outline-offset: 3px;
+            }
+
+            .menu-toggle span {
+                display: block;
+                width: 24px;
+                height: 2px;
+                background: currentColor;
+                transition: transform 160ms ease, opacity 160ms ease;
+            }
+
+            .menu-toggle[aria-expanded="true"] span:first-child {
+                transform: translateY(7px) rotate(45deg);
+            }
+
+            .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle[aria-expanded="true"] span:last-child {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+
+            .site-menu-panel {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 24px;
+                max-height: calc(100vh - 140px);
+                max-height: calc(100dvh - 140px);
+                overflow-y: auto;
+                padding: 24px clamp(20px, 6vw, 72px) 28px;
+                color: var(--page-text);
+                background: var(--surface-background);
+                border-bottom: 1px solid var(--surface-border);
+                box-shadow: 0 12px 24px rgb(0 0 0 / 22%);
+            }
+
+            .site-menu-panel[hidden] {
+                display: none;
+            }
+
+            .site-menu-category h2 {
+                margin: 0 0 8px;
+                color: var(--muted-color);
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
+
+            .site-menu-favorites {
+                grid-column: 1 / -1;
+                width: min(100%, 600px);
+                padding-top: 18px;
+                border-top: 1px solid var(--surface-border);
+            }
+
+            .site-menu-links {
+                display: grid;
+                gap: 4px;
+            }
+
+            .site-menu-links a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                padding: 10px 12px;
+                color: var(--page-text);
+                font-weight: 700;
+                text-decoration: none;
+                border-radius: 9px;
+                transition: background-color 150ms ease, color 150ms ease;
+            }
+
+            .site-menu-links a:hover {
+                color: var(--heading-color);
+                background: rgb(40 89 77 / 10%);
+            }
+
+            .site-menu-links a:focus-visible {
+                outline: 3px solid var(--focus-color);
+                outline-offset: 2px;
+            }
+
+            .site-menu-favorites .favorites-list {
+                grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 280px));
+                gap: 6px 12px;
+            }
+
+            .site-menu-favorites .favorites-list a {
+                width: 100%;
+                min-height: 44px;
+                overflow: visible;
+                white-space: normal;
+                overflow-wrap: break-word;
+            }
+
+            .site-menu-favorites .favorites-empty {
+                margin: 0;
             }
 
             .brand-mark {
@@ -313,38 +441,6 @@
                 line-height: 1.5;
             }
 
-            .policy-email-field {
-                display: grid;
-                gap: 7px;
-                margin-top: 18px;
-                font-weight: 700;
-            }
-
-            .policy-email-field input {
-                width: 100%;
-                min-height: 46px;
-                padding: 11px 12px;
-                color: var(--page-text);
-                font: inherit;
-                font-weight: 400;
-                background: var(--control-background);
-                border: 1px solid var(--control-border);
-                border-radius: 9px;
-            }
-
-            .policy-email-field input:focus-visible {
-                outline: 3px solid var(--focus-color);
-                outline-offset: 3px;
-            }
-
-            .policy-email-hint {
-                margin: 0;
-                color: var(--muted-color);
-                font-size: 0.88rem;
-                font-weight: 400;
-                line-height: 1.5;
-            }
-
             .policy-consent input {
                 width: 20px;
                 height: 20px;
@@ -380,127 +476,6 @@
                 display: flex;
                 justify-content: flex-end;
                 margin-top: 18px;
-            }
-
-            .policy-owner-skip {
-                margin-top: 18px;
-                padding-top: 14px;
-                border-top: 1px solid var(--surface-border);
-            }
-
-            .policy-owner-skip summary {
-                width: fit-content;
-                color: var(--muted-color);
-                font-size: 0.9rem;
-                font-weight: 700;
-                cursor: pointer;
-            }
-
-            .policy-owner-skip summary:focus-visible {
-                outline: 3px solid var(--focus-color);
-                outline-offset: 4px;
-                border-radius: 2px;
-            }
-
-            .policy-owner-skip-copy {
-                margin: 10px 0;
-                color: var(--muted-color);
-                font-size: 0.86rem;
-                line-height: 1.5;
-            }
-
-            .policy-owner-skip label {
-                display: grid;
-                gap: 7px;
-                font-size: 0.9rem;
-                font-weight: 700;
-            }
-
-            .policy-owner-skip input {
-                width: 100%;
-                min-height: 44px;
-                padding: 10px 12px;
-                color: var(--page-text);
-                font: inherit;
-                background: var(--control-background);
-                border: 1px solid var(--control-border);
-                border-radius: 9px;
-            }
-
-            .policy-owner-skip input:focus-visible {
-                outline: 3px solid var(--focus-color);
-                outline-offset: 3px;
-            }
-
-            .policy-owner-skip button {
-                min-height: 42px;
-                margin-top: 10px;
-                padding: 9px 14px;
-                color: var(--page-text);
-                font: inherit;
-                font-weight: 700;
-                background: var(--control-background);
-                border: 1px solid var(--control-border);
-                border-radius: 9px;
-                cursor: pointer;
-            }
-
-            .policy-owner-skip button:hover {
-                border-color: var(--focus-color);
-            }
-
-            .policy-owner-skip button:focus-visible {
-                outline: 3px solid var(--focus-color);
-                outline-offset: 3px;
-            }
-
-            .policy-owner-skip button:disabled {
-                opacity: 0.55;
-                cursor: not-allowed;
-            }
-
-            .policy-owner-status {
-                min-height: 1.4em;
-                margin: 8px 0 0;
-                color: var(--muted-color);
-                font-size: 0.86rem;
-                line-height: 1.5;
-            }
-
-            .policy-owner-setup {
-                margin-top: 16px;
-                padding-top: 14px;
-                border-top: 1px solid var(--surface-border);
-            }
-
-            .policy-owner-setup h3 {
-                margin: 0 0 6px;
-                color: var(--heading-color);
-                font-size: 0.95rem;
-            }
-
-            .policy-owner-setup-copy {
-                margin: 0 0 10px;
-                color: var(--muted-color);
-                font-size: 0.86rem;
-                line-height: 1.5;
-            }
-
-            .policy-owner-digest {
-                display: block;
-                width: 100%;
-                min-height: 66px;
-                margin-top: 10px;
-                padding: 10px;
-                color: var(--page-text);
-                font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-                font-size: 0.78rem;
-                overflow-wrap: anywhere;
-                white-space: pre-wrap;
-                background: var(--control-background);
-                border: 1px solid var(--control-border);
-                border-radius: 9px;
-                user-select: all;
             }
 
             .policy-accept {
@@ -633,35 +608,80 @@
                 text-transform: uppercase;
             }
 
-            .side-menu nav {
+            .player-profile,
+            .recent-games {
+                min-width: 0;
+            }
+
+            .player-profile-description,
+            .player-profile-status {
+                margin: 0 10px 10px;
+                color: var(--muted-color);
+                font-size: 0.82rem;
+                line-height: 1.45;
+            }
+
+            .player-profile-form {
                 display: grid;
-                gap: 5px;
+                gap: 8px;
+                padding: 0 10px;
             }
 
-            .side-menu nav a {
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-                padding: 10px;
+            .player-profile-form label,
+            .player-profile-name {
                 color: var(--page-text);
+                font-size: 0.86rem;
                 font-weight: 700;
-                text-decoration: none;
-                border-radius: 9px;
-                transition: background-color 150ms ease, color 150ms ease;
             }
 
-            .side-menu nav a:hover {
-                color: var(--heading-color);
-                background: rgb(40 89 77 / 10%);
+            .player-profile-form input {
+                width: 100%;
+                min-height: 42px;
+                padding: 9px 10px;
+                color: var(--page-text);
+                font: inherit;
+                background: var(--control-background);
+                border: 1px solid var(--control-border);
+                border-radius: 8px;
             }
 
-            .side-menu nav a:focus-visible {
+            .player-profile-form input:focus-visible,
+            .player-profile-form button:focus-visible,
+            .player-profile-logout:focus-visible {
                 outline: 3px solid var(--focus-color);
                 outline-offset: 3px;
             }
 
-            .recent-games {
-                min-width: 0;
+            .player-profile-form button,
+            .player-profile-logout {
+                min-height: 42px;
+                padding: 9px 10px;
+                color: var(--header-text);
+                font: inherit;
+                font-weight: 700;
+                background: var(--header-color-end);
+                border: 0;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+
+            .player-profile-name {
+                margin: 0 10px 8px;
+                overflow-wrap: anywhere;
+            }
+
+            .player-profile-logout {
+                width: calc(100% - 20px);
+                margin: 0 10px;
+                color: var(--page-text);
+                background: var(--control-background);
+                border: 1px solid var(--control-border);
+            }
+
+            .player-profile-form[hidden],
+            .player-profile-logout[hidden],
+            .player-profile-name[hidden] {
+                display: none;
             }
 
             .recent-games-list {
@@ -698,6 +718,46 @@
             }
 
             .recent-games-empty {
+                margin: 0 10px;
+                color: var(--muted-color);
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            .favorites-list {
+                display: grid;
+                gap: 5px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .favorites-list a {
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+                overflow: hidden;
+                padding: 8px 10px;
+                color: var(--page-text);
+                font-size: 0.9rem;
+                font-weight: 700;
+                text-decoration: none;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                border-radius: 9px;
+            }
+
+            .favorites-list a:hover {
+                color: var(--heading-color);
+                background: rgb(40 89 77 / 10%);
+            }
+
+            .favorites-list a:focus-visible {
+                outline: 3px solid var(--focus-color);
+                outline-offset: 3px;
+            }
+
+            .favorites-empty {
                 margin: 0 10px;
                 color: var(--muted-color);
                 font-size: 0.85rem;
@@ -902,18 +962,78 @@
             }
 
             .game-card {
+                position: relative;
                 display: flex;
                 min-width: 0;
                 flex-direction: column;
                 overflow: hidden;
                 color: var(--page-text);
-                text-decoration: none;
                 background: var(--surface-background);
                 border: 1px solid var(--surface-border);
                 border-radius: 14px;
                 box-shadow: 0 4px 12px rgb(28 43 36 / 10%);
                 transition: transform 160ms ease, box-shadow 160ms ease;
                 animation: card-enter 460ms cubic-bezier(.2, .75, .3, 1) backwards;
+            }
+
+            .game-open-link {
+                display: flex;
+                min-width: 0;
+                flex: 1;
+                flex-direction: column;
+                color: inherit;
+                text-decoration: none;
+                border-radius: inherit;
+            }
+
+            .game-open-link:focus-visible {
+                outline: 3px solid var(--focus-color);
+                outline-offset: -4px;
+            }
+
+            .favorite-toggle {
+                position: absolute;
+                z-index: 1;
+                top: 10px;
+                right: 10px;
+                min-width: 42px;
+                min-height: 42px;
+                padding: 8px 10px;
+                color: #183c36;
+                font: inherit;
+                font-size: 1.2rem;
+                line-height: 1;
+                background: #f8f6ed;
+                border: 1px solid rgb(24 60 54 / 22%);
+                border-radius: 999px;
+                box-shadow: 0 2px 8px rgb(0 0 0 / 18%);
+                cursor: pointer;
+            }
+
+            .favorite-toggle[aria-pressed="true"] {
+                color: #7d351f;
+                background: #ffe4a8;
+            }
+
+            :root[data-theme="dark"] .favorite-toggle {
+                color: #e8eee9;
+                background: #202b28;
+                border-color: rgb(208 225 214 / 24%);
+            }
+
+            :root[data-theme="dark"] .favorite-toggle[aria-pressed="true"] {
+                color: #211a0d;
+                background: #e8c77e;
+            }
+
+            .favorite-toggle:focus-visible {
+                outline: 3px solid var(--focus-color);
+                outline-offset: 3px;
+            }
+
+            .favorite-toggle:disabled {
+                opacity: 0.8;
+                cursor: not-allowed;
             }
 
             .game-card:nth-child(4n + 1) {
@@ -1077,6 +1197,11 @@
             }
 
             @media (max-width: 760px) {
+                .site-menu-panel {
+                    grid-template-columns: minmax(0, 1fr);
+                    gap: 18px;
+                }
+
                 .footer-content {
                     grid-template-columns: repeat(2, minmax(0, 1fr));
                     gap: 26px 20px;
@@ -1098,22 +1223,11 @@
                     padding: 10px;
                 }
 
-                .side-menu-label {
-                    display: none;
-                }
-
-                .side-menu nav {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 3px;
-                }
-
-                .side-menu nav a {
-                    padding: 9px;
-                    font-size: 0.9rem;
-                }
-
                 .recent-games {
+                    flex: 1 0 100%;
+                }
+
+                .player-profile {
                     flex: 1 0 100%;
                 }
 
@@ -1136,16 +1250,12 @@
 
             @media (max-width: 420px) {
                 header {
-                    flex-wrap: wrap;
+                    flex-wrap: nowrap;
                 }
 
                 .side-menu {
                     align-items: stretch;
                     flex-direction: column;
-                }
-
-                .side-menu nav {
-                    justify-content: space-between;
                 }
 
                 .theme-toggle {
@@ -1180,26 +1290,60 @@
                 <img src="https://freepngimg.com/thumb/letter/130045-c-letter-png-image-high-quality.png" alt="">
             </div>
             <div class="brand-copy">
-                <h1>Un-Blocked Games</h1>
+                <h1>Un-Blocked Games 67</h1>
                 <p>Play • Explore • Enjoy</p>
                 <span class="version-badge">v26.1.1</span>
             </div>
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu-panel">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+            <nav class="site-menu-panel" id="site-menu-panel" aria-label="Main navigation" hidden>
+                <section class="site-menu-category" aria-labelledby="menu-games-heading">
+                    <h2 id="menu-games-heading">Games</h2>
+                    <div class="site-menu-links">
+                        <a href="#games">Popular games</a>
+                        <a href="#all-games">All games</a>
+                    </div>
+                </section>
+                <section class="site-menu-category" aria-labelledby="menu-discover-heading">
+                    <h2 id="menu-discover-heading">Discover</h2>
+                    <div class="site-menu-links">
+                        <a href="#apps">Apps</a>
+                    </div>
+                </section>
+                <section class="site-menu-category" aria-labelledby="menu-community-heading">
+                    <h2 id="menu-community-heading">Community</h2>
+                    <div class="site-menu-links">
+                        <a href="#beta-test">BETA test program</a>
+                        <a href="#request-game">Request a game</a>
+                    </div>
+                </section>
+                <section class="site-menu-category site-menu-favorites" aria-labelledby="menu-favorites-heading">
+                    <h2 id="menu-favorites-heading">Favorites</h2>
+                    <p class="favorites-empty" id="favorites-empty">Log in to save favorites.</p>
+                    <ol class="favorites-list" id="favorites-list" aria-label="Favorite games" aria-live="polite"></ol>
+                </section>
+            </nav>
         </header>
         <div class="page-layout">
             <aside class="side-menu" aria-label="Site menu">
-                <div>
-                    <p class="side-menu-label">Explore</p>
-                    <nav aria-label="Main navigation">
-                        <a href="#games">Popular games</a>
-                        <a href="#all-games">All games</a>
-                        <a href="#apps">Apps</a>
-                        <a href="#beta-test">BETA test program</a>
-                        <a href="#request-game">Request a game</a>
-                    </nav>
-                </div>
+                <section class="player-profile" aria-labelledby="player-profile-heading">
+                    <p class="side-menu-label" id="player-profile-heading">Player profile</p>
+                    <p class="player-profile-description">A local nickname, not a secure account.</p>
+                    <form class="player-profile-form" id="player-profile-form">
+                        <label for="player-nickname">Nickname</label>
+                        <input id="player-nickname" type="text" maxlength="24" autocomplete="nickname" required>
+                        <button type="submit">Log in</button>
+                    </form>
+                    <p class="player-profile-name" id="player-profile-name" hidden></p>
+                    <button class="player-profile-logout" id="player-profile-logout" type="button" hidden>Log out</button>
+                    <p class="player-profile-status" id="player-profile-status" role="status" aria-live="polite"></p>
+                </section>
                 <section class="recent-games" aria-labelledby="recent-games-heading">
                     <p class="side-menu-label" id="recent-games-heading">Jump back in</p>
-                    <p class="recent-games-empty" id="recent-games-empty">Your recently opened games will appear here.</p>
+                    <p class="recent-games-empty" id="recent-games-empty">Recently played games appear here.</p>
                     <ol class="recent-games-list" id="recent-games-list" aria-label="Five most recently opened games" aria-live="polite"></ol>
                 </section>
                 <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">
@@ -1276,15 +1420,15 @@
         </div>
         <dialog class="policy-dialog" id="policy-dialog" aria-labelledby="policy-heading" aria-describedby="policy-instructions">
             <h2 id="policy-heading">Please review our policies</h2>
-            <p class="policy-intro">Read both documents to the end and confirm that you agree before using the site.</p>
+            <p class="policy-intro">Read both documents to the end and confirm that you agree before continuing to the school form.</p>
             <p class="policy-instructions" id="policy-instructions">Scroll each document all the way to the bottom. You must review both documents before the confirmation option becomes available.</p>
             <section class="policy-document" id="terms-document" tabindex="0" aria-labelledby="terms-heading">
                 <h3 id="terms-heading">Terms of Service</h3>
                 <p class="policy-effective-date">Effective October 27, 2026</p>
                 <h4>1. Acceptance of Terms</h4>
-                <p>By accessing, browsing, or using Unblocked Games 67, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you must discontinue your use of the website immediately.</p>
+                <p>By accessing, browsing, or using Un-Blocked Games 67, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you must discontinue your use of the website immediately.</p>
                 <h4>2. Description of Service</h4>
-                <p>Unblocked Games 67 provides a collection of free, browser-based casual, action, racing, and multiplayer games intended for casual entertainment. The service is provided "as is" and "as available" without warranties of any kind.</p>
+                <p>Un-Blocked Games 67 provides a collection of free, browser-based casual, action, racing, and multiplayer games intended for casual entertainment. The service is provided "as is" and "as available" without warranties of any kind.</p>
                 <h4>3. Acceptable Use and Classroom/Network Policies</h4>
                 <ul>
                     <li><strong>No Interference:</strong> You agree not to disrupt, overload, or compromise the functionality of the website or the network infrastructure it is accessed through.</li>
@@ -1292,13 +1436,13 @@
                 </ul>
                 <h4>4. Third-Party Content and External Links</h4>
                 <ul>
-                    <li><strong>Embedded Games:</strong> Many games hosted or linked on Unblocked Games 67 belong to third-party developers, creators, or external platforms (such as FreezeNova or other web game providers). We do not claim ownership over third-party source codes or intellectual property unless explicitly stated.</li>
+                    <li><strong>Embedded Games:</strong> Many games hosted or linked on Un-Blocked Games 67 belong to third-party developers, creators, or external platforms (such as FreezeNova or other web game providers). We do not claim ownership over third-party source codes or intellectual property unless explicitly stated.</li>
                     <li><strong>Advertisements and Redirects:</strong> Unblocked games websites may feature third-party advertisements, pop-ups, or external links. We do not endorse, control, or take responsibility for the content, privacy policies, or security of third-party websites or ad networks. Use caution and avoid clicking deceptive links or downloading unverified files.</li>
                 </ul>
                 <h4>5. Disclaimer of Warranties and Limitation of Liability</h4>
                 <ul>
                     <li><strong>No Guarantee of Uptime:</strong> We do not guarantee that the website will be uninterrupted, error-free, or permanently accessible, as network administrators or hosting providers may restrict access at any time.</li>
-                    <li><strong>No Liability for Damages:</strong> Under no circumstances shall the operators of Unblocked Games 67 be liable for any direct, indirect, incidental, or consequential damages arising out of your use of or inability to use the website, including loss of data or school/work penalties.</li>
+                    <li><strong>No Liability for Damages:</strong> Under no circumstances shall the operators of Un-Blocked Games 67 be liable for any direct, indirect, incidental, or consequential damages arising out of your use of or inability to use the website, including loss of data or school/work penalties.</li>
                 </ul>
                 <h4>6. Changes to the Terms</h4>
                 <p>We reserve the right to modify or update these Terms of Service at any time without prior notice. Continued use of the website after any modifications indicates your acceptance of the updated terms.</p>
@@ -1308,7 +1452,7 @@
             <section class="policy-document" id="confidentiality-document" tabindex="0" aria-labelledby="confidentiality-heading">
                 <h3 id="confidentiality-heading">Confidentiality Policy</h3>
                 <p class="policy-effective-date">Effective October 27, 2026</p>
-                <p>Welcome to our Unblocked Games website. We value the privacy of our contributors and users. This Confidentiality Policy explains how we collect, protect, and handle your information when you request access to share games on our platform.</p>
+                <p>Welcome to Un-Blocked Games 67. We value the privacy of our contributors and users. This Confidentiality Policy explains how we collect, protect, and handle your information when you request access to share games on our platform.</p>
                 <h4>1. Information We Collect</h4>
                 <p>To maintain a safe and high-quality sharing environment, we require contributors to request access before publishing content.</p>
                 <ul>
@@ -1337,41 +1481,15 @@
                 <p>We may update this policy occasionally to reflect changes in our site features or legal requirements. The "Effective Date" at the top will be updated accordingly.</p>
             </section>
             <p class="policy-progress" id="policy-progress" role="status" aria-live="polite"></p>
-            <label class="policy-email-field" for="policy-email">
-                C-VUSD email address
-                <input id="policy-email" type="email" autocomplete="email" inputmode="email" required aria-describedby="policy-email-hint policy-email-status">
-            </label>
-            <p class="policy-email-hint" id="policy-email-hint">Enter a valid address ending in @c-vusd.org. After agreeing, continue to the Google Form to record your verified school email.</p>
-            <p class="policy-progress" id="policy-email-status" role="status" aria-live="polite"></p>
+            <p class="policy-instructions">This page does not submit an email address. The school Google Form may request information using its own settings.</p>
             <label class="policy-consent">
                 <input id="policy-consent" type="checkbox" disabled>
                 <span>I have read and agree to the Terms of Service and Confidentiality Policy.</span>
             </label>
             <p class="policy-error" id="policy-error" role="alert" hidden></p>
             <div class="policy-actions">
-                <button class="policy-accept" id="policy-accept" type="button" disabled>Agree and continue</button>
+                <button class="policy-accept" id="policy-accept" type="button" disabled>Agree and continue to school form</button>
             </div>
-            <details class="policy-owner-skip">
-                <summary>Owner? Skip the policy agreement</summary>
-                <p class="policy-owner-skip-copy">Frontend-only convenience: the password check is visible to visitors and can be bypassed. Set a SHA-256 password digest in the page script before use. This shortcut does not save agreement.</p>
-                <label for="policy-owner-password">
-                    Owner password
-                    <input id="policy-owner-password" type="password" autocomplete="current-password">
-                </label>
-                <button id="policy-owner-skip-button" type="button">Verify password and skip</button>
-                <p class="policy-owner-status" id="policy-owner-status" role="status" aria-live="polite"></p>
-                <section class="policy-owner-setup" aria-labelledby="policy-owner-setup-heading">
-                    <h3 id="policy-owner-setup-heading">Set up the owner password</h3>
-                    <p class="policy-owner-setup-copy">Choose your password here to generate its SHA-256 hexadecimal digest. The password is only processed in this browser; it is not saved or sent. Copy the digest into <code>SHHS2026</code> in the page script and publish the change. Use a long, unique password. This frontend check is not secure authentication.</p>
-                    <label for="policy-owner-new-password">
-                        Password to hash
-                        <input id="policy-owner-new-password" type="password" autocomplete="new-password">
-                    </label>
-                    <button id="policy-owner-generate-hash" type="button">Generate SHA-256 digest</button>
-                    <output class="policy-owner-digest" id="policy-owner-digest" aria-label="Generated SHA-256 digest" aria-live="polite"></output>
-                    <p class="policy-owner-status" id="policy-owner-setup-status" role="status" aria-live="polite"></p>
-                </section>
-            </details>
         </dialog>
         <footer class="site-footer">
             <div class="footer-content">
@@ -1405,46 +1523,53 @@
         </footer>
         <script>
             const policyDialog = document.querySelector("#policy-dialog");
+            const menuToggle = document.querySelector("#menu-toggle");
+            const siteMenuPanel = document.querySelector("#site-menu-panel");
             const policyDocuments = [...document.querySelectorAll(".policy-document")];
             const policyProgress = document.querySelector("#policy-progress");
             const policyConsent = document.querySelector("#policy-consent");
             const policyAccept = document.querySelector("#policy-accept");
             const policyError = document.querySelector("#policy-error");
-            const policyEmail = document.querySelector("#policy-email");
-            const policyEmailStatus = document.querySelector("#policy-email-status");
-            const policyOwnerPassword = document.querySelector("#policy-owner-password");
-            const policyOwnerSkipButton = document.querySelector("#policy-owner-skip-button");
-            const policyOwnerStatus = document.querySelector("#policy-owner-status");
-            const policyOwnerNewPassword = document.querySelector("#policy-owner-new-password");
-            const policyOwnerGenerateHash = document.querySelector("#policy-owner-generate-hash");
-            const policyOwnerDigest = document.querySelector("#policy-owner-digest");
-            const policyOwnerSetupStatus = document.querySelector("#policy-owner-setup-status");
             const policyStorageKey = "unblockedgames-policies-accepted-v2";
             const policyFormUrl = "https://forms.gle/ehshJREYLCBgxEB89";
-            // Configure with a SHA-256 hex digest; never put the plaintext password in this file.
-            const ownerSkipPasswordHash = "e158727aa34903198281b0d94dc56126e74b962ba5c12673e432ee5189d19618";
             const policiesRead = new Set();
             let policyAcceptanceStored = false;
 
-            policyOwnerSkipButton.disabled = !/^[a-f0-9]{64}$/i.test(ownerSkipPasswordHash);
-            if (policyOwnerSkipButton.disabled) {
-                policyOwnerStatus.textContent = "Owner skip is not configured. Add its SHA-256 password digest in the page script.";
-            }
-            policyOwnerGenerateHash.disabled = !window.crypto?.subtle;
-            if (policyOwnerGenerateHash.disabled) {
-                policyOwnerSetupStatus.textContent = "SHA-256 generation is unavailable in this browser context.";
-            }
+            const setMenuOpen = (isOpen, returnFocus = false) => {
+                menuToggle.setAttribute("aria-expanded", String(isOpen));
+                menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+                siteMenuPanel.hidden = !isOpen;
+                if (returnFocus) menuToggle.focus();
+            };
+
+            menuToggle.addEventListener("click", () => {
+                setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true");
+            });
+
+            siteMenuPanel.addEventListener("click", (event) => {
+                if (event.target instanceof Element && event.target.closest("a")) {
+                    setMenuOpen(false);
+                }
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
+                    setMenuOpen(false, true);
+                }
+            });
+
+            document.addEventListener("click", (event) => {
+                if (event.target instanceof Element
+                    && !event.target.closest("header")
+                    && menuToggle.getAttribute("aria-expanded") === "true") {
+                    setMenuOpen(false);
+                }
+            });
 
             const updatePolicyProgress = () => {
                 policyProgress.textContent = `${policiesRead.size} of ${policyDocuments.length} documents read.`;
                 policyConsent.disabled = policiesRead.size !== policyDocuments.length;
-                const emailIsAllowed = policyEmail.validity.valid && policyEmail.value.trim().toLowerCase().endsWith("@c-vusd.org");
-                policyAccept.disabled = !policyConsent.checked || policiesRead.size !== policyDocuments.length || !emailIsAllowed;
-                policyEmailStatus.textContent = !policyEmail.value
-                    ? "A C-VUSD email is required to continue."
-                    : emailIsAllowed
-                        ? "C-VUSD email format accepted. Your verified account email will be recorded by Google Forms."
-                        : "Enter a valid email address ending in @c-vusd.org.";
+                policyAccept.disabled = !policyConsent.checked || policiesRead.size !== policyDocuments.length;
             };
 
             const markPolicyRead = (documentSection) => {
@@ -1459,72 +1584,10 @@
             });
 
             policyConsent.addEventListener("change", updatePolicyProgress);
-            policyEmail.addEventListener("input", updatePolicyProgress);
             policyDialog.addEventListener("cancel", (event) => event.preventDefault());
-            policyOwnerGenerateHash.addEventListener("click", async () => {
-                if (!window.crypto?.subtle) {
-                    policyOwnerSetupStatus.textContent = "SHA-256 generation is unavailable in this browser context.";
-                    return;
-                }
-
-                if (!policyOwnerNewPassword.value) {
-                    policyOwnerSetupStatus.textContent = "Enter a password to generate its digest.";
-                    policyOwnerNewPassword.focus();
-                    return;
-                }
-
-                try {
-                    const passwordBytes = new TextEncoder().encode(policyOwnerNewPassword.value);
-                    const passwordDigest = await window.crypto.subtle.digest("SHA-256", passwordBytes);
-                    const passwordHash = [...new Uint8Array(passwordDigest)]
-                        .map((byte) => byte.toString(16).padStart(2, "0"))
-                        .join("");
-
-                    policyOwnerDigest.textContent = passwordHash;
-                    policyOwnerSetupStatus.textContent = "Digest generated locally. Copy it into ownerSkipPasswordHash, then clear the password field.";
-                    policyOwnerNewPassword.value = "";
-                } catch (error) {
-                    console.error("Could not generate the owner password digest.", error);
-                    policyOwnerSetupStatus.textContent = "Could not generate the digest in this browser.";
-                }
-            });
-
-            policyOwnerSkipButton.addEventListener("click", async () => {
-                if (!/^[a-f0-9]{64}$/i.test(ownerSkipPasswordHash)) {
-                    policyOwnerStatus.textContent = "Owner skip is not configured.";
-                    return;
-                }
-
-                if (!policyOwnerPassword.value) {
-                    policyOwnerStatus.textContent = "Enter the owner password.";
-                    policyOwnerPassword.focus();
-                    return;
-                }
-
-                try {
-                    const passwordBytes = new TextEncoder().encode(policyOwnerPassword.value);
-                    const passwordDigest = await window.crypto.subtle.digest("SHA-256", passwordBytes);
-                    const passwordHash = [...new Uint8Array(passwordDigest)]
-                        .map((byte) => byte.toString(16).padStart(2, "0"))
-                        .join("");
-
-                    if (passwordHash !== ownerSkipPasswordHash.toLowerCase()) {
-                        policyOwnerStatus.textContent = "Incorrect password.";
-                        policyOwnerPassword.value = "";
-                        policyOwnerPassword.focus();
-                        return;
-                    }
-
-                    policyDialog.close();
-                } catch (error) {
-                    console.error("Could not verify the owner password.", error);
-                    policyOwnerStatus.textContent = "Password verification is unavailable in this browser context.";
-                }
-            });
 
             policyAccept.addEventListener("click", () => {
-                const emailIsAllowed = policyEmail.validity.valid && policyEmail.value.trim().toLowerCase().endsWith("@c-vusd.org");
-                if (policiesRead.size !== policyDocuments.length || !policyConsent.checked || !emailIsAllowed) return;
+                if (policiesRead.size !== policyDocuments.length || !policyConsent.checked) return;
 
                 try {
                     localStorage.setItem(policyStorageKey, "true");
@@ -2173,15 +2236,184 @@
                 ["Poly Track", 4],
                 ["Level Devil", 5]
             ]);
+            const playerProfileForm = document.querySelector("#player-profile-form");
+            const playerNicknameInput = document.querySelector("#player-nickname");
+            const playerProfileName = document.querySelector("#player-profile-name");
+            const playerProfileLogout = document.querySelector("#player-profile-logout");
+            const playerProfileStatus = document.querySelector("#player-profile-status");
+            const favoritesList = document.querySelector("#favorites-list");
+            const favoritesEmpty = document.querySelector("#favorites-empty");
+            const playerProfileStorageKey = "unblockedgames-player-profile-v1";
+            const playerFavoritesStoragePrefix = "unblockedgames-player-favorites-v1:";
+            const playerRecentGamesStoragePrefix = "unblockedgames-player-recents-v1:";
+            const knownGameHrefs = new Set(games.map((game) => game.href));
+            let activePlayerProfile = "";
+            let favoriteGameHrefs = new Set();
+
+            try {
+                activePlayerProfile = localStorage.getItem(playerProfileStorageKey) || "";
+            } catch (error) {
+                console.warn("Could not load the local player profile.", error);
+                playerProfileStatus.textContent = "Could not load the local profile from this browser.";
+            }
+
+            const getPlayerFavoritesStorageKey = (profileName) =>
+                `${playerFavoritesStoragePrefix}${encodeURIComponent(profileName.trim().toLocaleLowerCase())}`;
+
+            const loadPlayerFavorites = (profileName) => {
+                try {
+                    const savedFavorites = localStorage.getItem(getPlayerFavoritesStorageKey(profileName));
+                    const parsedFavorites = savedFavorites ? JSON.parse(savedFavorites) : [];
+                    if (!Array.isArray(parsedFavorites)) {
+                        throw new TypeError("Saved favorites are not a list.");
+                    }
+                    favoriteGameHrefs = new Set(parsedFavorites.filter((href) => knownGameHrefs.has(href)));
+                    return true;
+                } catch (error) {
+                    console.warn("Could not load this player's favorites.", error);
+                    playerProfileStatus.textContent = "Could not load favorites for this nickname from this browser.";
+                    favoriteGameHrefs = new Set();
+                    return false;
+                }
+            };
+
+            const renderPlayerProfile = () => {
+                const isLoggedIn = Boolean(activePlayerProfile);
+                playerProfileForm.hidden = isLoggedIn;
+                playerProfileName.hidden = !isLoggedIn;
+                playerProfileLogout.hidden = !isLoggedIn;
+                playerProfileName.textContent = isLoggedIn ? `Playing as ${activePlayerProfile}` : "";
+                favoritesEmpty.textContent = isLoggedIn
+                    ? favoriteGameHrefs.size ? "" : "No favorites yet. Tap the heart on a game to save it."
+                    : "Log in with a nickname to save favorites.";
+                favoritesEmpty.hidden = isLoggedIn && favoriteGameHrefs.size > 0;
+                favoritesList.replaceChildren();
+
+                favoriteGameHrefs.forEach((href) => {
+                    const game = games.find((catalogGame) => catalogGame.href === href);
+                    if (!game) return;
+                    const item = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.className = "favorite-game-link";
+                    link.href = game.href;
+                    link.textContent = game.name;
+                    link.title = game.name;
+                    item.append(link);
+                    favoritesList.append(item);
+                });
+            };
+
+            const updateFavoriteButtons = () => {
+                document.querySelectorAll(".favorite-toggle").forEach((button) => {
+                    const isFavorite = favoriteGameHrefs.has(button.dataset.gameHref);
+                    button.disabled = !activePlayerProfile;
+                    button.setAttribute("aria-pressed", String(isFavorite));
+                    button.setAttribute("aria-label", !activePlayerProfile
+                        ? "Log in with a nickname to favorite games"
+                        : isFavorite
+                            ? `Remove ${button.dataset.gameName} from favorites`
+                            : `Add ${button.dataset.gameName} to favorites`);
+                    button.title = activePlayerProfile
+                        ? isFavorite ? "Remove from favorites" : "Add to favorites"
+                        : "Log in with a nickname to favorite games";
+                    button.textContent = isFavorite ? "♥" : "♡";
+                });
+            };
+
+            playerProfileForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const profileName = playerNicknameInput.value.trim();
+                if (!profileName || profileName.length > 24) {
+                    playerProfileStatus.textContent = "Enter a nickname between 1 and 24 characters.";
+                    playerNicknameInput.focus();
+                    return;
+                }
+
+                try {
+                    localStorage.setItem(playerProfileStorageKey, profileName);
+                } catch (error) {
+                    console.warn("Could not save the local player profile.", error);
+                    playerProfileStatus.textContent = "Could not save this profile in the browser. Check browser storage settings and try again.";
+                    return;
+                }
+
+                activePlayerProfile = profileName;
+                const favoritesLoaded = loadPlayerFavorites(activePlayerProfile);
+                const recentGamesLoaded = loadRecentGames(activePlayerProfile);
+                playerProfileStatus.textContent = favoritesLoaded && recentGamesLoaded
+                    ? "Local profile loaded on this browser. It is not a secure account and will not sync."
+                    : "Profile loaded, but some saved activity could not be read from this browser.";
+                renderPlayerProfile();
+                updateFavoriteButtons();
+            });
+
+            playerProfileLogout.addEventListener("click", () => {
+                try {
+                    localStorage.removeItem(playerProfileStorageKey);
+                } catch (error) {
+                    console.warn("Could not log out of the local player profile.", error);
+                    playerProfileStatus.textContent = "Could not log out in this browser. Check browser storage settings and try again.";
+                    return;
+                }
+
+                activePlayerProfile = "";
+                favoriteGameHrefs = new Set();
+                const recentGamesLoaded = loadRecentGames("");
+                playerProfileStatus.textContent = "Logged out. Your nickname's favorites remain saved on this browser.";
+                if (!recentGamesLoaded) {
+                    playerProfileStatus.textContent = "Logged out, but the browser's recent-games list could not be loaded.";
+                }
+                renderPlayerProfile();
+                updateFavoriteButtons();
+            });
+
+            document.addEventListener("click", (event) => {
+                const favoriteButton = event.target.closest(".favorite-toggle");
+                if (!favoriteButton) return;
+                if (!activePlayerProfile) {
+                    playerProfileStatus.textContent = "Log in with a nickname before adding favorites.";
+                    playerNicknameInput.focus();
+                    return;
+                }
+
+                const nextFavorites = new Set(favoriteGameHrefs);
+                if (nextFavorites.has(favoriteButton.dataset.gameHref)) {
+                    nextFavorites.delete(favoriteButton.dataset.gameHref);
+                } else {
+                    nextFavorites.add(favoriteButton.dataset.gameHref);
+                }
+
+                try {
+                    localStorage.setItem(
+                        getPlayerFavoritesStorageKey(activePlayerProfile),
+                        JSON.stringify([...nextFavorites])
+                    );
+                } catch (error) {
+                    console.warn("Could not save this player's favorites.", error);
+                    playerProfileStatus.textContent = "Could not save favorites in this browser. Check browser storage settings and try again.";
+                    return;
+                }
+
+                favoriteGameHrefs = nextFavorites;
+                playerProfileStatus.textContent = `Saved ${favoriteGameHrefs.size} favorite${favoriteGameHrefs.size === 1 ? "" : "s"} for ${activePlayerProfile} on this browser.`;
+                renderPlayerProfile();
+                updateFavoriteButtons();
+            });
+
+            if (activePlayerProfile) loadPlayerFavorites(activePlayerProfile);
+            renderPlayerProfile();
             const allGamesGrid = document.querySelector("#all-games-grid");
             const renderGameCard = (game) => {
-                const card = document.createElement("a");
+                const card = document.createElement("article");
                 card.className = "game-card";
-                card.href = game.href;
+                card.dataset.href = game.href;
                 card.dataset.category = game.category;
                 card.style.setProperty("--art-start", game.artStart);
                 card.style.setProperty("--art-end", game.artEnd);
 
+                const gameLink = document.createElement("a");
+                gameLink.className = "game-open-link";
+                gameLink.href = game.href;
                 const art = document.createElement("span");
                 art.className = "game-art";
                 art.setAttribute("aria-hidden", "true");
@@ -2220,7 +2452,15 @@
                 info.className = "game-info";
                 info.append(title, category, ratingDisplay);
                 copy.append(info, playLabel);
-                card.append(art, copy);
+                gameLink.append(art, copy);
+
+                const favoriteButton = document.createElement("button");
+                favoriteButton.className = "favorite-toggle";
+                favoriteButton.type = "button";
+                favoriteButton.dataset.gameHref = game.href;
+                favoriteButton.dataset.gameName = game.name;
+                favoriteButton.setAttribute("aria-pressed", "false");
+                card.append(gameLink, favoriteButton);
                 return card;
             };
 
@@ -2250,6 +2490,7 @@
                 ? "https://crashtest5812-fun.github.io/Un-BlockedGames67/"
                 : document.baseURI;
             const getAssetUrl = (path) => new URL(path, assetBase).href;
+            updateFavoriteButtons();
             const clickSound = new Audio("data:audio/mpeg;base64,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VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/70mQAD/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//vSZAAP8AAAaQAAAAgAAA0gAAABAAABpAAAACAAADSAAAAETEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+9JkAA/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/70GQAD/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU=");
             clickSound.preload = "auto";
             const loFiTracks = [
@@ -2473,7 +2714,7 @@
                     );
                 }
 
-                const cardsByHref = new Map(allGameCards.map((card) => [card.getAttribute("href"), card]));
+                const cardsByHref = new Map(allGameCards.map((card) => [card.dataset.href, card]));
                 const fragment = document.createDocumentFragment();
                 sortedGames.forEach((game) => fragment.append(cardsByHref.get(game.href)));
                 allGamesGrid.append(fragment);
@@ -2528,32 +2769,45 @@
                 recentGamesEmpty.hidden = recentGameHrefs.length > 0;
             };
 
-            try {
-                const savedRecentGames = localStorage.getItem(recentGamesStorageKey);
-                if (savedRecentGames) {
-                    const parsedRecentGames = JSON.parse(savedRecentGames);
+            const getRecentGamesStorageKey = (profileName = activePlayerProfile) =>
+                profileName
+                    ? `${playerRecentGamesStoragePrefix}${encodeURIComponent(profileName.trim().toLocaleLowerCase())}`
+                    : recentGamesStorageKey;
+
+            const loadRecentGames = (profileName = activePlayerProfile) => {
+                try {
+                    const savedRecentGames = localStorage.getItem(getRecentGamesStorageKey(profileName));
+                    const parsedRecentGames = savedRecentGames ? JSON.parse(savedRecentGames) : [];
                     if (!Array.isArray(parsedRecentGames)) {
                         throw new TypeError("Saved recent games are not a list.");
                     }
                     recentGameHrefs = [...new Set(parsedRecentGames.filter((href) => gamesByHref.has(href)))].slice(0, 5);
+                    renderRecentGames();
+                    return true;
+                } catch (error) {
+                    console.warn("Could not load recently opened games.", error);
+                    playerProfileStatus.textContent = "Could not load this profile's recent games from this browser.";
+                    recentGameHrefs = [];
+                    renderRecentGames();
+                    return false;
                 }
-            } catch (error) {
-                console.warn("Could not load recently opened games.", error);
-            }
-            renderRecentGames();
+            };
+
+            loadRecentGames();
 
             const addRecentGame = (game) => {
                 recentGameHrefs = [game.href, ...recentGameHrefs.filter((href) => href !== game.href)].slice(0, 5);
                 renderRecentGames();
                 try {
-                    localStorage.setItem(recentGamesStorageKey, JSON.stringify(recentGameHrefs));
+                    localStorage.setItem(getRecentGamesStorageKey(), JSON.stringify(recentGameHrefs));
                 } catch (error) {
                     console.warn("Could not save recently opened games.", error);
+                    playerProfileStatus.textContent = "Could not save recent games in this browser. Check browser storage settings and try again.";
                 }
             };
 
             document.addEventListener("click", (event) => {
-                const gameLink = event.target.closest(".game-card, .recent-game-link");
+                const gameLink = event.target.closest(".game-open-link, .game-card[href], .recent-game-link, .favorite-game-link");
                 if (!gameLink) return;
 
                 event.preventDefault();
