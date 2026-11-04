@@ -1178,8 +1178,12 @@
             }
 
             .game-player-dialog {
-                width: min(1100px, calc(100% - 24px));
-                max-height: min(94vh, 900px);
+                display: flex;
+                width: min(1200px, calc(100vw - 32px));
+                height: min(820px, calc(100dvh - 48px));
+                max-width: none;
+                max-height: none;
+                flex-direction: column;
                 overflow: hidden;
                 padding: 0;
                 color: var(--page-text);
@@ -1221,12 +1225,25 @@
                 cursor: pointer;
             }
 
-            .game-player-frame {
-                display: block;
+            .game-player-stage {
+                position: relative;
                 width: 100%;
-                height: min(68vh, 680px);
-                min-height: 320px;
-                background: #fff;
+                height: 0;
+                min-height: 0;
+                min-width: 0;
+                flex: 1 1 0;
+                overflow: hidden;
+                background: #000;
+            }
+
+            .game-player-frame {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block;
+                width: 1280px;
+                height: 720px;
+                transform-origin: top left;
                 border: 0;
             }
 
@@ -1259,8 +1276,8 @@
 
             @media (max-width: 520px) {
                 .game-player-dialog {
-                    width: calc(100% - 12px);
-                    max-height: 96vh;
+                    width: calc(100vw - 12px);
+                    height: calc(100dvh - 12px);
                     border-radius: 12px;
                 }
 
@@ -1268,9 +1285,8 @@
                     padding: 10px 12px;
                 }
 
-                .game-player-frame {
-                    height: 68vh;
-                    min-height: 240px;
+                .game-player-stage {
+                    min-height: 0;
                 }
 
                 .game-player-status {
@@ -1582,7 +1598,9 @@
                 <h3 id="game-player-title">Game</h3>
                 <button class="game-player-close" id="game-player-close" type="button" aria-label="Close game">Close</button>
             </div>
-            <iframe class="game-player-frame" id="game-player-frame" title="Game" allow="autoplay; fullscreen; gamepad" allowfullscreen></iframe>
+            <div class="game-player-stage" id="game-player-stage">
+                <iframe class="game-player-frame" id="game-player-frame" title="Game" allow="autoplay; fullscreen; gamepad" allowfullscreen></iframe>
+            </div>
             <p class="game-player-status" id="game-player-status" role="status" aria-live="polite"></p>
             <div class="game-player-actions">
                 <button type="button" id="game-player-fullscreen">Play Fullscreen</button>
@@ -1666,6 +1684,7 @@
                 <section class="footer-section" aria-labelledby="footer-contact-heading">
                     <h2 id="footer-contact-heading">Get in touch</h2>
                     <p>Have a game idea or question? <a href="mailto:madcoder19265@outlook.com">Email us</a>.</p>
+                    <p>Need help? <a href="https://ubg67-support.vercel.app/" target="_blank" rel="noopener noreferrer">Visit our support website</a>.</p>
                 </section>
                 <section class="footer-section" id="beta-test" aria-labelledby="beta-test-heading">
                     <h2 id="beta-test-heading">BETA Test Program</h2>
@@ -2305,16 +2324,6 @@
                     "artEnd": "#c77c3e"
                 },
                 {
-                    "name": "Harvester Simulator",
-                    "category": "Casual",
-                    "href": "Assets/Games/clharvestio.html",
-                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrg2J6K6azV8HZ7I15VRolEbuzRgqwF6gsxsyzdPeUjg&s=10",
-                    "emoji": null,
-                    "artStart": "#a8d4a1",
-                    "artEnd": "#5e8b63",
-                    "popular": 8
-                },
-                {
                     "name": "Brotato",
                     "category": "Arcade",
                     "href": "Assets/Games/clbrotato.html",
@@ -2401,7 +2410,6 @@
                 ["Soccer Bros", 3],
                 ["Wrestle Bros", 3],
                 ["Flappy Bird", 4],
-                ["Harvester Simulator", 3],
                 ["Brotato", 5],
                 ["Poly Track", 4],
                 ["Level Devil", 5]
@@ -2652,11 +2660,24 @@
             const gamesByHref = new Map(games.map((game) => [game.href, game]));
             const gamePlayerDialog = document.querySelector("#game-player-dialog");
             const gamePlayerTitle = document.querySelector("#game-player-title");
+            const gamePlayerStage = document.querySelector("#game-player-stage");
             const gamePlayerFrame = document.querySelector("#game-player-frame");
             const gamePlayerStatus = document.querySelector("#game-player-status");
             const gamePlayerFullscreenButton = document.querySelector("#game-player-fullscreen");
             const gamePlayerCloseButton = document.querySelector("#game-player-close");
             let activeGame = null;
+
+            const fitGameFrame = () => {
+                const { width, height } = gamePlayerStage.getBoundingClientRect();
+                if (!width || !height) return;
+
+                const scale = Math.min(1, width / 1280, height / 720);
+                const left = (width - 1280 * scale) / 2;
+                const top = (height - 720 * scale) / 2;
+                gamePlayerFrame.style.transform = `translate(${left}px, ${top}px) scale(${scale})`;
+            };
+
+            new ResizeObserver(fitGameFrame).observe(gamePlayerStage);
 
             const openGamePlayer = (game) => {
                 activeGame = game;
@@ -2666,6 +2687,7 @@
                 gamePlayerFrame.src = getAssetUrl(game.href);
                 if (typeof gamePlayerDialog.showModal === "function") {
                     gamePlayerDialog.showModal();
+                    requestAnimationFrame(fitGameFrame);
                 }
             };
 
