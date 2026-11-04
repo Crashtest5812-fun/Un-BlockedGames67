@@ -1144,6 +1144,144 @@
                 font-weight: 700;
             }
 
+            .ui-dashboard {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 18px;
+            }
+
+            .ui-panel {
+                display: grid;
+                gap: 12px;
+                min-height: 100%;
+                padding: 20px;
+                color: var(--page-text);
+                background: var(--surface-background);
+                border: 1px solid var(--surface-border);
+                border-radius: 16px;
+                box-shadow: 0 4px 12px rgb(28 43 36 / 10%);
+            }
+
+            .ui-panel h3 {
+                margin: 0;
+                color: var(--heading-color);
+                font-size: 1.1rem;
+            }
+
+            .ui-panel ul {
+                display: grid;
+                gap: 10px;
+                margin: 0;
+                padding-left: 18px;
+                color: var(--muted-color);
+                line-height: 1.55;
+            }
+
+            .game-player-dialog {
+                width: min(1100px, calc(100% - 24px));
+                max-height: min(94vh, 900px);
+                overflow: hidden;
+                padding: 0;
+                color: var(--page-text);
+                background: var(--surface-background);
+                border: 1px solid var(--surface-border);
+                border-radius: 18px;
+                box-shadow: 0 24px 80px rgb(0 0 0 / 32%);
+            }
+
+            .game-player-dialog::backdrop {
+                background: rgb(9 17 14 / 68%);
+                backdrop-filter: blur(2px);
+            }
+
+            .game-player-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--surface-border);
+            }
+
+            .game-player-header h3 {
+                margin: 0;
+                color: var(--heading-color);
+                font-size: 1.2rem;
+            }
+
+            .game-player-close {
+                min-height: 38px;
+                padding: 8px 12px;
+                color: var(--page-text);
+                font: inherit;
+                font-weight: 700;
+                background: var(--control-background);
+                border: 1px solid var(--control-border);
+                border-radius: 10px;
+                cursor: pointer;
+            }
+
+            .game-player-frame {
+                display: block;
+                width: 100%;
+                height: min(68vh, 680px);
+                min-height: 320px;
+                background: #fff;
+                border: 0;
+            }
+
+            .game-player-status {
+                margin: 0;
+                padding: 8px 18px;
+                color: var(--muted-color);
+                font-size: 0.85rem;
+            }
+
+            .game-player-actions {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                gap: 10px;
+                padding: 0 18px 14px;
+            }
+
+            .game-player-actions button {
+                min-height: 44px;
+                padding: 10px 16px;
+                color: var(--header-text);
+                font: inherit;
+                font-weight: 700;
+                background: var(--header-color-end);
+                border: 0;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+
+            @media (max-width: 520px) {
+                .game-player-dialog {
+                    width: calc(100% - 12px);
+                    max-height: 96vh;
+                    border-radius: 12px;
+                }
+
+                .game-player-header {
+                    padding: 10px 12px;
+                }
+
+                .game-player-frame {
+                    height: 68vh;
+                    min-height: 240px;
+                }
+
+                .game-player-status {
+                    padding-inline: 12px;
+                }
+
+                .game-player-actions {
+                    padding: 0 12px 12px;
+                }
+            }
+
             @keyframes page-enter {
                 from { opacity: 0; }
                 to { opacity: 1; }
@@ -1292,7 +1430,7 @@
             <div class="brand-copy">
                 <h1>Un-Blocked Games 67</h1>
                 <p>Play • Explore • Enjoy</p>
-                <span class="version-badge">v26.1.1</span>
+                <span class="version-badge">v26.1.2</span>
             </div>
             <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu-panel">
                 <span aria-hidden="true"></span>
@@ -1400,6 +1538,27 @@
                         <div class="games-grid" id="all-games-grid"></div>
                 </details>
             </section>
+            <section class="content-section" id="community-updates" aria-labelledby="community-updates-heading">
+                <h2 class="section-heading" id="community-updates-heading">Community Updates</h2>
+                <div class="ui-dashboard">
+                    <article class="ui-panel">
+                        <h3>Bug tracker</h3>
+                        <ul class="issue-list">
+                            <li><strong>Mobile layout:</strong> Keep the game shell and card spacing readable on smaller screens.</li>
+                            <li><strong>Game shell:</strong> Confirm the fullscreen launch behavior stays consistent across browser sessions.</li>
+                            <li><strong>Catalog checks:</strong> Review new titles before release and monitor the latest additions.</li>
+                        </ul>
+                    </article>
+                    <article class="ui-panel">
+                        <h3>Requested Games</h3>
+                        <ul class="requested-games-list">
+                            <li>Super Mario Bros.</li>
+                            <li>Wacky Flips</li>
+                            <li>More racing arcade picks</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
             <section class="content-section" id="apps" aria-labelledby="apps-heading">
                 <h2 class="section-heading" id="apps-heading">Apps</h2>
                 <div class="games-grid">
@@ -1418,6 +1577,17 @@
             </section>
             </main>
         </div>
+        <dialog class="game-player-dialog" id="game-player-dialog" aria-labelledby="game-player-title">
+            <div class="game-player-header">
+                <h3 id="game-player-title">Game</h3>
+                <button class="game-player-close" id="game-player-close" type="button" aria-label="Close game">Close</button>
+            </div>
+            <iframe class="game-player-frame" id="game-player-frame" title="Game" allow="autoplay; fullscreen; gamepad" allowfullscreen></iframe>
+            <p class="game-player-status" id="game-player-status" role="status" aria-live="polite"></p>
+            <div class="game-player-actions">
+                <button type="button" id="game-player-fullscreen">Play Fullscreen</button>
+            </div>
+        </dialog>
         <dialog class="policy-dialog" id="policy-dialog" aria-labelledby="policy-heading" aria-describedby="policy-instructions">
             <h2 id="policy-heading">Please review our policies</h2>
             <p class="policy-intro">Read both documents to the end and confirm that you agree before continuing to the school form.</p>
@@ -2135,7 +2305,7 @@
                     "artEnd": "#c77c3e"
                 },
                 {
-                    "name": "Harvest Simulator",
+                    "name": "Harvester Simulator",
                     "category": "Casual",
                     "href": "Assets/Games/clharvestio.html",
                     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrg2J6K6azV8HZ7I15VRolEbuzRgqwF6gsxsyzdPeUjg&s=10",
@@ -2231,7 +2401,7 @@
                 ["Soccer Bros", 3],
                 ["Wrestle Bros", 3],
                 ["Flappy Bird", 4],
-                ["Harvest Simulator", 3],
+                ["Harvester Simulator", 3],
                 ["Brotato", 5],
                 ["Poly Track", 4],
                 ["Level Devil", 5]
@@ -2453,13 +2623,13 @@
                 info.append(title, category, ratingDisplay);
                 copy.append(info, playLabel);
                 gameLink.append(art, copy);
-
                 const favoriteButton = document.createElement("button");
                 favoriteButton.className = "favorite-toggle";
                 favoriteButton.type = "button";
                 favoriteButton.dataset.gameHref = game.href;
                 favoriteButton.dataset.gameName = game.name;
                 favoriteButton.setAttribute("aria-pressed", "false");
+
                 card.append(gameLink, favoriteButton);
                 return card;
             };
@@ -2480,6 +2650,64 @@
             const recentGamesList = document.querySelector("#recent-games-list");
             const recentGamesEmpty = document.querySelector("#recent-games-empty");
             const gamesByHref = new Map(games.map((game) => [game.href, game]));
+            const gamePlayerDialog = document.querySelector("#game-player-dialog");
+            const gamePlayerTitle = document.querySelector("#game-player-title");
+            const gamePlayerFrame = document.querySelector("#game-player-frame");
+            const gamePlayerStatus = document.querySelector("#game-player-status");
+            const gamePlayerFullscreenButton = document.querySelector("#game-player-fullscreen");
+            const gamePlayerCloseButton = document.querySelector("#game-player-close");
+            let activeGame = null;
+
+            const openGamePlayer = (game) => {
+                activeGame = game;
+                gamePlayerTitle.textContent = game.name;
+                gamePlayerFrame.title = game.name;
+                gamePlayerStatus.textContent = `Loading ${game.name}…`;
+                gamePlayerFrame.src = getAssetUrl(game.href);
+                if (typeof gamePlayerDialog.showModal === "function") {
+                    gamePlayerDialog.showModal();
+                }
+            };
+
+            gamePlayerFrame.addEventListener("load", () => {
+                if (activeGame) {
+                    gamePlayerStatus.textContent = `Now playing ${activeGame.name}.`;
+                    gamePlayerFrame.focus();
+                }
+            });
+            gamePlayerCloseButton.addEventListener("click", () => gamePlayerDialog.close());
+            gamePlayerDialog.addEventListener("click", (event) => {
+                if (event.target === gamePlayerDialog) gamePlayerDialog.close();
+            });
+            gamePlayerDialog.addEventListener("close", () => {
+                activeGame = null;
+                gamePlayerFrame.src = "about:blank";
+            });
+            gamePlayerFullscreenButton.addEventListener("click", () => {
+                if (!activeGame) return;
+
+                const fullscreenWindow = window.open("about:blank", "_blank");
+                if (!fullscreenWindow) {
+                    gamePlayerStatus.textContent = "Your browser blocked the new tab. Allow pop-ups to play fullscreen.";
+                    return;
+                }
+
+                const fullscreenDocument = fullscreenWindow.document;
+                fullscreenWindow.opener = null;
+                fullscreenDocument.title = `${activeGame.name} - Fullscreen`;
+                fullscreenDocument.documentElement.style.cssText = "width:100%;height:100%;";
+                fullscreenDocument.body.style.cssText = "width:100%;height:100%;margin:0;overflow:hidden;background:#000;";
+                const fullscreenFrame = fullscreenDocument.createElement("iframe");
+                fullscreenFrame.title = activeGame.name;
+                fullscreenFrame.src = getAssetUrl(activeGame.href);
+                fullscreenFrame.allow = "autoplay; fullscreen; gamepad";
+                fullscreenFrame.allowFullscreen = true;
+                fullscreenFrame.tabIndex = 0;
+                fullscreenFrame.style.cssText = "display:block;width:100%;height:100%;border:0;";
+                fullscreenFrame.addEventListener("load", () => fullscreenFrame.focus(), { once: true });
+                fullscreenDocument.body.append(fullscreenFrame);
+                gamePlayerDialog.close();
+            });
             let recentGameHrefs = [];
             const themeToggle = document.querySelector("#theme-toggle");
             const musicToggle = document.querySelector("#music-toggle");
@@ -2807,219 +3035,16 @@
             };
 
             document.addEventListener("click", (event) => {
+                if (!(event.target instanceof Element)) return;
                 const gameLink = event.target.closest(".game-open-link, .game-card[href], .recent-game-link, .favorite-game-link");
-                if (!gameLink) return;
+                if (!gameLink || event.defaultPrevented) return;
+
+                const game = gamesByHref.get(gameLink.getAttribute("href"));
+                if (!game) return;
 
                 event.preventDefault();
-
-                const gameUrl = getAssetUrl(gameLink.getAttribute("href"));
-                const gameWindow = window.open("about:blank", "_blank");
-
-                if (!gameWindow) {
-                    window.alert("Allow pop-ups for this page to open games in a blank tab.");
-                    return;
-                }
-
-                const game = games.find((catalogGame) => catalogGame.href === gameLink.getAttribute("href"));
-                if (game) addRecentGame(game);
-
-                const gameTitle = gameLink.querySelector("strong")?.textContent || gameLink.textContent.trim();
-                gameWindow.document.title = gameTitle;
-                gameWindow.document.documentElement.style.height = "100%";
-                gameWindow.document.body.style.cssText = "display:flex;flex-direction:column;height:100%;margin:0;background:#101816;color:#f8f6ed;font-family:Arial,sans-serif";
-
-                const playerStyles = gameWindow.document.createElement("style");
-                playerStyles.textContent = `
-                    * { box-sizing: border-box; }
-                    .player-toolbar {
-                        display: flex;
-                        min-height: 58px;
-                        align-items: center;
-                        justify-content: space-between;
-                        gap: 16px;
-                        padding: 10px 18px;
-                        background: #183c36;
-                        border-bottom: 3px solid #d2a85a;
-                    }
-                    .player-heading { min-width: 0; flex: 1; }
-                    .player-heading h1 {
-                        overflow: hidden;
-                        margin: 0;
-                        font-size: 1rem;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        transition: font-size 240ms ease;
-                    }
-                    .player-heading.is-expanded h1 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
-                    .player-status { margin: 4px 0 0; color: #d8e5dc; font-size: .8rem; }
-                    .player-controls { display: flex; flex: 0 0 auto; gap: 8px; }
-                    .player-controls button {
-                        min-height: 44px;
-                        padding: 9px 12px;
-                        color: #183c36;
-                        font: inherit;
-                        font-weight: 700;
-                        background: #f8f6ed;
-                        border: 0;
-                        border-radius: 8px;
-                        cursor: pointer;
-                    }
-                    .player-controls button:hover { background: #e8c77e; }
-                    .player-controls button:focus-visible { outline: 3px solid #e8c77e; outline-offset: 3px; }
-                    .game-stage { position: relative; min-height: 0; flex: 1; background: #000; }
-                    .game-frame { width: 100%; height: 100%; border: 0; }
-                    .game-loading {
-                        position: absolute;
-                        inset: 0;
-                        display: grid;
-                        align-content: center;
-                        justify-items: center;
-                        overflow: hidden;
-                        background: linear-gradient(135deg, #18211e, #111715);
-                        transition: opacity 260ms ease;
-                    }
-                    .game-loading[hidden] { display: none; }
-                    .game-loading.is-hidden { opacity: 0; pointer-events: none; }
-                    .loading-content {
-                        position: relative;
-                        z-index: 1;
-                        display: grid;
-                        justify-items: center;
-                        gap: 14px;
-                        padding: 28px;
-                        color: #f8f6ed;
-                        text-align: center;
-                        text-shadow: 0 2px 10px rgb(0 0 0 / 75%);
-                    }
-                    .loading-content strong { font-size: clamp(1.4rem, 4vw, 2.25rem); }
-                    .loading-message { font-size: .95rem; }
-                    .loading-spinner {
-                        width: 38px;
-                        height: 38px;
-                        border: 4px solid #3b4540;
-                        border-top-color: #a88b58;
-                        border-radius: 50%;
-                        animation: spin .8s linear infinite;
-                        box-shadow: 0 0 10px rgb(168 139 88 / 16%);
-                    }
-                    @keyframes spin { to { transform: rotate(360deg); } }
-                    .loading-dots { display: flex; gap: 6px; }
-                    .loading-dots span {
-                        width: 7px;
-                        height: 7px;
-                        background: #a88b58;
-                        border-radius: 50%;
-                        animation: dot-bounce 900ms ease-in-out infinite;
-                    }
-                    .loading-dots span:nth-child(2) { animation-delay: 120ms; }
-                    .loading-dots span:nth-child(3) { animation-delay: 240ms; }
-                    @keyframes dot-bounce {
-                        0%, 60%, 100% { opacity: .45; transform: translateY(0); }
-                        30% { opacity: 1; transform: translateY(-6px); }
-                    }
-                    @media (max-width: 520px) {
-                        .player-toolbar { align-items: flex-start; flex-direction: column; gap: 10px; }
-                        .player-controls { width: 100%; }
-                        .player-controls button { flex: 1; }
-                    }
-                    @media (prefers-reduced-motion: reduce) {
-                        .loading-spinner, .loading-dots span { animation: none; }
-                        .player-heading h1 { transition: none; }
-                    }
-                `;
-                gameWindow.document.head.append(playerStyles);
-
-                const toolbar = gameWindow.document.createElement("header");
-                toolbar.className = "player-toolbar";
-                const heading = gameWindow.document.createElement("div");
-                heading.className = "player-heading";
-                const title = gameWindow.document.createElement("h1");
-                title.textContent = gameTitle;
-                const status = gameWindow.document.createElement("p");
-                status.className = "player-status";
-                status.setAttribute("role", "status");
-                status.setAttribute("aria-live", "polite");
-                status.textContent = "Loading game…";
-                heading.append(title, status);
-
-                const controls = gameWindow.document.createElement("div");
-                controls.className = "player-controls";
-                const fullscreenButton = gameWindow.document.createElement("button");
-                fullscreenButton.type = "button";
-                fullscreenButton.textContent = "Enter fullscreen";
-                const closeButton = gameWindow.document.createElement("button");
-                closeButton.type = "button";
-                closeButton.textContent = "Back to library";
-                controls.append(fullscreenButton, closeButton);
-                toolbar.append(heading, controls);
-
-                const stage = gameWindow.document.createElement("main");
-                stage.className = "game-stage";
-                const loading = gameWindow.document.createElement("div");
-                loading.className = "game-loading";
-                loading.setAttribute("aria-hidden", "true");
-                const loadingContent = gameWindow.document.createElement("div");
-                loadingContent.className = "loading-content";
-                const spinner = gameWindow.document.createElement("span");
-                spinner.className = "loading-spinner";
-                spinner.setAttribute("aria-hidden", "true");
-                const loadingTitle = gameWindow.document.createElement("strong");
-                loadingTitle.textContent = gameTitle;
-                const loadingMessage = gameWindow.document.createElement("span");
-                loadingMessage.className = "loading-message";
-                loadingMessage.textContent = "Getting your game ready…";
-                const loadingDots = gameWindow.document.createElement("span");
-                loadingDots.className = "loading-dots";
-                loadingDots.setAttribute("aria-hidden", "true");
-                for (let index = 0; index < 3; index += 1) {
-                    loadingDots.append(gameWindow.document.createElement("span"));
-                }
-                loadingContent.append(spinner, loadingTitle, loadingMessage, loadingDots);
-                loading.append(loadingContent);
-                const gameFrame = gameWindow.document.createElement("iframe");
-                gameFrame.className = "game-frame";
-                gameFrame.title = gameTitle;
-                gameFrame.allow = "autoplay; fullscreen; gamepad";
-                gameFrame.allowFullscreen = true;
-                gameFrame.addEventListener("load", () => {
-                    loading.classList.add("is-hidden");
-                    gameWindow.setTimeout(() => {
-                        loading.hidden = true;
-                        status.textContent = "Game loaded";
-                        gameWindow.setTimeout(() => {
-                            status.textContent = "";
-                            status.hidden = true;
-                            heading.classList.add("is-expanded");
-                        }, 2000);
-                    }, 280);
-                });
-                stage.append(loading, gameFrame);
-                gameWindow.document.body.append(toolbar, stage);
-                gameFrame.src = gameUrl;
-
-                fullscreenButton.addEventListener("click", async () => {
-                    try {
-                        if (gameWindow.document.fullscreenElement) {
-                            await gameWindow.document.exitFullscreen();
-                        } else {
-                            await gameFrame.requestFullscreen();
-                        }
-                    } catch (error) {
-                        console.warn("Could not change game fullscreen mode.", error);
-                        status.textContent = "Fullscreen is unavailable in this browser.";
-                    }
-                });
-                gameWindow.document.addEventListener("fullscreenchange", () => {
-                    fullscreenButton.textContent = gameWindow.document.fullscreenElement
-                        ? "Exit fullscreen"
-                        : "Enter fullscreen";
-                });
-                closeButton.addEventListener("click", () => {
-                    gameWindow.close();
-                    if (!gameWindow.closed) {
-                        status.textContent = "Close this browser tab to return to the game list.";
-                    }
-                });
+                addRecentGame(game);
+                openGamePlayer(game);
             });
         </script>
     </body>
