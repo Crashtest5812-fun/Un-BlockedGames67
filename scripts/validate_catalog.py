@@ -8,7 +8,7 @@ from urllib.parse import unquote, urlparse
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 GAME_DATA_PATTERN = re.compile(r"const games = (\[.*?\]);", re.S)
-ALLOWED_CATEGORIES = {"Sports", "Racing", "Arcade", "Puzzle", "Casual", "Other"}
+ALLOWED_CATEGORIES = {"Sports", "Racing", "Arcade", "Puzzle", "Casual", "Horror", "Other"}
 
 
 def local_file(reference):

@@ -1178,7 +1178,7 @@
             }
 
             .game-player-dialog {
-                display: flex;
+                display: none;
                 width: min(1200px, calc(100vw - 32px));
                 height: min(820px, calc(100dvh - 48px));
                 max-width: none;
@@ -1191,6 +1191,10 @@
                 border: 1px solid var(--surface-border);
                 border-radius: 18px;
                 box-shadow: 0 24px 80px rgb(0 0 0 / 32%);
+            }
+
+            .game-player-dialog[open] {
+                display: flex;
             }
 
             .game-player-dialog::backdrop {
@@ -1446,7 +1450,7 @@
             <div class="brand-copy">
                 <h1>Un-Blocked Games 67</h1>
                 <p>Play • Explore • Enjoy</p>
-                <span class="version-badge">v26.1.2</span>
+                <span class="version-badge">26.2.1Pre</span>
             </div>
             <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu-panel">
                 <span aria-hidden="true"></span>
@@ -1547,33 +1551,14 @@
                             <button class="category-filter" type="button" data-category="Arcade" aria-pressed="false">Arcade</button>
                             <button class="category-filter" type="button" data-category="Puzzle" aria-pressed="false">Puzzle</button>
                             <button class="category-filter" type="button" data-category="Casual" aria-pressed="false">Casual</button>
+                            <button class="category-filter" type="button" data-category="Horror" aria-pressed="false">Horror</button>
                             <button class="category-filter" type="button" data-category="Other" aria-pressed="false">Other</button>
                         </div>
                         <p class="game-search-status" id="game-search-status" aria-live="polite"></p>
                         <p class="game-empty-state" id="game-empty-state" hidden>No games match your search. Try a different name or category.</p>
                         <div class="games-grid" id="all-games-grid"></div>
+                    </div>
                 </details>
-            </section>
-            <section class="content-section" id="community-updates" aria-labelledby="community-updates-heading">
-                <h2 class="section-heading" id="community-updates-heading">Community Updates</h2>
-                <div class="ui-dashboard">
-                    <article class="ui-panel">
-                        <h3>Bug tracker</h3>
-                        <ul class="issue-list">
-                            <li><strong>Mobile layout:</strong> Keep the game shell and card spacing readable on smaller screens.</li>
-                            <li><strong>Game shell:</strong> Confirm the fullscreen launch behavior stays consistent across browser sessions.</li>
-                            <li><strong>Catalog checks:</strong> Review new titles before release and monitor the latest additions.</li>
-                        </ul>
-                    </article>
-                    <article class="ui-panel">
-                        <h3>Requested Games</h3>
-                        <ul class="requested-games-list">
-                            <li>Super Mario Bros.</li>
-                            <li>Wacky Flips</li>
-                            <li>More racing arcade picks</li>
-                        </ul>
-                    </article>
-                </div>
             </section>
             <section class="content-section" id="apps" aria-labelledby="apps-heading">
                 <h2 class="section-heading" id="apps-heading">Apps</h2>
@@ -1593,6 +1578,37 @@
             </section>
             </main>
         </div>
+        <footer class="site-footer">
+            <div class="footer-content">
+                <section class="footer-section" aria-labelledby="footer-contact-heading">
+                    <h2 id="footer-contact-heading">Get in touch</h2>
+                    <p>Have a game idea or question? <a href="mailto:madcoder19265@outlook.com">Email us</a>.</p>
+                    <p>Need help? <a href="https://ubg67-support.vercel.app/" target="_blank" rel="noopener noreferrer">Visit our support website</a>.</p>
+                </section>
+                <section class="footer-section" id="beta-test" aria-labelledby="beta-test-heading">
+                    <h2 id="beta-test-heading">BETA Test Program</h2>
+                    <p>Interested in helping improve Un-Blocked Games? Apply to join our BETA test program.</p>
+                    <a class="welcome-link" href="https://forms.gle/8V2H11xddreZdRN27" target="_blank" rel="noopener noreferrer">
+                        Apply for the BETA <span aria-hidden="true">&#8594;</span>
+                    </a>
+                </section>
+                <nav class="footer-section" aria-label="Footer navigation">
+                    <h2>Explore</h2>
+                    <div class="footer-links">
+                        <a href="#games">Popular games</a>
+                        <a href="#all-games">All games</a>
+                        <a href="#apps">Apps</a>
+                        <a href="#beta-test">BETA test program</a>
+                        <a href="#request-game">Request a game</a>
+                    </div>
+                </nav>
+                <section class="footer-section" aria-labelledby="footer-credits-heading">
+                    <h2 id="footer-credits-heading">Credits</h2>
+                    <p class="footer-credit">Made by: Adrian Virrueta &amp; Liam Soto</p>
+                    <p>Thank you to our BETA testers: Andrew Dave, Nathan Lepe, Adriana Mascorro, Brandon Oliver, Brandon Macias, Lucia Nanda, and Isabelle Swink.</p>
+                </section>
+            </div>
+        </footer>
         <dialog class="game-player-dialog" id="game-player-dialog" aria-labelledby="game-player-title">
             <div class="game-player-header">
                 <h3 id="game-player-title">Game</h3>
@@ -1679,37 +1695,6 @@
                 <button class="policy-accept" id="policy-accept" type="button" disabled>Agree and continue to school form</button>
             </div>
         </dialog>
-        <footer class="site-footer">
-            <div class="footer-content">
-                <section class="footer-section" aria-labelledby="footer-contact-heading">
-                    <h2 id="footer-contact-heading">Get in touch</h2>
-                    <p>Have a game idea or question? <a href="mailto:madcoder19265@outlook.com">Email us</a>.</p>
-                    <p>Need help? <a href="https://ubg67-support.vercel.app/" target="_blank" rel="noopener noreferrer">Visit our support website</a>.</p>
-                </section>
-                <section class="footer-section" id="beta-test" aria-labelledby="beta-test-heading">
-                    <h2 id="beta-test-heading">BETA Test Program</h2>
-                    <p>Interested in helping improve Un-Blocked Games? Apply to join our BETA test program.</p>
-                    <a class="welcome-link" href="https://forms.gle/8V2H11xddreZdRN27" target="_blank" rel="noopener noreferrer">
-                        Apply for the BETA <span aria-hidden="true">&#8594;</span>
-                    </a>
-                </section>
-                <nav class="footer-section" aria-label="Footer navigation">
-                    <h2>Explore</h2>
-                    <div class="footer-links">
-                        <a href="#games">Popular games</a>
-                        <a href="#all-games">All games</a>
-                        <a href="#apps">Apps</a>
-                        <a href="#beta-test">BETA test program</a>
-                        <a href="#request-game">Request a game</a>
-                    </div>
-                </nav>
-                <section class="footer-section" aria-labelledby="footer-credits-heading">
-                    <h2 id="footer-credits-heading">Credits</h2>
-                    <p class="footer-credit">Made by: Adrian Virrueta &amp; Liam Soto</p>
-                    <p>Thank you to our BETA testers: Andrew Dave, Nathan Lepe, Adriana Mascorro, Brandon Oliver, Brandon Macias, Lucia Nanda, and Isabelle Swink.</p>
-                </section>
-            </div>
-        </footer>
         <script>
             const policyDialog = document.querySelector("#policy-dialog");
             const menuToggle = document.querySelector("#menu-toggle");
@@ -2333,16 +2318,6 @@
                     "artEnd": "#be593d"
                 },
                 {
-                    "name": "Poly Track",
-                    "category": "Racing",
-                    "href": "Assets/Games/clpolyold.html",
-                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpjYzMQs7W03rtnywfHz-vm3w8508Xxw3dm1AIvZgWKA&s=10",
-                    "emoji": null,
-                    "artStart": "#a8d4e8",
-                    "artEnd": "#4f83a5",
-                    "popular": 7
-                },
-                {
                     "name": "Level Devil",
                     "category": "Puzzle",
                     "href": "Assets/Games/clleveldevil.html",
@@ -2350,6 +2325,78 @@
                     "emoji": null,
                     "artStart": "#f4b878",
                     "artEnd": "#be593d"
+                },
+                {
+                    "name": "Five Nights at Freddy's",
+                    "category": "Horror",
+                    "href": "Assets/Games/clFNAF.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN-doZ4ecD49-K-GpMF-LkaiAfwMiBed2uXXPnpy7V1A&s=10",
+                    "emoji": null,
+                    "artStart": "#f4b878",
+                    "artEnd": "#be593d"
+                },
+                {
+                    "name": "Five Nights at Freddy's 2",
+                    "category": "Horror",
+                    "href": "Assets/Games/clFNAF2.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqHI3jUP9xwiWBVRCCljvJOaZa1aVpUJeQNr-OPUvxJQ&s=10",
+                    "emoji": null,
+                    "artStart": "#f4b878",
+                    "artEnd": "#be593d"
+                },
+                {
+                    "name": "Five Nights at Freddy's 3",
+                    "category": "Horror",
+                    "href": "Assets/Games/clFNAF3.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXzB94K3FU4u9lqoANgAWCYz5KMhpYz_77gPr6F4np6A&s=10",
+                    "emoji": null,
+                    "artStart": "#f4b878",
+                    "artEnd": "#be593d"
+                },
+                {
+                    "name": "Five Nights at Freddy's 4",
+                    "category": "Horror",
+                    "href": "Assets/Games/clFNAF4.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFu2IIIp_a62Bb--xwWiVgX0cvpoCpmUSvh1aRUJkwA&s=10//encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFu2IIIp_a62Bb--xwWiVgX0cvpoCpmUSvh1aRUJkwA&s=10,",
+                    "emoji": null,
+                    "artStart": "#4c3b39",
+                    "artEnd": "#171516"
+                },
+                {
+                    "name": "Five Nights at Freddy's 4 Halloween",
+                    "category": "Horror",
+                    "href": "Assets/Games/clfnaf4halloween.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE4-sKlL6kKeMJjhdtQ-XtxfLsb9uoPVxiqJFCdeOwwQ&s=10",
+                    "emoji": null,
+                    "artStart": "#74452f",
+                    "artEnd": "#241b1b"
+                },
+                {
+                    "name": "Five Nights at Freddy's: Pizzeria Simulator",
+                    "category": "Horror",
+                    "href": "Assets/Games/clfnafps.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8leSTY-m45e5wvOySZ_NGgy2PnK_nlk69NrXDjAwHaQ&s=10",
+                    "emoji": null,
+                    "artStart": "#9d5539",
+                    "artEnd": "#35201e"
+                },
+                {
+                    "name": "Five Nights at Winston's",
+                    "category": "Horror",
+                    "href": "Assets/Games/clfnaw.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2gIT0lIlan8Cv-K9o4wa_db27uXlTMcok0rV6iSV53A&s=10",
+                    "emoji": null,
+                    "artStart": "#514c3c",
+                    "artEnd": "#1e2526"
+                },
+                {
+                    "name": "Five Night's at Epsteins",
+                    "category": "Horror",
+                    "href": "Assets/Games/clfivenightsatepsteins.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiVNw20zz43XKVt_GoUleQJC6WHurG-etO4mrd2r_gjA&s=10",
+                    "emoji": null,
+                    "artStart": "#514c3c",
+                    "artEnd": "#1e2526"
                 }
             ];
             const gameRatings = new Map([
@@ -2411,8 +2458,13 @@
                 ["Wrestle Bros", 3],
                 ["Flappy Bird", 4],
                 ["Brotato", 5],
-                ["Poly Track", 4],
-                ["Level Devil", 5]
+                ["Level Devil", 5],
+                ["Five Nights at Freddy's 4", 4],
+                ["Five Nights at Freddy's 4 Halloween", 4],
+                ["Five Nights at Freddy's: Pizzeria Simulator", 4],
+                ["Five Nights at Winston's", 4],
+                ["Five Night's at Epsteins", 4]
+
             ]);
             const playerProfileForm = document.querySelector("#player-profile-form");
             const playerNicknameInput = document.querySelector("#player-nickname");
@@ -2619,16 +2671,20 @@
                 category.className = "game-category";
                 category.textContent = game.category;
                 const rating = gameRatings.get(game.name);
-                const ratingDisplay = document.createElement("span");
-                ratingDisplay.className = "game-rating";
-                ratingDisplay.setAttribute("aria-label", `${rating} out of 5 stars`);
-                ratingDisplay.textContent = `${"★".repeat(Math.floor(rating))}${rating % 1 ? "½" : ""}${"☆".repeat(5 - Math.ceil(rating))}`;
+                const gameInfoItems = [title, category];
+                if (rating !== undefined) {
+                    const ratingDisplay = document.createElement("span");
+                    ratingDisplay.className = "game-rating";
+                    ratingDisplay.setAttribute("aria-label", `${rating} out of 5 stars`);
+                    ratingDisplay.textContent = `${"★".repeat(Math.floor(rating))}${rating % 1 ? "½" : ""}${"☆".repeat(5 - Math.ceil(rating))}`;
+                    gameInfoItems.push(ratingDisplay);
+                }
                 const playLabel = document.createElement("span");
                 playLabel.className = "play-label";
                 playLabel.textContent = "Play →";
                 const info = document.createElement("span");
                 info.className = "game-info";
-                info.append(title, category, ratingDisplay);
+                info.append(...gameInfoItems);
                 copy.append(info, playLabel);
                 gameLink.append(art, copy);
                 const favoriteButton = document.createElement("button");
