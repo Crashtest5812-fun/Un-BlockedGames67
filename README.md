@@ -3,9 +3,10 @@
 ## Game catalog
 
 Games are listed in the `games` array in `index.html`. Keep the name, category,
-game-page path, and image or emoji fallback in sync when adding a game. Search
-matches game names and categories. The menu keeps the five most recently opened
-games in that browser for quick access.
+game-page path or HTTPS URL, and optional image or emoji in sync when adding a
+game. When both image and emoji are null, the card displays its gradient artwork
+without an icon. Search matches game names and categories. The menu keeps the
+five most recently opened games in that browser for quick access.
 
 Run the catalog checks before publishing:
 

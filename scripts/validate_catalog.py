@@ -49,11 +49,16 @@ def main():
             errors.append(f"{name}: duplicate game link {href}")
         else:
             hrefs.add(href)
-            try:
-                if not local_file(href).is_file():
-                    errors.append(f"{name}: game file does not exist: {href}")
-            except ValueError as error:
-                errors.append(f"{name}: {error}")
+            parsed_href = urlparse(href)
+            if parsed_href.scheme:
+                if parsed_href.scheme not in {"http", "https"} or not parsed_href.netloc:
+                    errors.append(f"{name}: invalid game URL: {href}")
+            else:
+                try:
+                    if not local_file(href).is_file():
+                        errors.append(f"{name}: game file does not exist: {href}")
+                except ValueError as error:
+                    errors.append(f"{name}: {error}")
 
         if category not in ALLOWED_CATEGORIES:
             errors.append(f"{name}: invalid category {category!r}")
@@ -71,8 +76,10 @@ def main():
                         errors.append(f"{name}: local image does not exist: {image}")
                 except ValueError as error:
                     errors.append(f"{name}: {error}")
-        elif not isinstance(game.get("emoji"), str) or not game["emoji"]:
-            errors.append(f"{name}: needs an image or an emoji fallback")
+        elif game.get("emoji") is not None and (
+            not isinstance(game.get("emoji"), str) or not game["emoji"]
+        ):
+            errors.append(f"{name}: emoji must be a non-empty string or null")
 
         if not isinstance(game.get("artStart"), str) or not isinstance(game.get("artEnd"), str):
             errors.append(f"{name}: missing card artwork colors")
