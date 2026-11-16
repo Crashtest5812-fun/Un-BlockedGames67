@@ -20,10 +20,11 @@ external host.
 
 ## License
 
-Original code and documentation authored by Adrian Virrueta are released under
-the MIT License; see [`LICENSE`](./LICENSE). This does not cover third-party
-games, files in `Assets/Games/`, or third-party artwork, images, fonts,
-libraries, or other materials. Those remain subject to their respective
+Original code and documentation authored by Adrian Virrueta are licensed under
+the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+License (CC BY-NC-ND 4.0); see [`LICENSE`](./LICENSE). This does not cover
+third-party games, files in `Assets/Games/`, or third-party artwork, images,
+fonts, libraries, or other materials. Those remain subject to their respective
 licenses and permissions. This software license is separate from the site's
 Terms of Service, which govern use of the website.
 
