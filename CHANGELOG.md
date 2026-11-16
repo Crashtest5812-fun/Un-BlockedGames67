@@ -1,6 +1,12 @@
 # Update Log
 
-Notable updates to **Un-BlockedGames67**, based on the repository's commit history.
+Notable updates to **Crashtest Games**, based on the repository's commit history.
+
+## 2026-11-16 — Crashtest Games
+- Rebranded the site and kept the main page in the single `index.html` entry point.
+- Added the profile picture logo, animated loading mascot, loading tips, and pause messages.
+- Expanded the game catalog.
+- Added an interactive snapshot of the site's earliest committed homepage.
 
 ## 2026-11-02 — Version 26.1.1
 - Finished version 26.1.1.

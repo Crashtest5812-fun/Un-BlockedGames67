@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Un-Blocked Games 67</title>
-        <link rel="icon" type="image/png" href="https://freepngimg.com/thumb/letter/130045-c-letter-png-image-high-quality.png">
+        <title>Crashtest Games</title>
+        <link rel="icon" type="image/jpeg" href="https://crashtest5812-fun.github.io/Un-BlockedGames67/Assets/Crashtest.jpg">
         <style>
             :root {
                 --page-background: rgb(216, 216, 199);
@@ -209,9 +209,9 @@
 
             .brand-mark img {
                 display: block;
-                width: 38px;
-                height: 38px;
-                object-fit: contain;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
             }
 
             .brand-copy h1 {
@@ -219,6 +219,15 @@
                 font-size: clamp(1.25rem, 3vw, 1.75rem);
                 font-family: var(--heading-font);
                 letter-spacing: 0.02em;
+            }
+
+            .brand-former-name {
+                display: block;
+                margin-top: 2px;
+                color: var(--header-subtitle);
+                font-size: 0.72rem;
+                letter-spacing: 0.03em;
+                opacity: 0.82;
             }
 
             .brand-copy p {
@@ -1251,6 +1260,207 @@
                 border: 0;
             }
 
+            .game-player-loading {
+                position: absolute;
+                z-index: 1;
+                inset: 0;
+                display: grid;
+                place-content: center;
+                padding: 20px;
+                overflow: hidden;
+                color: var(--page-text);
+                background:
+                    radial-gradient(ellipse at 18% 18%, var(--surface-background), transparent 58%),
+                    radial-gradient(ellipse at 82% 84%, var(--page-background), transparent 54%),
+                    linear-gradient(145deg, var(--page-background), var(--surface-background));
+                opacity: 1;
+                transition: opacity 450ms ease;
+                isolation: isolate;
+            }
+
+            .game-player-loading.is-fading-out {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .game-player-loading.is-paused .game-player-mascot,
+            .game-player-loading.is-paused .game-player-loading-progress span {
+                animation-play-state: paused;
+            }
+
+            .game-player-loading::before,
+            .game-player-loading::after {
+                position: absolute;
+                z-index: -1;
+                width: min(34vw, 320px);
+                aspect-ratio: 1;
+                content: "";
+                border: 1px solid var(--surface-border);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+            .game-player-loading::before {
+                top: -18%;
+                left: -7%;
+                box-shadow: 0 0 0 28px var(--surface-border), 0 0 0 56px var(--surface-border);
+            }
+
+            .game-player-loading::after {
+                right: -9%;
+                bottom: -28%;
+                box-shadow: 0 0 0 34px var(--surface-border), 0 0 0 68px var(--surface-border);
+            }
+
+            .game-player-loading-panel {
+                display: grid;
+                justify-items: center;
+                gap: 14px;
+                width: min(440px, calc(100vw - 48px));
+                padding: clamp(24px, 5vw, 42px);
+                text-align: center;
+                color: var(--page-text);
+                background: var(--surface-background);
+                border: 1px solid var(--surface-border);
+                border-radius: 24px;
+                box-shadow: 0 24px 80px rgb(0 0 0 / 18%);
+                backdrop-filter: blur(14px);
+            }
+
+            .game-player-loading-label {
+                display: inline-flex;
+                align-items: center;
+                gap: 9px;
+                color: var(--muted-color);
+                font-size: 0.72rem;
+                font-weight: 800;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+            }
+
+            .game-player-loading-dot {
+                width: 8px;
+                height: 8px;
+                background: var(--header-accent);
+                border-radius: 50%;
+                box-shadow: 0 0 12px var(--header-accent);
+            }
+
+            .game-player-loading[hidden] {
+                display: none;
+            }
+
+            .game-player-mascot {
+                position: relative;
+                display: grid;
+                width: 80px;
+                height: 80px;
+                margin: 2px 0;
+                place-items: center;
+                filter: drop-shadow(0 5px 8px rgb(0 0 0 / 20%));
+                animation: game-player-mascot-bob 1.5s steps(2, end) infinite;
+            }
+
+            .game-player-mascot img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            .game-player-mascot-static {
+                display: none;
+                color: var(--header-color-end);
+                font-size: 4rem;
+                line-height: 1;
+            }
+
+            @keyframes game-player-mascot-bob {
+                50% {
+                    transform: translateY(-5px);
+                }
+            }
+
+            .game-player-loading-title {
+                margin: 0;
+                color: var(--heading-color);
+                font-size: clamp(1.35rem, 3vw, 1.8rem);
+                line-height: 1.2;
+            }
+
+            .game-player-loading-game-name {
+                color: var(--header-color-end);
+            }
+
+            .game-player-loading-copy {
+                margin: 0;
+                color: var(--muted-color);
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+
+            .game-player-loading-tip {
+                max-width: 320px;
+                margin: 0;
+                padding-top: 12px;
+                color: var(--muted-color);
+                font-size: 0.82rem;
+                line-height: 1.45;
+                border-top: 1px solid var(--surface-border);
+            }
+
+            .game-player-loading-progress {
+                width: min(280px, 100%);
+                height: 7px;
+                margin-top: 6px;
+                overflow: hidden;
+                background: var(--control-border);
+                border-radius: 999px;
+            }
+
+            .game-player-loading-progress span {
+                display: block;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, var(--header-color-end), var(--header-accent));
+                border-radius: inherit;
+                transform: scaleX(0);
+                transform-origin: left;
+                animation: game-player-progress 4.55s linear forwards;
+            }
+
+            @keyframes game-player-progress {
+                to {
+                    transform: scaleX(1);
+                }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .game-player-loading {
+                    transition: none;
+                }
+
+                .game-player-mascot {
+                    animation: none;
+                }
+
+                .game-player-mascot img {
+                    display: none;
+                }
+
+                .game-player-mascot-static {
+                    display: block;
+                }
+
+                .game-player-loading-progress span {
+                    animation: none;
+                }
+
+                .game-player-loading-progress span {
+                    transform: scaleX(1);
+                }
+            }
+
             .game-player-status {
                 margin: 0;
                 padding: 8px 18px;
@@ -1445,10 +1655,11 @@
     <body>
         <header>
             <div class="brand-mark">
-                <img src="https://freepngimg.com/thumb/letter/130045-c-letter-png-image-high-quality.png" alt="">
+                <img src="https://crashtest5812-fun.github.io/Un-BlockedGames67/Assets/Crashtest.jpg" alt="">
             </div>
             <div class="brand-copy">
-                <h1>Un-Blocked Games 67</h1>
+                <h1>Crashtest Games</h1>
+                <span class="brand-former-name">formerly Un-Blocked Games 67</span>
                 <p>Play • Explore • Enjoy</p>
                 <span class="version-badge">26.2.1Pre</span>
             </div>
@@ -1616,6 +1827,19 @@
             </div>
             <div class="game-player-stage" id="game-player-stage">
                 <iframe class="game-player-frame" id="game-player-frame" title="Game" allow="autoplay; fullscreen; gamepad" allowfullscreen></iframe>
+                <div class="game-player-loading" id="game-player-loading" aria-hidden="true">
+                    <div class="game-player-loading-panel">
+                        <span class="game-player-loading-label"><span class="game-player-loading-dot" aria-hidden="true"></span><span id="game-player-loading-label">Preparing your game</span></span>
+                        <span class="game-player-mascot" aria-hidden="true">
+                            <img src="https://crashtest5812-fun.github.io/Un-BlockedGames67/Assets/Puch.gif" alt="">
+                            <span class="game-player-mascot-static">👾</span>
+                        </span>
+                        <h4 class="game-player-loading-title">Loading <span class="game-player-loading-game-name" id="game-player-loading-name">your game</span></h4>
+                        <p class="game-player-loading-copy" id="game-player-loading-copy">Getting everything ready. Hang tight!</p>
+                        <p class="game-player-loading-tip" id="game-player-loading-tip"></p>
+                        <div class="game-player-loading-progress" aria-hidden="true"><span></span></div>
+                    </div>
+                </div>
             </div>
             <p class="game-player-status" id="game-player-status" role="status" aria-live="polite"></p>
             <div class="game-player-actions">
@@ -1630,9 +1854,9 @@
                 <h3 id="terms-heading">Terms of Service</h3>
                 <p class="policy-effective-date">Effective October 27, 2026</p>
                 <h4>1. Acceptance of Terms</h4>
-                <p>By accessing, browsing, or using Un-Blocked Games 67, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you must discontinue your use of the website immediately.</p>
+                <p>By accessing, browsing, or using Crashtest Games, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you must discontinue your use of the website immediately.</p>
                 <h4>2. Description of Service</h4>
-                <p>Un-Blocked Games 67 provides a collection of free, browser-based casual, action, racing, and multiplayer games intended for casual entertainment. The service is provided "as is" and "as available" without warranties of any kind.</p>
+                <p>Crashtest Games provides a collection of free, browser-based casual, action, racing, and multiplayer games intended for casual entertainment. The service is provided "as is" and "as available" without warranties of any kind.</p>
                 <h4>3. Acceptable Use and Classroom/Network Policies</h4>
                 <ul>
                     <li><strong>No Interference:</strong> You agree not to disrupt, overload, or compromise the functionality of the website or the network infrastructure it is accessed through.</li>
@@ -1640,13 +1864,13 @@
                 </ul>
                 <h4>4. Third-Party Content and External Links</h4>
                 <ul>
-                    <li><strong>Embedded Games:</strong> Many games hosted or linked on Un-Blocked Games 67 belong to third-party developers, creators, or external platforms (such as FreezeNova or other web game providers). We do not claim ownership over third-party source codes or intellectual property unless explicitly stated.</li>
+                    <li><strong>Embedded Games:</strong> Many games hosted or linked on Crashtest Games belong to third-party developers, creators, or external platforms (such as FreezeNova or other web game providers). We do not claim ownership over third-party source codes or intellectual property unless explicitly stated.</li>
                     <li><strong>Advertisements and Redirects:</strong> Unblocked games websites may feature third-party advertisements, pop-ups, or external links. We do not endorse, control, or take responsibility for the content, privacy policies, or security of third-party websites or ad networks. Use caution and avoid clicking deceptive links or downloading unverified files.</li>
                 </ul>
                 <h4>5. Disclaimer of Warranties and Limitation of Liability</h4>
                 <ul>
                     <li><strong>No Guarantee of Uptime:</strong> We do not guarantee that the website will be uninterrupted, error-free, or permanently accessible, as network administrators or hosting providers may restrict access at any time.</li>
-                    <li><strong>No Liability for Damages:</strong> Under no circumstances shall the operators of Un-Blocked Games 67 be liable for any direct, indirect, incidental, or consequential damages arising out of your use of or inability to use the website, including loss of data or school/work penalties.</li>
+                    <li><strong>No Liability for Damages:</strong> Under no circumstances shall the operators of Crashtest Games be liable for any direct, indirect, incidental, or consequential damages arising out of your use of or inability to use the website, including loss of data or school/work penalties.</li>
                 </ul>
                 <h4>6. Changes to the Terms</h4>
                 <p>We reserve the right to modify or update these Terms of Service at any time without prior notice. Continued use of the website after any modifications indicates your acceptance of the updated terms.</p>
@@ -1656,7 +1880,7 @@
             <section class="policy-document" id="confidentiality-document" tabindex="0" aria-labelledby="confidentiality-heading">
                 <h3 id="confidentiality-heading">Confidentiality Policy</h3>
                 <p class="policy-effective-date">Effective October 27, 2026</p>
-                <p>Welcome to Un-Blocked Games 67. We value the privacy of our contributors and users. This Confidentiality Policy explains how we collect, protect, and handle your information when you request access to share games on our platform.</p>
+                <p>Welcome to Crashtest Games. We value the privacy of our contributors and users. This Confidentiality Policy explains how we collect, protect, and handle your information when you request access to share games on our platform.</p>
                 <h4>1. Information We Collect</h4>
                 <p>To maintain a safe and high-quality sharing environment, we require contributors to request access before publishing content.</p>
                 <ul>
@@ -2447,7 +2671,7 @@
                     "name": "Age of War",
                     "category": "Other",
                     "href": "Assets/Games/clageofwar.html",
-                    "image": null,
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPr9FCJ1GrcmPmd1fcJSYQGxN_30fBoS-pZCbbxrLQ7w&s=10",
                     "emoji": null,
                     "artStart": "#e6b45e",
                     "artEnd": "#8f5138"
@@ -2456,7 +2680,7 @@
                     "name": "Baldi's Basics",
                     "category": "Horror",
                     "href": "Assets/Games/clbaldisbasics.html",
-                    "image": null,
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpKB8QqlPiZmXlgvOvUX_zrtWhr-u17nvRXs59K-a1nA&s=10",
                     "emoji": null,
                     "artStart": "#8bb66c",
                     "artEnd": "#4d764d"
@@ -2613,6 +2837,222 @@
                     "emoji": null,
                     "artStart": "#c793d5",
                     "artEnd": "#665092"
+                },
+                {
+                    "name": "Fancy Pants Adventures",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clfancypantsadventure.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS3H8S9Q6vYNhct08b1A96DtCaFP37uu3Na9MpMaO5cA&s=10",
+                    "emoji": null,
+                    "artStart": "#f3a85e",
+                    "artEnd": "#c54e45"
+                },
+                {
+                    "name": "Fancy Pants Adventures 2",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clfancypantsadventure2.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy95a8FpXUii_VVKaHAHY-YL5tfMNLgV6vnQrj3g0sjQ&s=10",
+                    "emoji": null,
+                    "artStart": "#efbd68",
+                    "artEnd": "#ad5946"
+                },
+                {
+                    "name": "Fancy Pants Adventures 3",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clfancypantsadventure3.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAciBQCXcoxnQuD0s7oaaeisVLXvuL2dBtsYKU0MZjNQ&s=10",
+                    "emoji": null,
+                    "artStart": "#f3a85e",
+                    "artEnd": "#c54e45"
+                },
+                {
+                    "name": "Fancy Pants Adventures 4: Part 1",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clfpa4p1.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcJQiXvN3u-XrxRhrMSEDTlu1P7f-xAa7j6oDSRBfv-A&s=10",
+                    "emoji": null,
+                    "artStart": "#efbd68",
+                    "artEnd": "#ad5946"
+                },
+                {
+                    "name": "Fancy Pants Adventures 4: Part 2",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clfpa4p2.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcJQiXvN3u-XrxRhrMSEDTlu1P7f-xAa7j6oDSRBfv-A&s=10",
+                    "emoji": null,
+                    "artStart": "#f3a85e",
+                    "artEnd": "#c54e45"
+                },
+                {
+                    "name": "60 Seconds Burger Run",
+                    "category": "Arcade",
+                    "href": "Assets/Games/cl60secondsburgerrun.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZ8xzQG_FYvyZ7fZ39jfn8cKTq0SNV8G7aKUsGPgw5A&s=10",
+                    "emoji": null,
+                    "artStart": "#e9ab68",
+                    "artEnd": "#ae5440"
+                },
+                {
+                    "name": "Bart Blast",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clbartblast.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1gdaXrurmb0GxiphLHI4rFByoO1jjlVfHTwXJdXKuCg&s=10",
+                    "emoji": null,
+                    "artStart": "#f0ca67",
+                    "artEnd": "#cc674b"
+                },
+                {
+                    "name": "Bloxorz",
+                    "category": "Puzzle",
+                    "href": "Assets/Games/clbloxorz.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNCylsiIKkQR_qtA7Gc8EY-HqMu4eK_UjcdpCdCjjByw&s=10",
+                    "emoji": null,
+                    "artStart": "#91b8cb",
+                    "artEnd": "#4c6a8c"
+                },
+                {
+                    "name": "Cookie Clicker",
+                    "category": "Casual",
+                    "href": "Assets/Games/clcookieclicker.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvKnvNJT4eT09DesAXpA4Vdxssn5fRulsbU3BkFYo6KA&s",
+                    "emoji": null,
+                    "artStart": "#e8bf83",
+                    "artEnd": "#986347"
+                },
+                {
+                    "name": "Doge Miner",
+                    "category": "Casual",
+                    "href": "Assets/Games/cldogeminer.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRos9uhwdpOtJj0xybDqxpfFw99aX1rv6AAXfxCJWFkwQ&s=10",
+                    "emoji": null,
+                    "artStart": "#efca68",
+                    "artEnd": "#a87435"
+                },
+                {
+                    "name": "GachaVerse",
+                    "category": "Casual",
+                    "href": "Assets/Games/clgachaverse.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxI5AE9RjKrHPklG8z-No24bzHrcQGBK51vgIJAsbr_Q&s",
+                    "emoji": null,
+                    "artStart": "#d49de0",
+                    "artEnd": "#7456a1"
+                },
+                {
+                    "name": "Grow a Garden",
+                    "category": "Casual",
+                    "href": "Assets/Games/clgrowagarden.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR75GauiQAr-aTuFRjok8uaVoddvdlm5T3F21SzT1_mvQ&s=10",
+                    "emoji": null,
+                    "artStart": "#97c978",
+                    "artEnd": "#4b8e63"
+                },
+                {
+                    "name": "Gun Knight",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clgunknight.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdQNWT5W-MtdSnY0Cn3wBdoTdLUSCd319QF1RtfPQmyg&s=10",
+                    "emoji": null,
+                    "artStart": "#d39270",
+                    "artEnd": "#604c68"
+                },
+                {
+                    "name": "The Impossible Quiz",
+                    "category": "Puzzle",
+                    "href": "Assets/Games/climpossiblequiz.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy9oIHjvqImst9iT2g0e5JJdcSF7vpFX1io3sDqzs2Ew&s=10",
+                    "emoji": null,
+                    "artStart": "#db9d73",
+                    "artEnd": "#834c48"
+                },
+                {
+                    "name": "Infinite Craft",
+                    "category": "Puzzle",
+                    "href": "Assets/Games/clinfinitecraft.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyP8pnilRXuca_IBpbJOZBm7jypJ8E7qZpYdktPZYLhg&s",
+                    "emoji": null,
+                    "artStart": "#8bb8d1",
+                    "artEnd": "#574d84"
+                },
+                {
+                    "name": "Obby Jail Break: Two Players",
+                    "category": "Arcade",
+                    "href": "Assets/Games/cljailbreakobbbobob.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXEmGV7Yx7gUhr811LFSb66IqdGHTuum2ZCZowogKbQ&s=10",
+                    "emoji": null,
+                    "artStart": "#88bcdc",
+                    "artEnd": "#56518a"
+                },
+                {
+                    "name": "Obby 99% Will Lose",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clobby-99-will-lose.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwXfsFcnUuE3GOoW-mKykNU1RPsjJAR43lnyag8eaI6Q&s=10",
+                    "emoji": null,
+                    "artStart": "#b2a1cb",
+                    "artEnd": "#5c547c"
+                },
+                {
+                    "name": "Obby 1 Jump Per Click",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clobby1jumpperclick.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ-EZNHJ4j2HK7cYMRwA-d0De5JXK_3KDq_eflrDEJzw&s=10",
+                    "emoji": null,
+                    "artStart": "#78bed2",
+                    "artEnd": "#455b92"
+                },
+                {
+                    "name": "Vex",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clvex.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnVg2s9Uf3DgDN6tEM47El_8YYI3b1Dw6byn5VdrZdMQ&s=10",
+                    "emoji": null,
+                    "artStart": "#a9b5b7",
+                    "artEnd": "#4c5a6d"
+                },
+                {
+                    "name": "Vex 2",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clvex2.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHBIY2b2i7c1qJ7Zl3EVm8bibfc6v2iHKtS6yZ9Rmpdg&s=10",
+                    "emoji": null,
+                    "artStart": "#a9b5b7",
+                    "artEnd": "#4c5a6d"
+                },
+                {
+                    "name": "Whack Your Boss",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clwhackyourboss.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT7y6O8U68nJpHh9ZLJgsjWzNez_8vdu_pFDJAuNkieUrAMAf3Weno3-g&s=10",
+                    "emoji": null,
+                    "artStart": "#bd9e87",
+                    "artEnd": "#5f4751"
+                },
+                {
+                    "name": "EaglercraftX 1.8",
+                    "category": "Other",
+                    "href": "Assets/Games/clEaglercraftX188(u29).html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyf81pqZn2XJ-YrSh5YgIvo0D5i1WJiT5vn35IpkQvcA&s",
+                    "emoji": null,
+                    "artStart": "#9cc77a",
+                    "artEnd": "#53735c"
+                },
+                {
+                    "name": "Among Us",
+                    "category": "Arcade",
+                    "href": "Assets/Games/clamongus.html",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsJb5ORafg2n6qiFut80-ks6dLYu3BFn62j-ixdhMkVA&s=10",
+                    "emoji": null,
+                    "artStart": "#e9877e",
+                    "artEnd": "#6d425e"
+                },
+                {
+                    "name": "Crashtest Games: The Beginning",
+                    "category": "Other",
+                    "href": "CrashtestGamesBeginning.html",
+                    "image": null,
+                    "emoji": null,
+                    "artStart": "#b7c98e",
+                    "artEnd": "#5c806c"
                 }
             ];
             const gameRatings = new Map([
@@ -2937,7 +3377,154 @@
             const gamePlayerStatus = document.querySelector("#game-player-status");
             const gamePlayerFullscreenButton = document.querySelector("#game-player-fullscreen");
             const gamePlayerCloseButton = document.querySelector("#game-player-close");
+            const gamePlayerLoadingScreen = document.querySelector("#game-player-loading");
+            const gamePlayerLoadingName = document.querySelector("#game-player-loading-name");
+            const gamePlayerLoadingLabel = document.querySelector("#game-player-loading-label");
+            const gamePlayerLoadingCopy = document.querySelector("#game-player-loading-copy");
+            const gamePlayerLoadingTip = document.querySelector("#game-player-loading-tip");
+            const gamePlayerLoadingDurationMs = 5000;
+            const gamePlayerLoadingFadeDurationMs = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 450;
+            const gamePlayerLoadingMessages = [
+                "Warming up the pixels…",
+                "Tuning the game world…",
+                "Getting everything ready…",
+                "Almost there—get ready to play!"
+            ];
+            const gamePlayerLoadingTips = {
+                "People Playground": "Tip: Try different tools and see how the objects react.",
+                "Fruit Ninja": "Tip: Slice fruit quickly, but keep an eye out for bombs.",
+                "Fork N Sausage": "Tip: Use each level's objects and momentum to guide the sausage to the fork.",
+                "Getaway Shootout": "Tip: Time your jumps carefully to outmaneuver the other racers.",
+                "Rooftop Snipers": "Tip: Use recoil and well-timed shots to knock your opponent off the roof.",
+                "Basket Random": "Tip: Time your jumps around the unpredictable ragdoll bounces.",
+                "Soccer Random": "Tip: Watch the ball's bounce and time your kick instead of rushing.",
+                "Boxing Random": "Tip: Wait for an opening, then time your punch and jump together.",
+                "Google Baseball": "Tip: Swing when the pitch reaches the plate.",
+                "Google Dino": "Tip: Jump over cacti and duck under flying obstacles.",
+                "Snake": "Tip: Plan your turns early so you don't run into your own tail.",
+                "Time Shooter 2": "Tip: Time moves when you move, so pause to plan your next move.",
+                "1v1.lol": "Tip: Build cover and take the high ground before you shoot.",
+                "Escape Road": "Tip: Look ahead through traffic and avoid getting boxed in.",
+                "Escape Road 2": "Tip: Leave room to turn before traffic closes around you.",
+                "Escape Road City 2": "Tip: Use open streets to plan your next escape route.",
+                "Ragdoll Hit": "Tip: Aim your swings and use knockback to send rivals flying.",
+                "Ragdoll Archers": "Tip: Lead moving targets and account for your arrows' arc.",
+                "Rooftop Snipers 2": "Tip: Track your opponent's movement before taking a shot.",
+                "GrindCraft": "Tip: Gather basic materials first, then craft tools to speed up progress.",
+                "2048": "Tip: Keep your largest tile in one corner and build around it.",
+                "2 3 4 Player Games": "Tip: Check the on-screen controls to see which keys belong to each player.",
+                "Run 3": "Tip: The walls are part of the path—rotate the tunnel when you need to.",
+                "Escape Road 3": "Tip: Keep an escape route open instead of driving into a dead end.",
+                "Retro Bowl": "Tip: Watch the receiver's route and lead your pass into open space.",
+                "Retro Bowl College": "Tip: Build your roster around a balanced offense and defense.",
+                "Snow Rider 3D": "Tip: Look ahead and steer around obstacles before they reach you.",
+                "Eggy Car": "Tip: Ease off the gas on hills to keep the egg from bouncing out.",
+                "Sandboxels": "Tip: Experiment with small element combinations to discover how they interact.",
+                "Super Smash Bros.": "Tip: Build up damage, then use a strong hit to launch your opponent.",
+                "Funny Shooter 2": "Tip: Keep moving while aiming so enemies have a harder time hitting you.",
+                "SUPERHOT": "Tip: Since time moves when you move, plan each action before committing.",
+                "Time Shooter 3 SWAT": "Tip: Use the pauses between movements to line up your next shot.",
+                "Moto X3M": "Tip: Balance throttle and brake in midair to land cleanly.",
+                "Moto X3M Winter": "Tip: Adjust your flips to land safely on slippery winter tracks.",
+                "Moto X3M Pool Party": "Tip: Keep your bike balanced over the waterpark jumps.",
+                "Moto X3M Spooky Land": "Tip: Watch for moving traps before launching off a ramp.",
+                "OvO 2": "Tip: Link slides, wall jumps, and dives to keep your momentum.",
+                "Paper.io": "Tip: Make short territory runs and return safely before opponents cut you off.",
+                "Pixel Shooter 1": "Tip: Keep moving, collect useful pickups, and aim ahead of moving rivals.",
+                "Please, Don’t Touch Anything": "Tip: Inspect the panel for clues before trying its controls.",
+                "Baseball Bros": "Tip: Watch the pitch and time your swing for the center of the strike zone.",
+                "Basketball Legends": "Tip: Mix up your shots and blocks so your opponent can't predict you.",
+                "Basketball Stars": "Tip: Use fakes to create space before taking your shot.",
+                "Basket Bros": "Tip: Time your jump and shot while keeping an eye on your opponent.",
+                "BitLife": "Tip: Each choice shapes your character's life—try different paths.",
+                "Tunnel Rush": "Tip: Look toward the center of the tunnel to spot openings sooner.",
+                "Papa's Bakeria": "Tip: Follow each ticket carefully and decorate orders to match.",
+                "Papa's Burgeria": "Tip: Keep an eye on the grill timer while building each order.",
+                "Papa's Cheeseria": "Tip: Prep the sandwiches in ticket order to keep customers moving.",
+                "Papa's Pancakeria": "Tip: Watch the cook timers and stack each order to match the ticket.",
+                "Papa's Sushiria": "Tip: Check each order for the right ingredients and roll before slicing.",
+                "Subway Surfers: San Francisco": "Tip: Switch lanes early, and time jumps and rolls around trains.",
+                "Football Bros": "Tip: Use quick direction changes to make space before you run or pass.",
+                "Soccer Bros": "Tip: Keep the ball close and look for an opening before shooting.",
+                "Wrestle Bros": "Tip: Build momentum and time your grapple near the ring ropes.",
+                "Flappy Bird": "Tip: Use small, steady taps to guide the bird through each gap.",
+                "Brotato": "Tip: Choose upgrades that complement your weapons and survive each wave.",
+                "Level Devil": "Tip: Expect familiar platforms to hide surprises and test each step.",
+                "Five Nights at Freddy's": "Tip: Check cameras selectively and conserve power until morning.",
+                "Five Nights at Freddy's 2": "Tip: Keep the music box wound and react quickly with the mask.",
+                "Five Nights at Freddy's 3": "Tip: Use audio to lure threats away and keep the systems working.",
+                "Five Nights at Freddy's 4": "Tip: Listen closely at the doors before using the flashlight.",
+                "Five Nights at Freddy's 4 Halloween": "Tip: Listen for danger at each doorway before shining your light.",
+                "Five Nights at Freddy's: Pizzeria Simulator": "Tip: Listen for sounds in the vents while finishing your tasks.",
+                "Five Nights at Winston's": "Tip: Watch for movement and check the room before using a resource.",
+                "Five Night's at Epsteins": "Tip: Monitor your surroundings and manage your limited tools carefully.",
+                "Crazy Cattle 3D": "Tip: Use your sheep's momentum to bump rivals out of the arena.",
+                "Drift Hunters": "Tip: Hold a smooth drift through corners to build your score.",
+                "MR RACER": "Tip: Look ahead for traffic and make your overtakes early.",
+                "Tag": "Tip: Keep moving and use the arena layout to avoid being tagged.",
+                "Bit Planes - Modified!": "Tip: Watch the incoming hazards and steer into open sky.",
+                "Age of War": "Tip: Balance your unit production with saving up for the next age.",
+                "Baldi's Basics": "Tip: Solve notebooks while keeping track of where Baldi is.",
+                "Big Tower Tiny Square": "Tip: Use short, precise jumps to climb the tower safely.",
+                "Big Tower Tiny Square 2": "Tip: Learn each obstacle's timing before committing to a jump.",
+                "Hobo": "Tip: Chain attacks together and watch for enemies approaching from either side.",
+                "Hobo 2": "Tip: Keep moving through the crowd and chain your attacks.",
+                "Hobo 3": "Tip: Look for openings to interrupt enemies before they surround you.",
+                "Hobo 4": "Tip: Mix attacks to handle groups coming from different directions.",
+                "Hobo 5": "Tip: Stay mobile and use attack combos when enemies bunch up.",
+                "Hobo 6": "Tip: Watch both sides of the screen and avoid getting cornered.",
+                "Hobo 7": "Tip: Use your combos to clear space when enemies close in.",
+                "Pokémon FireRed": "Tip: Build a balanced team and use type matchups to your advantage.",
+                "Pokémon Unbound": "Tip: Check type matchups and build a team with complementary strengths.",
+                "Stealing the Diamond": "Tip: Try different plans—the choices can lead to very different outcomes.",
+                "Infiltrating the Airship": "Tip: Explore the branching choices; failed attempts can reveal useful options.",
+                "Breaking the Bank": "Tip: Experiment with each option to see where Henry's plan goes wrong.",
+                "Escaping the Prison": "Tip: Try different items and choices to uncover alternate escape routes.",
+                "Fleeing the Complex": "Tip: Pay attention to each decision—small choices change the escape.",
+                "Super Smash Flash": "Tip: Build damage and watch your opponent's position before launching an attack.",
+                "Fancy Pants Adventures": "Tip: Keep your running momentum to leap farther and explore more of the level.",
+                "Fancy Pants Adventures 2": "Tip: Use slopes and walls to keep your FancyPants moving quickly.",
+                "Fancy Pants Adventures 3": "Tip: Carry your momentum through jumps and look out for hidden paths.",
+                "Fancy Pants Adventures 4: Part 1": "Tip: Link slides and jumps to keep moving through each stage.",
+                "Fancy Pants Adventures 4: Part 2": "Tip: Use your momentum to reach platforms and explore side paths.",
+                "60 Seconds Burger Run": "Tip: Keep moving and watch for obstacles on the way to the burger.",
+                "Bart Blast": "Tip: Track the targets and line up your shots before firing.",
+                "Bloxorz": "Tip: Plan each roll so the block reaches the goal without falling off.",
+                "Cookie Clicker": "Tip: Spend cookies on upgrades to automate your bakery.",
+                "Doge Miner": "Tip: Buy mining upgrades and helpers to earn Dogecoins faster.",
+                "GachaVerse": "Tip: Try different character customizations and explore the available modes.",
+                "Grow a Garden": "Tip: Plant crops, care for them, and harvest when they're ready.",
+                "Gun Knight": "Tip: Keep moving through the arena and aim before enemies close in.",
+                "The Impossible Quiz": "Tip: Read each question carefully—some answers rely on wordplay.",
+                "Infinite Craft": "Tip: Combine discoveries in unexpected ways to unlock new elements.",
+                "Obby Jail Break: Two Players": "Tip: Coordinate jumps with your partner to get through the obby.",
+                "Obby 99% Will Lose": "Tip: Take each obstacle one step at a time instead of rushing.",
+                "Obby 1 Jump Per Click": "Tip: Click once per jump and pace your taps to clear each gap.",
+                "Vex": "Tip: Watch each obstacle, then time your jump and slide.",
+                "Vex 2": "Tip: Use checkpoints and time your jumps around the traps.",
+                "Whack Your Boss": "Tip: Explore the scene and try different objects to discover its outcomes.",
+                "EaglercraftX 1.8": "Tip: Gather wood first, then craft tools to help you explore and build.",
+                "Among Us": "Tip: Finish tasks while watching for suspicious behavior.",
+                "Crashtest Games: The Beginning": "Tip: Browse the original 19-game catalog to see how the site started."
+            };
+            const gamePlayerLoadingCategoryTips = {
+                Sports: "Tip: Watch the play develop and time your move for an opening.",
+                Racing: "Tip: Look ahead and steer smoothly to avoid obstacles.",
+                Arcade: "Tip: Learn the obstacle patterns and time your moves carefully.",
+                Puzzle: "Tip: Take a moment to spot a pattern before making your next move.",
+                Casual: "Tip: Explore the options and try a few strategies.",
+                Horror: "Tip: Pay attention to the sounds and movement around you.",
+                Other: "Tip: Check the game's instructions and experiment at your own pace."
+            };
+            let lastGamePlayerLoadingMessageIndex = -1;
             let activeGame = null;
+            let gamePlayerLoadingTimeout = null;
+            let gamePlayerLoadingPauseTimeout = null;
+            let gamePlayerLoadingFadeTimeout = null;
+            let gamePlayerLoadingMessageInterval = null;
+            let gamePlayerFrameLoaded = false;
+            let gamePlayerLoadingRemainingMs = 0;
+            let gamePlayerLoadingActiveStartedAt = 0;
 
             const fitGameFrame = () => {
                 const { width, height } = gamePlayerStage.getBoundingClientRect();
@@ -2951,22 +3538,106 @@
 
             new ResizeObserver(fitGameFrame).observe(gamePlayerStage);
 
+            const stopGamePlayerLoadingMessages = () => {
+                if (gamePlayerLoadingMessageInterval !== null) {
+                    window.clearInterval(gamePlayerLoadingMessageInterval);
+                    gamePlayerLoadingMessageInterval = null;
+                }
+            };
+
+            const startGamePlayerLoadingMessages = () => {
+                stopGamePlayerLoadingMessages();
+                const showRandomMessage = () => {
+                    let messageIndex = Math.floor(Math.random() * gamePlayerLoadingMessages.length);
+                    if (messageIndex === lastGamePlayerLoadingMessageIndex) {
+                        messageIndex = (messageIndex + 1) % gamePlayerLoadingMessages.length;
+                    }
+                    lastGamePlayerLoadingMessageIndex = messageIndex;
+                    gamePlayerLoadingCopy.textContent = gamePlayerLoadingMessages[messageIndex];
+                };
+                showRandomMessage();
+                gamePlayerLoadingMessageInterval = window.setInterval(showRandomMessage, 1400);
+            };
+
+            const startGamePlayerLoadingTimer = () => {
+                gamePlayerLoadingActiveStartedAt = performance.now();
+                gamePlayerLoadingTimeout = window.setTimeout(() => {
+                    gamePlayerLoadingTimeout = null;
+                    stopGamePlayerLoadingMessages();
+                    gamePlayerLoadingScreen.classList.add("is-fading-out");
+                    gamePlayerLoadingFadeTimeout = window.setTimeout(() => {
+                        gamePlayerLoadingFadeTimeout = null;
+                        gamePlayerLoadingScreen.hidden = true;
+                        gamePlayerLoadingScreen.classList.remove("is-fading-out");
+                        if (gamePlayerFrameLoaded && activeGame) {
+                            gamePlayerStatus.textContent = `Now playing ${activeGame.name}.`;
+                            gamePlayerFrame.focus();
+                        }
+                    }, gamePlayerLoadingFadeDurationMs);
+                }, gamePlayerLoadingRemainingMs);
+            };
+
             const openGamePlayer = (game) => {
+                if (gamePlayerLoadingTimeout !== null) window.clearTimeout(gamePlayerLoadingTimeout);
+                if (gamePlayerLoadingPauseTimeout !== null) window.clearTimeout(gamePlayerLoadingPauseTimeout);
+                if (gamePlayerLoadingFadeTimeout !== null) window.clearTimeout(gamePlayerLoadingFadeTimeout);
+                gamePlayerLoadingTimeout = null;
+                gamePlayerLoadingPauseTimeout = null;
+                gamePlayerLoadingFadeTimeout = null;
                 activeGame = game;
+                gamePlayerFrameLoaded = false;
+                gamePlayerLoadingRemainingMs = gamePlayerLoadingDurationMs - gamePlayerLoadingFadeDurationMs;
                 gamePlayerTitle.textContent = game.name;
                 gamePlayerFrame.title = game.name;
+                gamePlayerLoadingName.textContent = game.name;
+                gamePlayerLoadingTip.textContent = gamePlayerLoadingTips[game.name]
+                    || gamePlayerLoadingCategoryTips[game.category];
                 gamePlayerStatus.textContent = `Loading ${game.name}…`;
-                gamePlayerFrame.src = getAssetUrl(game.href);
+                gamePlayerLoadingLabel.textContent = "Preparing your game";
+                gamePlayerLoadingScreen.classList.remove("is-fading-out", "is-paused");
+                gamePlayerLoadingScreen.hidden = false;
                 if (typeof gamePlayerDialog.showModal === "function") {
                     gamePlayerDialog.showModal();
                     requestAnimationFrame(fitGameFrame);
                 }
+                startGamePlayerLoadingMessages();
+                startGamePlayerLoadingTimer();
+                const pauseDelayMs = Math.floor(700 + Math.random() * 1600);
+                gamePlayerLoadingPauseTimeout = window.setTimeout(() => {
+                    gamePlayerLoadingPauseTimeout = null;
+                    gamePlayerLoadingRemainingMs = Math.max(
+                        0,
+                        gamePlayerLoadingRemainingMs - (performance.now() - gamePlayerLoadingActiveStartedAt)
+                    );
+                    window.clearTimeout(gamePlayerLoadingTimeout);
+                    gamePlayerLoadingTimeout = null;
+                    gamePlayerLoadingScreen.classList.add("is-paused");
+                    stopGamePlayerLoadingMessages();
+                    gamePlayerLoadingLabel.textContent = "Taking a quick pause";
+                    gamePlayerLoadingCopy.textContent = "Just a moment—we’ll get right back to it.";
+                    gamePlayerStatus.textContent = `Loading ${activeGame.name} is taking a quick pause…`;
+                    const pauseDurationMs = Math.floor(450 + Math.random() * 700);
+                    gamePlayerLoadingPauseTimeout = window.setTimeout(() => {
+                        gamePlayerLoadingPauseTimeout = null;
+                        gamePlayerLoadingScreen.classList.remove("is-paused");
+                        gamePlayerLoadingLabel.textContent = "Preparing your game";
+                        gamePlayerStatus.textContent = `Loading ${activeGame.name}…`;
+                        startGamePlayerLoadingMessages();
+                        startGamePlayerLoadingTimer();
+                    }, pauseDurationMs);
+                }, pauseDelayMs);
+                gamePlayerFrame.src = getAssetUrl(game.href);
             };
 
             gamePlayerFrame.addEventListener("load", () => {
                 if (activeGame) {
-                    gamePlayerStatus.textContent = `Now playing ${activeGame.name}.`;
-                    gamePlayerFrame.focus();
+                    gamePlayerFrameLoaded = true;
+                    if (gamePlayerLoadingTimeout === null
+                        && gamePlayerLoadingPauseTimeout === null
+                        && gamePlayerLoadingFadeTimeout === null) {
+                        gamePlayerStatus.textContent = `Now playing ${activeGame.name}.`;
+                        gamePlayerFrame.focus();
+                    }
                 }
             });
             gamePlayerCloseButton.addEventListener("click", () => gamePlayerDialog.close());
@@ -2974,7 +3645,23 @@
                 if (event.target === gamePlayerDialog) gamePlayerDialog.close();
             });
             gamePlayerDialog.addEventListener("close", () => {
+                stopGamePlayerLoadingMessages();
+                if (gamePlayerLoadingTimeout !== null) {
+                    window.clearTimeout(gamePlayerLoadingTimeout);
+                    gamePlayerLoadingTimeout = null;
+                }
+                if (gamePlayerLoadingPauseTimeout !== null) {
+                    window.clearTimeout(gamePlayerLoadingPauseTimeout);
+                    gamePlayerLoadingPauseTimeout = null;
+                }
+                if (gamePlayerLoadingFadeTimeout !== null) {
+                    window.clearTimeout(gamePlayerLoadingFadeTimeout);
+                    gamePlayerLoadingFadeTimeout = null;
+                }
                 activeGame = null;
+                gamePlayerFrameLoaded = false;
+                gamePlayerLoadingScreen.hidden = true;
+                gamePlayerLoadingScreen.classList.remove("is-fading-out", "is-paused");
                 gamePlayerFrame.src = "about:blank";
             });
             gamePlayerFullscreenButton.addEventListener("click", () => {
