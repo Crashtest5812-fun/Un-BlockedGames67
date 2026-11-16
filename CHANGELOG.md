@@ -7,6 +7,7 @@ Notable updates to **Crashtest Games**, based on the repository's commit history
 - Added the profile picture logo, animated loading mascot, loading tips, and pause messages.
 - Expanded the game catalog.
 - Added an interactive snapshot of the site's earliest committed homepage.
+- Connected community game ratings to Supabase with anonymous guest sessions.
 
 ## 2026-11-02 — Version 26.1.1
 - Finished version 26.1.1.

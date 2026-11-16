@@ -1133,14 +1133,63 @@
             }
 
             .game-rating {
+                display: block;
                 color: #9b7122;
-                font-size: 0.9rem;
-                letter-spacing: 0.08em;
-                white-space: nowrap;
+                font-size: 0.78rem;
+                letter-spacing: 0.03em;
             }
 
             :root[data-theme="dark"] .game-rating {
                 color: #e8c77e;
+            }
+
+            .game-rating-control {
+                display: flex;
+                align-items: center;
+                gap: 7px;
+                min-height: 42px;
+                padding: 4px 14px 8px;
+                color: var(--muted-color);
+                font-size: 0.78rem;
+            }
+
+            .game-rating-stars {
+                display: inline-flex;
+                gap: 2px;
+            }
+
+            .game-rating-stars button {
+                min-width: 32px;
+                min-height: 36px;
+                padding: 2px;
+                color: var(--muted-color);
+                font: inherit;
+                font-size: 1.15rem;
+                line-height: 1;
+                background: transparent;
+                border: 0;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+
+            .game-rating-stars button:hover,
+            .game-rating-stars button[aria-pressed="true"] {
+                color: #9b7122;
+            }
+
+            :root[data-theme="dark"] .game-rating-stars button:hover,
+            :root[data-theme="dark"] .game-rating-stars button[aria-pressed="true"] {
+                color: #e8c77e;
+            }
+
+            .game-rating-stars button:focus-visible {
+                outline: 2px solid var(--focus-color);
+                outline-offset: 1px;
+            }
+
+            .game-rating-stars button:disabled {
+                cursor: wait;
+                opacity: 0.65;
             }
 
             .play-label {
@@ -1744,6 +1793,7 @@
             </section>
             <section class="content-section" id="all-games" aria-labelledby="all-games-heading">
                 <h2 class="section-heading" id="all-games-heading">All Games</h2>
+                <p id="game-ratings-status" role="status" aria-live="polite">Connecting to community ratings…</p>
                 <details class="all-games-menu">
                     <summary>Browse all games</summary>
                     <div class="all-games-content">
@@ -1919,6 +1969,7 @@
                 <button class="policy-accept" id="policy-accept" type="button" disabled>Agree and continue to school form</button>
             </div>
         </dialog>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
         <script>
             const policyDialog = document.querySelector("#policy-dialog");
             const menuToggle = document.querySelector("#menu-toggle");
@@ -3055,73 +3106,8 @@
                     "artEnd": "#5c806c"
                 }
             ];
-            const gameRatings = new Map([
-                ["People Playground", 5],
-                ["Fruit Ninja", 5],
-                ["Fork N Sausage", 3],
-                ["Getaway Shootout", 3],
-                ["Rooftop Snipers", 3],
-                ["Basket Random", 3],
-                ["Soccer Random", 3],
-                ["Boxing Random", 3],
-                ["Google Baseball", 4],
-                ["Google Dino", 4],
-                ["Snake", 4],
-                ["Time Shooter 2", 5],
-                ["1v1.lol", 4],
-                ["Escape Road", 3],
-                ["Escape Road 2", 3],
-                ["Escape Road City 2", 3],
-                ["Ragdoll Hit", 4],
-                ["Ragdoll Archers", 4],
-                ["Rooftop Snipers 2", 3],
-                ["GrindCraft", 4],
-                ["2048", 4],
-                ["2 3 4 Player Games", 3],
-                ["Run 3", 4],
-                ["Escape Road 3", 3],
-                ["Retro Bowl", 5],
-                ["Retro Bowl College", 5],
-                ["Snow Rider 3D", 4],
-                ["Eggy Car", 3],
-                ["Sandboxels", 5],
-                ["Super Smash Bros.", 5],
-                ["Funny Shooter 2", 4],
-                ["SUPERHOT", 5],
-                ["Time Shooter 3 SWAT", 3.5],
-                ["Moto X3M", 4],
-                ["Moto X3M Winter", 4],
-                ["Moto X3M Pool Party", 4],
-                ["Moto X3M Spooky Land", 4],
-                ["OvO 2", 4],
-                ["Paper.io", 4],
-                ["Pixel Shooter 1", 4],
-                ["Please, Don’t Touch Anything", 4],
-                ["Baseball Bros", 3],
-                ["Basketball Legends", 3],
-                ["Basketball Stars", 3],
-                ["Basket Bros", 3],
-                ["BitLife", 3],
-                ["Tunnel Rush", 4],
-                ["Papa's Bakeria", 4],
-                ["Papa's Burgeria", 4],
-                ["Papa's Cheeseria", 4],
-                ["Papa's Pancakeria", 4],
-                ["Papa's Sushiria", 4],
-                ["Subway Surfers: San Francisco", 3],
-                ["Football Bros", 3],
-                ["Soccer Bros", 3],
-                ["Wrestle Bros", 3],
-                ["Flappy Bird", 4],
-                ["Brotato", 5],
-                ["Level Devil", 5],
-                ["Five Nights at Freddy's 4", 4],
-                ["Five Nights at Freddy's 4 Halloween", 4],
-                ["Five Nights at Freddy's: Pizzeria Simulator", 4],
-                ["Five Nights at Winston's", 4],
-                ["Five Night's at Epsteins", 4]
-
-            ]);
+            const gameRatingSummaries = new Map();
+            const userGameRatings = new Map();
             const playerProfileForm = document.querySelector("#player-profile-form");
             const playerNicknameInput = document.querySelector("#player-nickname");
             const playerProfileName = document.querySelector("#player-profile-name");
@@ -3326,15 +3312,11 @@
                 const category = document.createElement("span");
                 category.className = "game-category";
                 category.textContent = game.category;
-                const rating = gameRatings.get(game.name);
-                const gameInfoItems = [title, category];
-                if (rating !== undefined) {
-                    const ratingDisplay = document.createElement("span");
-                    ratingDisplay.className = "game-rating";
-                    ratingDisplay.setAttribute("aria-label", `${rating} out of 5 stars`);
-                    ratingDisplay.textContent = `${"★".repeat(Math.floor(rating))}${rating % 1 ? "½" : ""}${"☆".repeat(5 - Math.ceil(rating))}`;
-                    gameInfoItems.push(ratingDisplay);
-                }
+                const ratingDisplay = document.createElement("span");
+                ratingDisplay.className = "game-rating";
+                ratingDisplay.dataset.gameHref = game.href;
+                ratingDisplay.textContent = "No ratings yet";
+                const gameInfoItems = [title, category, ratingDisplay];
                 const playLabel = document.createElement("span");
                 playLabel.className = "play-label";
                 playLabel.textContent = "Play →";
@@ -3350,7 +3332,29 @@
                 favoriteButton.dataset.gameName = game.name;
                 favoriteButton.setAttribute("aria-pressed", "false");
 
-                card.append(gameLink, favoriteButton);
+                const ratingControl = document.createElement("div");
+                ratingControl.className = "game-rating-control";
+                ratingControl.dataset.gameHref = game.href;
+                ratingControl.setAttribute("role", "group");
+                ratingControl.setAttribute("aria-label", `Rate ${game.name}`);
+                const ratingLabel = document.createElement("span");
+                ratingLabel.textContent = "Your rating";
+                const ratingStars = document.createElement("span");
+                ratingStars.className = "game-rating-stars";
+                for (let value = 1; value <= 5; value += 1) {
+                    const ratingButton = document.createElement("button");
+                    ratingButton.type = "button";
+                    ratingButton.dataset.gameHref = game.href;
+                    ratingButton.dataset.rating = String(value);
+                    ratingButton.disabled = true;
+                    ratingButton.setAttribute("aria-pressed", "false");
+                    ratingButton.setAttribute("aria-label", `Rate ${game.name} ${value} out of 5 stars`);
+                    ratingButton.textContent = "☆";
+                    ratingStars.append(ratingButton);
+                }
+                ratingControl.append(ratingLabel, ratingStars);
+
+                card.append(gameLink, ratingControl, favoriteButton);
                 return card;
             };
 
@@ -3362,6 +3366,154 @@
             games.filter((game) => game.popular).sort((first, second) => first.popular - second.popular).forEach((game) => {
                 popularGamesGrid.append(renderGameCard(game));
             });
+            const gameRatingsStatus = document.querySelector("#game-ratings-status");
+            const supabaseProjectUrl = "https://rqbiiifqmaewzlcrjrbc.supabase.co";
+            const supabasePublishableKey = "sb_publishable_kiG61adP4HB1BZDkBW5F0A_4QpHLjrk";
+            let supabaseClient = null;
+            let supabaseRatingUserId = null;
+            let ratingsReady = false;
+
+            const renderGameRating = (gameHref) => {
+                const summary = gameRatingSummaries.get(gameHref);
+                const userRating = userGameRatings.get(gameHref) || 0;
+                document.querySelectorAll(".game-rating").forEach((display) => {
+                    if (display.dataset.gameHref !== gameHref) return;
+                    if (!summary || summary.rating_count === 0) {
+                        display.textContent = "No community ratings yet";
+                    } else {
+                        display.textContent = `★ ${Number(summary.average_rating).toFixed(1)} · ${summary.rating_count} rating${summary.rating_count === 1 ? "" : "s"}`;
+                        display.setAttribute(
+                            "aria-label",
+                            `Community rating ${Number(summary.average_rating).toFixed(1)} out of 5 from ${summary.rating_count} rating${summary.rating_count === 1 ? "" : "s"}`
+                        );
+                    }
+                });
+                document.querySelectorAll(".game-rating-control").forEach((control) => {
+                    if (control.dataset.gameHref !== gameHref) return;
+                    control.querySelectorAll("button[data-rating]").forEach((button) => {
+                        const value = Number(button.dataset.rating);
+                        button.disabled = !ratingsReady;
+                        button.textContent = value <= userRating ? "★" : "☆";
+                        button.setAttribute("aria-pressed", String(value === userRating));
+                    });
+                });
+            };
+
+            const renderAllGameRatings = () => {
+                games.forEach((game) => renderGameRating(game.href));
+            };
+
+            const initializeGameRatings = async () => {
+                if (!window.supabase?.createClient) {
+                    throw new Error("The Supabase client library did not load.");
+                }
+
+                supabaseClient = window.supabase.createClient(supabaseProjectUrl, supabasePublishableKey);
+                const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+                if (sessionError) {
+                    throw new Error(`Could not restore the guest session: ${sessionError.message}`);
+                }
+
+                let ratingUser = sessionData.session?.user;
+                if (!ratingUser) {
+                    const { data, error } = await supabaseClient.auth.signInAnonymously();
+                    if (error) {
+                        throw new Error(`Guest sign-in failed: ${error.message}`);
+                    }
+                    ratingUser = data.user;
+                }
+                if (!ratingUser) {
+                    throw new Error("Supabase did not return a user for the guest session.");
+                }
+                supabaseRatingUserId = ratingUser.id;
+
+                const { data: summaries, error: summaryError } = await supabaseClient
+                    .from("game_rating_summary")
+                    .select("game_id, average_rating, rating_count");
+                if (summaryError) {
+                    throw new Error(`Could not load community ratings: ${summaryError.message}`);
+                }
+                gameRatingSummaries.clear();
+                summaries.forEach((summary) => {
+                    gameRatingSummaries.set(summary.game_id, {
+                        average_rating: Number(summary.average_rating),
+                        rating_count: Number(summary.rating_count)
+                    });
+                });
+
+                const { data: ownRatings, error: ownRatingsError } = await supabaseClient
+                    .from("game_ratings")
+                    .select("game_id, rating")
+                    .eq("user_id", supabaseRatingUserId);
+                if (ownRatingsError) {
+                    throw new Error(`Could not load your ratings: ${ownRatingsError.message}`);
+                }
+                userGameRatings.clear();
+                ownRatings.forEach((rating) => userGameRatings.set(rating.game_id, rating.rating));
+
+                ratingsReady = true;
+                gameRatingsStatus.textContent = "Community ratings are ready. Your guest ratings are saved in this browser.";
+                renderAllGameRatings();
+            };
+
+            document.addEventListener("click", async (event) => {
+                if (!(event.target instanceof Element)) return;
+                const ratingButton = event.target.closest(".game-rating-stars button[data-rating]");
+                if (!ratingButton || !ratingsReady || !supabaseClient || !supabaseRatingUserId) return;
+
+                const gameHref = ratingButton.dataset.gameHref;
+                const rating = Number(ratingButton.dataset.rating);
+                const game = games.find((catalogGame) => catalogGame.href === gameHref);
+                if (!game || !Number.isInteger(rating) || rating < 1 || rating > 5) return;
+
+                const matchingButtons = [...document.querySelectorAll(".game-rating-stars button")]
+                    .filter((button) => button.dataset.gameHref === gameHref);
+                matchingButtons.forEach((button) => { button.disabled = true; });
+                gameRatingsStatus.textContent = `Saving your rating for ${game.name}…`;
+
+                try {
+                    const { error } = await supabaseClient
+                        .from("game_ratings")
+                        .upsert(
+                            { game_id: gameHref, user_id: supabaseRatingUserId, rating },
+                            { onConflict: "game_id,user_id" }
+                        );
+                    if (error) {
+                        throw new Error(error.message);
+                    }
+
+                    userGameRatings.set(gameHref, rating);
+                    const { data: summary, error: refreshError } = await supabaseClient
+                        .from("game_rating_summary")
+                        .select("game_id, average_rating, rating_count")
+                        .eq("game_id", gameHref)
+                        .maybeSingle();
+                    if (refreshError) {
+                        console.error("The rating was saved, but its community summary could not be refreshed.", refreshError);
+                        gameRatingsStatus.textContent = "Your rating was saved, but the community total could not refresh. Reload to try again.";
+                    } else {
+                        if (summary) {
+                            gameRatingSummaries.set(gameHref, {
+                                average_rating: Number(summary.average_rating),
+                                rating_count: Number(summary.rating_count)
+                            });
+                        }
+                        gameRatingsStatus.textContent = `Thanks for rating ${game.name}!`;
+                    }
+                    renderGameRating(gameHref);
+                } catch (error) {
+                    console.error(`Could not save your rating for ${game.name}.`, error);
+                    gameRatingsStatus.textContent = `Could not save your rating. ${error.message}`;
+                } finally {
+                    matchingButtons.forEach((button) => { button.disabled = !ratingsReady; });
+                }
+            });
+
+            initializeGameRatings().catch((error) => {
+                console.error("Could not initialize Supabase game ratings.", error);
+                gameRatingsStatus.textContent = `Ratings are unavailable: ${error.message} Check that the schema was run and anonymous sign-ins are enabled.`;
+            });
+
             const gameSearch = document.querySelector("#game-search");
             const gameSort = document.querySelector("#game-sort");
             const gameSearchStatus = document.querySelector("#game-search-status");
