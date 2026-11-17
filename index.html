@@ -1095,6 +1095,17 @@
                 transition: transform 220ms ease;
             }
 
+            .app-art img {
+                box-sizing: border-box;
+                width: 96px;
+                height: 96px;
+                padding: 8px;
+                object-fit: contain;
+                background: #fff;
+                border-radius: 20px;
+                box-shadow: 0 6px 16px rgb(0 0 0 / 18%);
+            }
+
             .game-copy {
                 display: flex;
                 flex: 1;
@@ -1824,16 +1835,57 @@
             <section class="content-section" id="apps" aria-labelledby="apps-heading">
                 <h2 class="section-heading" id="apps-heading">Apps</h2>
                 <div class="games-grid">
-                    <a class="game-card" href="Assets/Apps/GUST.html" style="--art-start: #b7d8d0; --art-end: #537f76">
-                        <span class="game-art" aria-hidden="true"><span>🌐</span></span>
+                    <a class="game-card" href="Assets/Apps/GUST.html" data-app-iframe data-app-title="GUST Browser" style="--art-start: #b7d8d0; --art-end: #537f76">
+                        <span class="game-art app-art" aria-hidden="true"><img src="Assets/Apps/gust-icon.svg" alt="" loading="lazy" decoding="async"><span class="app-art-fallback" hidden>🌐</span></span>
                         <span class="game-copy"><strong>GUST Browser</strong><span class="play-label">Open &#8594;</span></span>
                     </a>
+                    <a class="game-card" href="https://www.desmos.com/calculator" data-app-iframe data-app-title="Desmos Graphing Calculator" style="--art-start: #bce6f4; --art-end: #4a9cc2">
+                        <span class="game-art app-art" aria-hidden="true"><img src="https://www.desmos.com/assets/img/apps/graphing/apple-touch-icon.png" alt="" loading="lazy" decoding="async"><span class="app-art-fallback" hidden>📈</span></span>
+                        <span class="game-copy"><strong>Desmos Graphing Calculator</strong><span class="play-label">Open &#8594;</span></span>
+                    </a>
+                    <a class="game-card" href="https://www.geogebra.org/calculator" data-app-iframe data-app-title="GeoGebra" style="--art-start: #d7edbd; --art-end: #72a752">
+                        <span class="game-art app-art" aria-hidden="true"><img src="https://www.geogebra.org/apps/icons/suite.ico" alt="" loading="lazy" decoding="async"><span class="app-art-fallback" hidden>📐</span></span>
+                        <span class="game-copy"><strong>GeoGebra</strong><span class="play-label">Open &#8594;</span></span>
+                    </a>
+                    <a class="game-card" href="https://www.openstreetmap.org/export/embed.html?bbox=-180%2C-85%2C180%2C85&amp;layer=mapnik" data-app-iframe data-app-title="OpenStreetMap" style="--art-start: #bde1c4; --art-end: #568869">
+                        <span class="game-art app-art" aria-hidden="true"><img src="https://www.openstreetmap.org/assets/favicon-194x194-79d3fb0152c735866e64b1d7535d504483cd13c2fad0131a6142bd9629d30de2.png" alt="" loading="lazy" decoding="async"><span class="app-art-fallback" hidden>🗺️</span></span>
+                        <span class="game-copy"><strong>OpenStreetMap</strong><span class="play-label">Open &#8594;</span></span>
+                    </a>
+                    <a class="game-card" href="https://activities.graspablemath.com/new-whiteboard" data-app-iframe data-app-title="Graspable Math Whiteboard" style="--art-start: #f3e5a8; --art-end: #bd9851">
+                        <span class="game-art app-art" aria-hidden="true"><img src="https://activities.graspablemath.com/favicon.ico" alt="" loading="lazy" decoding="async"><span class="app-art-fallback" hidden>🧮</span></span>
+                        <span class="game-copy"><strong>Graspable Math Whiteboard</strong><span class="play-label">Open &#8594;</span></span>
+                    </a>
+                    <a class="game-card" href="https://www.photopea.com/" data-app-iframe data-app-title="Photopea" style="--art-start: #cbbdf2; --art-end: #7658aa">
+                        <span class="game-art app-art" aria-hidden="true"><img src="https://www.photopea.com/promo/icon512.png" alt="" loading="lazy" decoding="async"><span class="app-art-fallback" hidden>🎨</span></span>
+                        <span class="game-copy"><strong>Photopea</strong><span class="play-label">Open &#8594;</span></span>
+                    </a>
+                    <a class="game-card" href="https://www.desmos.com/geometry" data-app-iframe data-app-title="Desmos Geometry" style="--art-start: #bce6f4; --art-end: #4a9cc2">
+                        <span class="game-art app-art" aria-hidden="true"><img src="https://www.desmos.com/assets/img/apps/graphing/apple-touch-icon.png" alt="" loading="lazy" decoding="async"><span class="app-art-fallback" hidden>📐</span></span>
+                        <span class="game-copy"><strong>Desmos Geometry</strong><span class="play-label">Open &#8594;</span></span>
+                    </a>
+                    <a class="game-card" href="https://jspaint.app/" data-app-iframe data-app-title="JS Paint" style="--art-start: #f5c7bd; --art-end: #d87968">
+                        <span class="game-art app-art" aria-hidden="true"><img src="https://jspaint.app/images/icons/apple-icon-180x180.png" alt="" loading="lazy" decoding="async"><span class="app-art-fallback" hidden>🖌️</span></span>
+                        <span class="game-copy"><strong>JS Paint</strong><span class="play-label">Open &#8594;</span></span>
+                    </a>
+                    <a class="game-card" href="https://www.tldraw.com/" data-app-iframe data-app-title="tldraw" style="--art-start: #c4e6d4; --art-end: #548d73">
+                        <span class="game-art app-art" aria-hidden="true"><img src="https://www.tldraw.com/favicon.svg" alt="" loading="lazy" decoding="async"><span class="app-art-fallback" hidden>📝</span></span>
+                        <span class="game-copy"><strong>tldraw</strong><span class="play-label">Open &#8594;</span></span>
+                    </a>
+                    <a class="game-card" href="https://witeboard.com/" data-app-iframe data-app-title="Witeboard" style="--art-start: #d6d5f3; --art-end: #7772ac">
+                        <span class="game-art app-art" aria-hidden="true"><img src="https://witeboard.com/favicon.ico" alt="" loading="lazy" decoding="async"><span class="app-art-fallback" hidden>🧑‍🏫</span></span>
+                        <span class="game-copy"><strong>Witeboard</strong><span class="play-label">Open &#8594;</span></span>
+                    </a>
+                    <a class="game-card" href="https://excalidraw.com/" data-app-iframe data-app-title="Excalidraw" style="--art-start: #f5c7bd; --art-end: #d87968">
+                        <span class="game-art app-art" aria-hidden="true"><img src="https://excalidraw.com/apple-touch-icon.png" alt="" loading="lazy" decoding="async"><span class="app-art-fallback" hidden>✏️</span></span>
+                        <span class="game-copy"><strong>Excalidraw</strong><span class="play-label">Open &#8594;</span></span>
+                    </a>
                 </div>
+                <p id="app-launch-status" role="status" aria-live="polite"></p>
             </section>
             <section class="content-section" id="request-game" aria-labelledby="request-game-heading">
                 <h2 class="section-heading" id="request-game-heading">Request a Game</h2>
                 <p>Have a game you’d like to see here? Send us a request.</p>
-                <a class="welcome-link" href="mailto:madcoder19265@outlook.com?subject=Game%20Request&amp;body=Hi%2C%20I%27d%20like%20to%20request%20this%20game%3A%0A%0AGame%20name%3A%20">
+                <a class="welcome-link" href="mailto:crashtestgames5812@gmail.com?subject=Game%20Request&amp;body=Hi%2C%20I%27d%20like%20to%20request%20this%20game%3A%0A%0AGame%20name%3A%20">
                     Email a game request <span aria-hidden="true">&#8594;</span>
                 </a>
             </section>
@@ -1843,7 +1895,7 @@
             <div class="footer-content">
                 <section class="footer-section" aria-labelledby="footer-contact-heading">
                     <h2 id="footer-contact-heading">Get in touch</h2>
-                    <p>Have a game idea or question? <a href="mailto:madcoder19265@outlook.com">Email us</a>.</p>
+                    <p>Have a game idea or question? <a href="mailto:crashtestgames5812@gmail.com">Email us</a>.</p>
                     <p>Need help? <a href="https://ubg67-support.vercel.app/" target="_blank" rel="noopener noreferrer">Visit our support website</a>.</p>
                 </section>
                 <section class="footer-section" id="beta-test" aria-labelledby="beta-test-heading">
@@ -1971,6 +2023,14 @@
         </dialog>
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
         <script>
+            document.querySelectorAll(".app-art img").forEach((image) => {
+                image.addEventListener("error", () => {
+                    const fallback = image.nextElementSibling;
+                    image.remove();
+                    if (fallback) fallback.hidden = false;
+                }, { once: true });
+            });
+
             const policyDialog = document.querySelector("#policy-dialog");
             const menuToggle = document.querySelector("#menu-toggle");
             const siteMenuPanel = document.querySelector("#site-menu-panel");
@@ -3743,7 +3803,8 @@
                 gamePlayerFrame.title = game.name;
                 gamePlayerLoadingName.textContent = game.name;
                 gamePlayerLoadingTip.textContent = gamePlayerLoadingTips[game.name]
-                    || gamePlayerLoadingCategoryTips[game.category];
+                    || gamePlayerLoadingCategoryTips[game.category]
+                    || "";
                 gamePlayerStatus.textContent = `Loading ${game.name}…`;
                 gamePlayerLoadingLabel.textContent = "Preparing your game";
                 gamePlayerLoadingScreen.classList.remove("is-fading-out", "is-paused");
@@ -4171,9 +4232,20 @@
                 if (!(event.target instanceof Element)) return;
                 const gameLink = event.target.closest(".game-open-link, .game-card[href], .recent-game-link, .favorite-game-link");
                 if (!gameLink || event.defaultPrevented) return;
+                if (gameLink.closest(".game-card[data-app-open-external]")) return;
 
                 const game = gamesByHref.get(gameLink.getAttribute("href"));
-                if (!game) return;
+                if (!game) {
+                    const appLink = gameLink.closest(".game-card[data-app-iframe][href]");
+                    if (!appLink) return;
+
+                    event.preventDefault();
+                    openGamePlayer({
+                        name: appLink.dataset.appTitle || appLink.querySelector("strong")?.textContent.trim() || "App",
+                        href: appLink.getAttribute("href")
+                    });
+                    return;
+                }
 
                 event.preventDefault();
                 addRecentGame(game);

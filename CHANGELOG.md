@@ -2,6 +2,9 @@
 
 Notable updates to **Crashtest Games**, based on the repository's commit history.
 
+## 2026-11-17 — Apps
+- Removed Jitsi Meet from the Apps section.
+
 ## 2026-11-16 — Crashtest Games
 - Rebranded the site and kept the main page in the single `index.html` entry point.
 - Added the profile picture logo, animated loading mascot, loading tips, and pause messages.
